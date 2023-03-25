@@ -39,6 +39,9 @@ struct ClubListRowItem: View {
                     .aspectRatio(contentMode: .fit)
                     .clipShape(Rectangle())
             }
+            NavigationLink("", value: club)
+                .frame(width: 0)
+            
         }
     }
 }

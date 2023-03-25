@@ -20,7 +20,7 @@ struct PlayerDetailScreen: View {
        AnyView(Button(action: onAdd) {Image(systemName: "plus")})
         }
     var body: some View {
-        NavigationStack{
+       
             Form{
                 Section {
                     //                HStack{
@@ -73,7 +73,7 @@ struct PlayerDetailScreen: View {
             .onAppear(perform:{
                 handicapListVM.getHandicapsByPlayer(vm: player)
             })
-        }
+        
     }
 }
 

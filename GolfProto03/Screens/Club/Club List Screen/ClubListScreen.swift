@@ -36,63 +36,54 @@ struct ClubListScreen: View {
     
     
     var body: some View {
+        List(clubListVM.clubs, id: \.self){club in
+           ClubListRowItem(needsRefresh: $needsRefresh, club: club)
+        }
         
-        NavigationStack{
-            List {
-                
-                ForEach(clubListVM.clubs, id: \.id) { club in
-                    
-                    NavigationLink(
-                        destination: CourseListScreen(club: club, needsRefresh: $needsRefresh)) {
-                            
-                            
-                            ClubListRowItem(needsRefresh: $needsRefresh,club: club)
-                            
-                            
-                        }
-                    
-                }
-                .onDelete(perform: deleteClub)
-                //            .sheet(isPresented: $isPresentedEdit, content: {EditClubScreen(club: clubEdit)})
-                
-                
-                
+        .navigationDestination(for: ClubViewModel.self){club in
+                CourseListScreen(club: club, needsRefresh: $needsRefresh)
             }
-            
-            .listStyle(PlainListStyle())
-            //            .navigationTitle("Clubs")
-            
-            .toolbar {
+        
+ 
                 
+//                //            .sheet(isPresented: $isPresentedEdit, content: {EditClubScreen(club: clubEdit)})
+//
+//
+//
+//            }
+//
+//            .listStyle(PlainListStyle())
+//
+//
+            .toolbar {
+
                 ToolbarItem(placement: .navigationBarTrailing) {
                     addButton
                 }
-                
-                
-                
+
+
+
             }
-            
-            
             
             .sheet(isPresented: $isPresented, onDismiss: {
                 clubListVM.getAllClubs1()
             }, content: {
                 AddClubScreen()
             })
-            //            .embedInNavigationView()
-            
+
             .onAppear(perform: {
                 clubListVM.getAllClubs1()
-                
+
             })
-            //        .accentColor(needsRefresh ? .white: .black)
-        }
+            
         }
 }
 
 struct ClubListScreen_Previews: PreviewProvider {
+  
     static var previews: some View {
-       
-        ClubListScreen()
+        NavigationStack{
+            ClubListScreen()
+        }
     }
 }

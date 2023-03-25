@@ -58,6 +58,7 @@
 		D41D4E9729CEF6E2001ACF68 /* TeeBox+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41D4E9129CEF6E2001ACF68 /* TeeBox+CoreDataClass.swift */; };
 		D41D4E9829CEF6E2001ACF68 /* TeeBox+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41D4E9229CEF6E2001ACF68 /* TeeBox+CoreDataProperties.swift */; };
 		D41D4E9A29CEF721001ACF68 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41D4E9929CEF721001ACF68 /* CoreDataManager.swift */; };
+		D41D4E9E29CF016D001ACF68 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41D4E9D29CF016D001ACF68 /* MainScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -115,6 +116,7 @@
 		D41D4E9929CEF721001ACF68 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		D41D4E9B29CEFA1B001ACF68 /* GolfProto03.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GolfProto03.entitlements; sourceTree = "<group>"; };
 		D41D4E9C29CEFA61001ACF68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D41D4E9D29CF016D001ACF68 /* MainScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +226,7 @@
 		D41D4E2F29CEF515001ACF68 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				D41D4E9D29CF016D001ACF68 /* MainScreen.swift */,
 				D41D4E5D29CEF5CB001ACF68 /* Players */,
 				D41D4E5C29CEF5B0001ACF68 /* Club */,
 			);
@@ -422,6 +425,7 @@
 				D41D4E6329CEF5CB001ACF68 /* PlayerListScreen.swift in Sources */,
 				D41D4E9529CEF6E2001ACF68 /* Player+CoreDataClass.swift in Sources */,
 				D41D4E8C29CEF662001ACF68 /* GolfDataModel.xcdatamodeld in Sources */,
+				D41D4E9E29CF016D001ACF68 /* MainScreen.swift in Sources */,
 				D41D4E8529CEF5F7001ACF68 /* AddTeeBoxViewModel.swift in Sources */,
 				D41D4E9829CEF6E2001ACF68 /* TeeBox+CoreDataProperties.swift in Sources */,
 				D41D4E5729CEF5AB001ACF68 /* EditTeeBoxScreen.swift in Sources */,

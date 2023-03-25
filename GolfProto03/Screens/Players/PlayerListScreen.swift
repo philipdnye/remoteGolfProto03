@@ -29,7 +29,7 @@ struct PlayerListScreen: View {
         }
     
     var body: some View {
-        NavigationStack{
+    
         List {
             
             ForEach(playerListVM.players, id: \.id) { player in
@@ -77,7 +77,7 @@ struct PlayerListScreen: View {
             playerListVM.getAllPlayers()
             
         })
-    }
+    
     }
 }
 

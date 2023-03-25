@@ -46,7 +46,7 @@ extension ClubListViewModel: NSFetchedResultsControllerDelegate {
     
 }
 
-struct ClubViewModel {
+struct ClubViewModel: Hashable{
     
     let club: Club
     
