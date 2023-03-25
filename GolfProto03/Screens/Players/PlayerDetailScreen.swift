@@ -10,6 +10,7 @@ import SwiftUI
 struct PlayerDetailScreen: View {
     @StateObject private var handicapListVM = HandicapListViewModel()
     @State private var showingSheet: Bool = false
+    @Binding var needsRefresh: Bool
     let player: PlayerViewModel
     
     private func onAdd() {
@@ -19,14 +20,13 @@ struct PlayerDetailScreen: View {
     private var addButton: some View {
        AnyView(Button(action: onAdd) {Image(systemName: "plus")})
         }
+    
+    
     var body: some View {
        
             Form{
                 Section {
-                    //                HStack{
-                    //                    Text(player.firstName)
-                    //                    Text(player.lastName)
-                    //                }
+           
                     ForEach(player.player.handicapArray.sorted(by: {$0.startDate ?? Date() > $1.startDate ?? Date()})) {handicap in
                         HStack{
                             Text(handicap.startDate?.formatted(.dateTime.day().month().year()) ?? "")
@@ -36,6 +36,9 @@ struct PlayerDetailScreen: View {
                                 .foregroundColor(.orange)
                         }
                     }
+                   // .onDelete(perform: <#T##Optional<(IndexSet) -> Void>##Optional<(IndexSet) -> Void>##(IndexSet) -> Void#>)
+                    
+                    
                 }
             header: {
                 Text("HANDICAP HISTORY")
@@ -51,6 +54,7 @@ struct PlayerDetailScreen: View {
             
             .sheet(isPresented: $showingSheet, onDismiss: {
                 handicapListVM.getHandicapsByPlayer(vm: player)
+                needsRefresh.toggle()
             }, content: {
                 AddHandicapScreen(player: player)
             })
@@ -80,6 +84,6 @@ struct PlayerDetailScreen: View {
 struct PlayerDetailScreen_Previews: PreviewProvider {
     static var previews: some View {
         let player = PlayerViewModel(player: Player(context: CoreDataManager.shared.viewContext))
-        PlayerDetailScreen(player: player)
+        PlayerDetailScreen(needsRefresh: .constant(false),player: player)
     }
 }

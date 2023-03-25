@@ -25,21 +25,31 @@ struct CourseListScreen: View {
                 ForEach(courseListVM.courses, id: \.courseId) {course in
                     TeeBoxListScreen_1Course(club: club ,course: course)
                 }
-//                let vm = courseListVM.courses[0]
-//
-//                TeeBoxListScreen(course: vm)
+
             case _ where club.club.course22?.count ?? 0 > 1:
-                List{
-                    ForEach(courseListVM.courses, id: \.courseId) { course in
-                        
-                        NavigationLink(
-                            destination: TeeBoxListScreen(course: course)) {
-                                CourseListRowItem(course: course)
-                            }
-                            
-                        
-                    }.onDelete(perform: deleteCourse)
-                }.listStyle(PlainListStyle())
+                List(courseListVM.courses, id: \.courseId){course in
+                    NavigationLink(value: course, label: {
+                        CourseListRowItem(course: course)
+                    })
+                }
+                .listStyle(PlainListStyle())
+                .navigationDestination(for: CourseViewModel.self){course in
+                    TeeBoxListScreen(course: course)
+                }
+                
+                
+                
+//                List{
+//                    ForEach(courseListVM.courses, id: \.courseId) { course in
+//                        
+//                        NavigationLink(
+//                            destination: TeeBoxListScreen(course: course)) {
+//                                CourseListRowItem(course: course)
+//                            }
+//                            
+//                        
+//                    }.onDelete(perform: deleteCourse)
+//                }.listStyle(PlainListStyle())
             default:
                 EmptyView()
             }

@@ -39,7 +39,7 @@ extension PlayerListViewModel: NSFetchedResultsControllerDelegate {
     
 }
 
-struct PlayerViewModel {
+struct PlayerViewModel: Hashable {
     let player: Player
     
     var id: NSManagedObjectID {

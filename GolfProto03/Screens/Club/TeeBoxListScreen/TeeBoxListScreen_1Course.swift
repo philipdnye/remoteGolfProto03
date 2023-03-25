@@ -134,9 +134,11 @@ struct TeeBoxListScreen_1Course: View {
 
 struct TeeBoxListScreen_1Course_Previews: PreviewProvider {
     static var previews: some View {
-        let club = ClubViewModel(club: Club(context: CoreDataManager.shared.viewContext))
-        let course = CourseViewModel(course: Course(context: CoreDataManager.shared.viewContext))
-        TeeBoxListScreen_1Course(club: club,course: course)//.embedInNavigationView()
+        NavigationStack{
+            let club = ClubViewModel(club: Club(context: CoreDataManager.shared.viewContext))
+            let course = CourseViewModel(course: Course(context: CoreDataManager.shared.viewContext))
+            TeeBoxListScreen_1Course(club: club,course: course)//.embedInNavigationView()
+        }
     }
 }
 

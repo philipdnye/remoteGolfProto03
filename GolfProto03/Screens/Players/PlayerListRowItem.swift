@@ -9,9 +9,11 @@ import SwiftUI
 
 struct PlayerListRowItem: View {
     @StateObject private var playerListVM = PlayerListViewModel()
-//    @Binding var needsRefresh: Bool
+    @Binding var needsRefresh: Bool
     let player: PlayerViewModel
     var body: some View {
+        
+        
         HStack{
             HStack{
                 Text(player.firstName)
@@ -21,9 +23,8 @@ struct PlayerListRowItem: View {
                         .font(.title2)
                         .foregroundColor(.orange)
             Spacer()
-            ZStack{
-//                Text(needsRefresh.description)
-//                    .opacity(0.0)
+           
+//
                 Image(uiImage: player.player.photo ?? UIImage())
                    
                     .resizable()
@@ -40,7 +41,10 @@ struct PlayerListRowItem: View {
                 //                .background(Color.black.opacity(0.2))
                     .aspectRatio(contentMode: .fit)
                     .clipShape(Rectangle())
-            }
+            
+            NavigationLink("", value: player)
+                .frame(width:0)
+            
         }
     }
 }
@@ -48,7 +52,7 @@ struct PlayerListRowItem: View {
 struct PlayerListRowItem_Previews: PreviewProvider {
     static var previews: some View {
         let player = PlayerViewModel(player: Player(context: CoreDataManager.shared.viewContext))
-        PlayerListRowItem(player: player)//.embedInNavigationView()
+        PlayerListRowItem(needsRefresh: .constant(false), player: player)//.embedInNavigationView()
     }
 }
 

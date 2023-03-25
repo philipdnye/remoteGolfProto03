@@ -134,7 +134,9 @@ struct EditTeeBoxScreen: View {
 
 struct EditTeeBoxScreen_Previews: PreviewProvider {
     static var previews: some View {
-        let teeBox = TeeBoxViewModel(teeBox: TeeBox(context: CoreDataManager.shared.viewContext))
-        EditTeeBoxScreen(teeBox: teeBox, holeValues2: .constant(Array(repeating: ["","","",""], count: 18)))
+        NavigationStack{
+            let teeBox = TeeBoxViewModel(teeBox: TeeBox(context: CoreDataManager.shared.viewContext))
+            EditTeeBoxScreen(teeBox: teeBox, holeValues2: .constant(Array(repeating: ["","","",""], count: 18)))
+        }
     }
 }

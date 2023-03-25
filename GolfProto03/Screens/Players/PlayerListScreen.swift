@@ -10,6 +10,7 @@ import SwiftUI
 struct PlayerListScreen: View {
     @StateObject private var playerListVM = PlayerListViewModel()
     @State private var isPresented: Bool = false
+    @State private var needsRefresh: Bool = false
     private func deletePlayer(at indexSet: IndexSet) {
         indexSet.forEach { index in
             let player = playerListVM.players[index]
@@ -29,27 +30,27 @@ struct PlayerListScreen: View {
         }
     
     var body: some View {
-    
-        List {
-            
-            ForEach(playerListVM.players, id: \.id) { player in
+        
+        List(playerListVM.players, id: \.id){ player in
                 
-                NavigationLink(
-                    destination: PlayerDetailScreen(player: player)) {
-                        
-                        
-                        PlayerListRowItem(player: player)
-                        
-                        
-                    }
+            NavigationLink(value: player, label: {
+                PlayerListRowItem(needsRefresh: $needsRefresh,player: player)
+            })
                 
             }
-            .onDelete(perform: deletePlayer)
-            //            .sheet(isPresented: $isPresentedEdit, content: {EditClubScreen(club: clubEdit)})
+            .navigationDestination(for: PlayerViewModel.self) {player in
+                PlayerDetailScreen(needsRefresh: $needsRefresh, player: player)
+            }
             
             
             
-        }
+            
+//            .onDelete(perform: deletePlayer)
+           
+            
+        
+            
+        
         
         .listStyle(PlainListStyle())
         // .navigationTitle("Players")

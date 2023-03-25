@@ -34,7 +34,7 @@ class CourseListViewModel: ObservableObject {
 }
 
 
-struct CourseViewModel {
+struct CourseViewModel: Hashable {
     
     let course: Course
     

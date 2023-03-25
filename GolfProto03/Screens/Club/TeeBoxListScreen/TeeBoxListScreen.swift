@@ -110,8 +110,10 @@ struct TeeBoxListScreen: View {
 
 struct TeeBoxListScreen_Previews: PreviewProvider {
     static var previews: some View {
-        let course = CourseViewModel(course: Course(context: CoreDataManager.shared.viewContext))
-        TeeBoxListScreen(course: course)//.embedInNavigationView()
+        NavigationStack{
+            let course = CourseViewModel(course: Course(context: CoreDataManager.shared.viewContext))
+            TeeBoxListScreen(course: course)//.embedInNavigationView()
+        }
     }
 }
 

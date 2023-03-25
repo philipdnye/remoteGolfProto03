@@ -37,9 +37,13 @@ struct ClubListScreen: View {
     
     var body: some View {
         List(clubListVM.clubs, id: \.self){club in
-           ClubListRowItem(needsRefresh: $needsRefresh, club: club)
+            
+            NavigationLink(value: club, label: {
+                ClubListRowItem(needsRefresh: $needsRefresh, club: club)
+            })
+            
         }
-        
+    
         .navigationDestination(for: ClubViewModel.self){club in
                 CourseListScreen(club: club, needsRefresh: $needsRefresh)
             }
