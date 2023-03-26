@@ -87,18 +87,34 @@ struct TeeBoxListScreen_1Course: View {
 //
 //        })
         .toolbar {
-                    
-            ToolbarItem(placement: .navigationBarTrailing) {
-                editCourseButton
+            ToolbarItemGroup(placement: .secondaryAction) {
+                Button("Edit course") {
+                    onEdit()
+                }
+                
+                Button("Add course") {
+                    onAddCourse()
+                }
+                
+                Button("Add teebox") {
+                    onAdd()
+                }
             }
-                    
-            ToolbarItem(placement: .navigationBarTrailing) {
-                addCourseButton
-            }
-            ToolbarItem(placement: .navigationBarTrailing) {
-                addButton
-            }
+            
         }
+            
+//
+//            ToolbarItem(placement: .navigationBarTrailing) {
+//                editCourseButton
+//            }
+//
+//            ToolbarItem(placement: .navigationBarTrailing) {
+//                addCourseButton
+//            }
+//            ToolbarItem(placement: .navigationBarTrailing) {
+//                addButton
+//            }
+//        }
         
         
         

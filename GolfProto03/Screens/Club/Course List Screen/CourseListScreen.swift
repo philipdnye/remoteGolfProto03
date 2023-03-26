@@ -112,6 +112,7 @@ struct CourseListScreen: View {
 //                }
                 .navigationTitle(club.name)
             
+                //NEED TO AMEND THIS BELOW
                 .navigationBarItems(trailing: HStack{
                     editButton
                     addButton
