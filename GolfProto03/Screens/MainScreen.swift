@@ -48,7 +48,19 @@ struct MainScreen: View {
                     Label("Players", systemImage:"person.fill")
                 }
 
-            
+            NavigationStack{
+                GameListScreen()
+                
+                    .navigationBarTitle("Games")
+                    .navigationBarTitleDisplayMode(.inline)
+//                    .toolbarRole(.editor)
+                //                    .embedInNavigationView()
+                //                .navigationViewStyle(.stack)
+            }
+                .tabItem{
+                    Label("Games", systemImage:"figure.golf")
+                }
+
             
         }
         .accentColor(.orange)

@@ -48,17 +48,7 @@ struct ClubListScreen: View {
                 CourseListScreen(club: club, needsRefresh: $needsRefresh)
             }
         
- 
-                
-//                //            .sheet(isPresented: $isPresentedEdit, content: {EditClubScreen(club: clubEdit)})
-//
-//
-//
-//            }
-//
-//            .listStyle(PlainListStyle())
-//
-//
+
             .toolbar {
 
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -68,7 +58,8 @@ struct ClubListScreen: View {
 
 
             }
-            
+//            .navigationTitle("Clubs")
+//            .navigationBarTitleDisplayMode(.inline)
             .sheet(isPresented: $isPresented, onDismiss: {
                 clubListVM.getAllClubs1()
             }, content: {

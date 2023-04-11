@@ -24,7 +24,7 @@ class GameListViewModel: NSObject, ObservableObject {
     
     func getAllGames () {
         let request: NSFetchRequest<Game> = Game.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
         fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataManager.shared.viewContext, sectionNameKeyPath: nil, cacheName: nil)
         fetchedResultsController.delegate = self
         try? fetchedResultsController.performFetch()

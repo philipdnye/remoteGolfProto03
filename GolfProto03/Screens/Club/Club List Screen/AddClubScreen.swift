@@ -101,6 +101,8 @@ struct AddClubScreen: View {
 
 struct AddClubScreen_Previews: PreviewProvider {
     static var previews: some View {
-        AddClubScreen()
+        NavigationStack{
+            AddClubScreen()
+        }
     }
 }
