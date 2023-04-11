@@ -2,13 +2,14 @@
 //  Player+CoreDataProperties.swift
 //  GolfProto03
 //
-//  Created by Philip Nye on 25/03/2023.
+//  Created by Philip Nye on 11/04/2023.
 //
 //
 
 import Foundation
 import CoreData
 import UIKit
+
 
 extension Player {
 
@@ -24,6 +25,7 @@ extension Player {
     @NSManaged public var mobile: String?
     @NSManaged public var photo: UIImage?
     @NSManaged public var handicap: NSSet?
+    @NSManaged public var competitor: NSSet?
     
     public var handicapArray: [Handicap] {
         let set = handicap as? Set<Handicap> ?? []
@@ -48,6 +50,23 @@ extension Player {
 
     @objc(removeHandicap:)
     @NSManaged public func removeFromHandicap(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for competitor
+extension Player {
+
+    @objc(addCompetitorObject:)
+    @NSManaged public func addToCompetitor(_ value: Competitor)
+
+    @objc(removeCompetitorObject:)
+    @NSManaged public func removeFromCompetitor(_ value: Competitor)
+
+    @objc(addCompetitor:)
+    @NSManaged public func addToCompetitor(_ values: NSSet)
+
+    @objc(removeCompetitor:)
+    @NSManaged public func removeFromCompetitor(_ values: NSSet)
 
 }
 

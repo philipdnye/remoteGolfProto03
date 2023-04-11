@@ -53,12 +53,12 @@
 		D41D4E8C29CEF662001ACF68 /* GolfDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D41D4E8A29CEF662001ACF68 /* GolfDataModel.xcdatamodeld */; };
 		D41D4E9329CEF6E2001ACF68 /* Club+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41D4E8D29CEF6E2001ACF68 /* Club+CoreDataClass.swift */; };
 		D41D4E9429CEF6E2001ACF68 /* Club+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41D4E8E29CEF6E2001ACF68 /* Club+CoreDataProperties.swift */; };
-		D41D4E9529CEF6E2001ACF68 /* Player+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41D4E8F29CEF6E2001ACF68 /* Player+CoreDataClass.swift */; };
-		D41D4E9629CEF6E2001ACF68 /* Player+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41D4E9029CEF6E2001ACF68 /* Player+CoreDataProperties.swift */; };
-		D41D4E9729CEF6E2001ACF68 /* TeeBox+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41D4E9129CEF6E2001ACF68 /* TeeBox+CoreDataClass.swift */; };
-		D41D4E9829CEF6E2001ACF68 /* TeeBox+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41D4E9229CEF6E2001ACF68 /* TeeBox+CoreDataProperties.swift */; };
 		D41D4E9A29CEF721001ACF68 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41D4E9929CEF721001ACF68 /* CoreDataManager.swift */; };
 		D41D4E9E29CF016D001ACF68 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41D4E9D29CF016D001ACF68 /* MainScreen.swift */; };
+		D49CC86929E56F6100388CB1 /* Player+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49CC86729E56F6100388CB1 /* Player+CoreDataClass.swift */; };
+		D49CC86A29E56F6100388CB1 /* Player+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49CC86829E56F6100388CB1 /* Player+CoreDataProperties.swift */; };
+		D49CC86D29E56FB600388CB1 /* TeeBox+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49CC86B29E56FB600388CB1 /* TeeBox+CoreDataClass.swift */; };
+		D49CC86E29E56FB600388CB1 /* TeeBox+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49CC86C29E56FB600388CB1 /* TeeBox+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -109,14 +109,14 @@
 		D41D4E8B29CEF662001ACF68 /* GolfDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GolfDataModel.xcdatamodel; sourceTree = "<group>"; };
 		D41D4E8D29CEF6E2001ACF68 /* Club+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Club+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		D41D4E8E29CEF6E2001ACF68 /* Club+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Club+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		D41D4E8F29CEF6E2001ACF68 /* Player+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		D41D4E9029CEF6E2001ACF68 /* Player+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		D41D4E9129CEF6E2001ACF68 /* TeeBox+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TeeBox+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		D41D4E9229CEF6E2001ACF68 /* TeeBox+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TeeBox+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		D41D4E9929CEF721001ACF68 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		D41D4E9B29CEFA1B001ACF68 /* GolfProto03.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GolfProto03.entitlements; sourceTree = "<group>"; };
 		D41D4E9C29CEFA61001ACF68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D41D4E9D29CF016D001ACF68 /* MainScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
+		D49CC86729E56F6100388CB1 /* Player+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		D49CC86829E56F6100388CB1 /* Player+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		D49CC86B29E56FB600388CB1 /* TeeBox+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TeeBox+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		D49CC86C29E56FB600388CB1 /* TeeBox+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TeeBox+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,12 +196,12 @@
 		D41D4E2C29CEF4F9001ACF68 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D49CC86B29E56FB600388CB1 /* TeeBox+CoreDataClass.swift */,
+				D49CC86C29E56FB600388CB1 /* TeeBox+CoreDataProperties.swift */,
+				D49CC86729E56F6100388CB1 /* Player+CoreDataClass.swift */,
+				D49CC86829E56F6100388CB1 /* Player+CoreDataProperties.swift */,
 				D41D4E8D29CEF6E2001ACF68 /* Club+CoreDataClass.swift */,
 				D41D4E8E29CEF6E2001ACF68 /* Club+CoreDataProperties.swift */,
-				D41D4E8F29CEF6E2001ACF68 /* Player+CoreDataClass.swift */,
-				D41D4E9029CEF6E2001ACF68 /* Player+CoreDataProperties.swift */,
-				D41D4E9129CEF6E2001ACF68 /* TeeBox+CoreDataClass.swift */,
-				D41D4E9229CEF6E2001ACF68 /* TeeBox+CoreDataProperties.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -415,6 +415,7 @@
 			files = (
 				D41D4E8329CEF5F7001ACF68 /* ClubListViewModel.swift in Sources */,
 				D41D4E6629CEF5CB001ACF68 /* AddPlayerScreen.swift in Sources */,
+				D49CC86A29E56F6100388CB1 /* Player+CoreDataProperties.swift in Sources */,
 				D41D4E5529CEF5AB001ACF68 /* AddCoursesScreen.swift in Sources */,
 				D41D4E8729CEF5F7001ACF68 /* TeeBoxListViewModel.swift in Sources */,
 				D41D4E4D29CEF5AB001ACF68 /* EditClubScreen.swift in Sources */,
@@ -423,11 +424,9 @@
 				D41D4E5829CEF5AB001ACF68 /* TeeBoxListScreen.swift in Sources */,
 				D41D4E1F29CEF4BC001ACF68 /* ContentView.swift in Sources */,
 				D41D4E6329CEF5CB001ACF68 /* PlayerListScreen.swift in Sources */,
-				D41D4E9529CEF6E2001ACF68 /* Player+CoreDataClass.swift in Sources */,
 				D41D4E8C29CEF662001ACF68 /* GolfDataModel.xcdatamodeld in Sources */,
 				D41D4E9E29CF016D001ACF68 /* MainScreen.swift in Sources */,
 				D41D4E8529CEF5F7001ACF68 /* AddTeeBoxViewModel.swift in Sources */,
-				D41D4E9829CEF6E2001ACF68 /* TeeBox+CoreDataProperties.swift in Sources */,
 				D41D4E5729CEF5AB001ACF68 /* EditTeeBoxScreen.swift in Sources */,
 				D41D4E1D29CEF4BC001ACF68 /* GolfProto03App.swift in Sources */,
 				D41D4E8829CEF5F7001ACF68 /* HoleListViewModel.swift in Sources */,
@@ -442,17 +441,18 @@
 				D41D4E6529CEF5CB001ACF68 /* AddHandicapScreen.swift in Sources */,
 				D41D4E5929CEF5AB001ACF68 /* TeeBoxListScreen_1Course.swift in Sources */,
 				D41D4E9329CEF6E2001ACF68 /* Club+CoreDataClass.swift in Sources */,
+				D49CC86E29E56FB600388CB1 /* TeeBox+CoreDataProperties.swift in Sources */,
 				D41D4E3429CEF561001ACF68 /* UIImageTransformer.swift in Sources */,
 				D41D4E5A29CEF5AB001ACF68 /* TeeBoxListRowItem.swift in Sources */,
 				D41D4E8929CEF5F7001ACF68 /* AddEditClubViewModel.swift in Sources */,
 				D41D4E5229CEF5AB001ACF68 /* HolesLayoutTotals.swift in Sources */,
 				D41D4E5429CEF5AB001ACF68 /* EditCourseScreen.swift in Sources */,
-				D41D4E9729CEF6E2001ACF68 /* TeeBox+CoreDataClass.swift in Sources */,
 				D41D4E4F29CEF5AB001ACF68 /* AddClubScreen.swift in Sources */,
 				D41D4E7A29CEF5F7001ACF68 /* PlayerListViewModel.swift in Sources */,
+				D49CC86D29E56FB600388CB1 /* TeeBox+CoreDataClass.swift in Sources */,
+				D49CC86929E56F6100388CB1 /* Player+CoreDataClass.swift in Sources */,
 				D41D4E5029CEF5AB001ACF68 /* HolesLayout9.swift in Sources */,
 				D41D4E6429CEF5CB001ACF68 /* PlayerListRowItem.swift in Sources */,
-				D41D4E9629CEF6E2001ACF68 /* Player+CoreDataProperties.swift in Sources */,
 				D41D4E3529CEF561001ACF68 /* UIColorTransformer.swift in Sources */,
 				D41D4E7D29CEF5F7001ACF68 /* HandicapListViewModel.swift in Sources */,
 				D41D4E8629CEF5F7001ACF68 /* AddHoleViewModel.swift in Sources */,

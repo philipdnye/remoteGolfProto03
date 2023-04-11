@@ -2,7 +2,7 @@
 //  TeeBox+CoreDataProperties.swift
 //  GolfProto03
 //
-//  Created by Philip Nye on 25/03/2023.
+//  Created by Philip Nye on 11/04/2023.
 //
 //
 
@@ -23,6 +23,7 @@ extension TeeBox {
     @NSManaged public var teeBoxColor: UIColor?
     @NSManaged public var holes: NSSet?
     @NSManaged public var origin: Course?
+    @NSManaged public var competitors: NSSet?
     
     public var holesArray: [Hole] {
         let set = holes as? Set<Hole> ?? []
@@ -51,6 +52,23 @@ extension TeeBox {
 
     @objc(removeHoles:)
     @NSManaged public func removeFromHoles(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for competitors
+extension TeeBox {
+
+    @objc(addCompetitorsObject:)
+    @NSManaged public func addToCompetitors(_ value: Competitor)
+
+    @objc(removeCompetitorsObject:)
+    @NSManaged public func removeFromCompetitors(_ value: Competitor)
+
+    @objc(addCompetitors:)
+    @NSManaged public func addToCompetitors(_ values: NSSet)
+
+    @objc(removeCompetitors:)
+    @NSManaged public func removeFromCompetitors(_ values: NSSet)
 
 }
 
