@@ -65,6 +65,7 @@
 		D49CC87829E57E5E00388CB1 /* GameListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49CC87729E57E5E00388CB1 /* GameListScreen.swift */; };
 		D49CC87A29E5800600388CB1 /* GameListRowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49CC87929E5800600388CB1 /* GameListRowItem.swift */; };
 		D49CC87C29E5817800388CB1 /* GameDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49CC87B29E5817800388CB1 /* GameDetailScreen.swift */; };
+		D49CC87E29E5859100388CB1 /* AddCompetitorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49CC87D29E5859100388CB1 /* AddCompetitorViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -129,6 +130,7 @@
 		D49CC87729E57E5E00388CB1 /* GameListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListScreen.swift; sourceTree = "<group>"; };
 		D49CC87929E5800600388CB1 /* GameListRowItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListRowItem.swift; sourceTree = "<group>"; };
 		D49CC87B29E5817800388CB1 /* GameDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailScreen.swift; sourceTree = "<group>"; };
+		D49CC87D29E5859100388CB1 /* AddCompetitorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCompetitorViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				D41D4E9D29CF016D001ACF68 /* MainScreen.swift */,
+				D49CC87D29E5859100388CB1 /* AddCompetitorViewModel.swift */,
 				D41D4E5D29CEF5CB001ACF68 /* Players */,
 				D41D4E5C29CEF5B0001ACF68 /* Club */,
 			);
@@ -442,6 +445,7 @@
 				D41D4E8329CEF5F7001ACF68 /* ClubListViewModel.swift in Sources */,
 				D49CC87629E57C5A00388CB1 /* AddGameScreen.swift in Sources */,
 				D49CC87A29E5800600388CB1 /* GameListRowItem.swift in Sources */,
+				D49CC87E29E5859100388CB1 /* AddCompetitorViewModel.swift in Sources */,
 				D41D4E6629CEF5CB001ACF68 /* AddPlayerScreen.swift in Sources */,
 				D49CC86A29E56F6100388CB1 /* Player+CoreDataProperties.swift in Sources */,
 				D41D4E5529CEF5AB001ACF68 /* AddCoursesScreen.swift in Sources */,

@@ -12,6 +12,7 @@ class AddGameViewModel: ObservableObject {
    
     var name: String = ""
     var date: Date = Date()
+   @Published var club: Club = Club()
     
     func save() {
         let manager = CoreDataManager.shared

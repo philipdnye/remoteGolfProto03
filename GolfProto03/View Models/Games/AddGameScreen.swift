@@ -10,18 +10,26 @@ import SwiftUI
 struct AddGameScreen: View {
     
     @StateObject private var addGameVM = AddGameViewModel()
+    @StateObject private var clubListVM = ClubListViewModel()
+    
     @State private var showSheet = false
     @Environment(\.presentationMode) var presentationMode
     
     
     var body: some View {
         Form{
-            TextField("Enter name for game",text: $addGameVM.name)
+            TextField("Enter name for this game",text: $addGameVM.name)
             DatePicker(selection: $addGameVM.date, in: ...Date(),displayedComponents: .date) {
-        Text("Date of game")
+        Text("Game played on: ")
         
     }
-        
+            Picker("Select club", selection: $addGameVM.club) {
+                ForEach(clubListVM.clubs, id: \.self){
+                    Text($0.name)
+                        .tag($0.club)
+//                        .focused($AddGameViewInFocus, equals: .club)
+                }
+            }
         
         HStack{
             Spacer()
@@ -34,6 +42,10 @@ struct AddGameScreen: View {
         }
     }
     .navigationTitle("Add Game")
+    .onAppear(perform: {
+        clubListVM.getAllClubs1()
+
+    })
     }
 }
 
