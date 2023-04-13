@@ -32,35 +32,41 @@ struct GameListScreen: View {
         }
     
     var body: some View {
-        List(gameListVM.games, id: \.self){game in
-            NavigationLink(value: game, label: {
-                GameListRowItem(needsRefresh: $needsRefresh, game: game)
-            })
+        List{
+            ForEach(gameListVM.games, id: \.self){game in
+                NavigationLink(value: game, label: {
+                    GameListRowItem(needsRefresh: $needsRefresh, game: game)
+                })
+            }
+            //on dleete here
+            .onDelete(perform: deleteGame)
         }
+        
         .navigationDestination(for: GameViewModel.self){game in
             GameDetailScreen(needsRefresh: $needsRefresh, game: game)
+        }
+        .toolbar {
+            
+            ToolbarItem(placement: .navigationBarTrailing) {
+                addButton
             }
-            .toolbar {
-
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    addButton
-                }
-
-
-
-            }
-//            .navigationTitle("Games")
-//            .navigationBarTitleDisplayMode(.inline)
-            .sheet(isPresented: $isPresented, onDismiss: {
-                gameListVM.getAllGames()
-            }, content: {
-                AddGameScreen()
-            })
-
-            .onAppear(perform: {
-                gameListVM.getAllGames()
-
-            })
+            
+            
+            
+        }
+        //            .navigationTitle("Games")
+        //            .navigationBarTitleDisplayMode(.inline)
+        .sheet(isPresented: $isPresented, onDismiss: {
+            gameListVM.getAllGames()
+        }, content: {
+            AddGameScreen()
+        })
+        
+        .onAppear(perform: {
+            gameListVM.getAllGames()
+            
+        })
+    
     }
 }
 

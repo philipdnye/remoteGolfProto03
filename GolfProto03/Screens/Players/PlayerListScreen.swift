@@ -30,14 +30,16 @@ struct PlayerListScreen: View {
         }
     
     var body: some View {
-        
-        List(playerListVM.players, id: \.id){ player in
+        List{
+            ForEach(playerListVM.players, id: \.id){ player in
                 
-            NavigationLink(value: player, label: {
-                PlayerListRowItem(needsRefresh: $needsRefresh,player: player)
-            })
+                NavigationLink(value: player, label: {
+                    PlayerListRowItem(needsRefresh: $needsRefresh,player: player)
+                })
                 
             }
+            .onDelete(perform: deletePlayer)
+        }
             .navigationDestination(for: PlayerViewModel.self) {player in
                 PlayerDetailScreen(needsRefresh: $needsRefresh, player: player)
             }

@@ -11,6 +11,7 @@
         <attribute name="name" attributeType="String" defaultValueString="New club"/>
         <attribute name="postCode" optional="YES" attributeType="String"/>
         <relationship name="course22" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Course" inverseName="origin" inverseEntity="Course"/>
+        <relationship name="game" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Game" inverseName="club" inverseEntity="Game"/>
     </entity>
     <entity name="Competitor" representedClassName="Competitor" syncable="YES" codeGenerationType="class">
         <attribute name="courseHandicap" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -28,6 +29,7 @@
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="gameFormat" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="club" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Club" inverseName="game" inverseEntity="Club"/>
         <relationship name="competitors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Competitor" inverseName="game" inverseEntity="Competitor"/>
     </entity>
     <entity name="Handicap" representedClassName="Handicap" syncable="YES" codeGenerationType="class">

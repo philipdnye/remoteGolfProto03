@@ -58,4 +58,8 @@ struct GameViewModel: Hashable {
     var date: Date {
         return game.date ?? Date()
     }
+    
+    var club: Club {
+        return game.club ?? Club(context: CoreDataManager.shared.persistentContainer.viewContext)
+    }
 }

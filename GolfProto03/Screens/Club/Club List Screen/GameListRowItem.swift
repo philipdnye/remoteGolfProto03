@@ -17,6 +17,8 @@ struct GameListRowItem: View {
                
                         .font(.title2)
                         .foregroundColor(.orange)
+            Text(game.club.wrappedName)
+            
         }
     }
 }

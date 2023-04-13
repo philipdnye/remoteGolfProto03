@@ -36,14 +36,18 @@ struct ClubListScreen: View {
     
     
     var body: some View {
-        List(clubListVM.clubs, id: \.self){club in
+        List{
             
-            NavigationLink(value: club, label: {
-                ClubListRowItem(needsRefresh: $needsRefresh, club: club)
-            })
-            
+            ForEach(clubListVM.clubs, id: \.self){club in
+                
+                NavigationLink(value: club, label: {
+                    ClubListRowItem(needsRefresh: $needsRefresh, club: club)
+                })
+                
+                
+            }
+            .onDelete(perform: deleteClub)
         }
-    
         .navigationDestination(for: ClubViewModel.self){club in
                 CourseListScreen(club: club, needsRefresh: $needsRefresh)
             }
@@ -55,9 +59,10 @@ struct ClubListScreen: View {
                     addButton
                 }
 
-
+                
 
             }
+            
 //            .navigationTitle("Clubs")
 //            .navigationBarTitleDisplayMode(.inline)
             .sheet(isPresented: $isPresented, onDismiss: {

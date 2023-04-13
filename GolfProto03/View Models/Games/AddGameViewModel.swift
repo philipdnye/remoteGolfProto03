@@ -8,20 +8,27 @@
 import Foundation
 import SwiftUI
 
+
 class AddGameViewModel: ObservableObject {
    
     var name: String = ""
     var date: Date = Date()
-   @Published var club: Club = Club()
+    
+    @Published var selectedClub: ClubViewModel = ClubViewModel(club: Club())
+    
+//   @Published var club: Club = Club(context: CoreDataManager.shared.persistentContainer.viewContext)
+    @StateObject private var clubListVM = ClubListViewModel()
     
     func save() {
-        let manager = CoreDataManager.shared
-        let game = Game(context: manager.persistentContainer.viewContext)
-        
-        game.name = name
-        game.date = date
-        
-        manager.save()
-        
+        if name != "" {
+            let manager = CoreDataManager.shared
+            let game = Game(context: manager.persistentContainer.viewContext)
+            
+            game.name = name
+            game.date = date
+            game.club = selectedClub.club
+            
+            manager.save()
+        }
     }
 }

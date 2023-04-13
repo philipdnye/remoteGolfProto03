@@ -23,21 +23,22 @@ struct AddGameScreen: View {
         Text("Game played on: ")
         
     }
-            Picker("Select club", selection: $addGameVM.club) {
+            Picker("Select club", selection: $addGameVM.selectedClub) {
                 ForEach(clubListVM.clubs, id: \.self){
                     Text($0.name)
                         .tag($0.club)
 //                        .focused($AddGameViewInFocus, equals: .club)
                 }
             }
-        
+//            Text("\(addGameVM.selectedClub.name)")
         HStack{
             Spacer()
             Button("Save") {
-               
+                
                 addGameVM.save()
                 presentationMode.wrappedValue.dismiss()
             }
+            
             Spacer()
         }
     }

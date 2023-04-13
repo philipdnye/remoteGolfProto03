@@ -14,7 +14,10 @@ struct GameDetailScreen: View {
     let game: GameViewModel
     
     var body: some View {
-        Text(game.name)
+        VStack{
+            Text(game.name)
+            Text(game.club.wrappedName)
+        }
     }
 }
 

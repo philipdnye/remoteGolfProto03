@@ -33,6 +33,20 @@ class ClubListViewModel: NSObject, ObservableObject {
         }
 
     }
+    func getFirstClub () {
+        let request: NSFetchRequest<Club> = Club.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+      request.fetchLimit = 1
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataManager.shared.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController.delegate = self
+        try? fetchedResultsController.performFetch()
+        DispatchQueue.main.async {
+            self.clubs = (self.fetchedResultsController.fetchedObjects ?? []).map(ClubViewModel.init)
+        }
+
+    }
+   
+    
     
     func getAllClubs() {
         

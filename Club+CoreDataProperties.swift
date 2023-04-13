@@ -2,7 +2,7 @@
 //  Club+CoreDataProperties.swift
 //  GolfProto03
 //
-//  Created by Philip Nye on 25/03/2023.
+//  Created by Philip Nye on 13/04/2023.
 //
 //
 
@@ -27,6 +27,7 @@ extension Club {
     @NSManaged public var name: String?
     @NSManaged public var postCode: String?
     @NSManaged public var course22: NSSet?
+    @NSManaged public var game: NSSet?
     
     public var wrappedName: String {
         name ?? "Unknown name"
@@ -81,6 +82,23 @@ extension Club {
 
     @objc(removeCourse22:)
     @NSManaged public func removeFromCourse22(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for game
+extension Club {
+
+    @objc(addGameObject:)
+    @NSManaged public func addToGame(_ value: Game)
+
+    @objc(removeGameObject:)
+    @NSManaged public func removeFromGame(_ value: Game)
+
+    @objc(addGame:)
+    @NSManaged public func addToGame(_ values: NSSet)
+
+    @objc(removeGame:)
+    @NSManaged public func removeFromGame(_ values: NSSet)
 
 }
 
