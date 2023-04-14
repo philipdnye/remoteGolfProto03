@@ -139,6 +139,7 @@ struct GameDetailScreen: View {
                     
                 }
                 Text(refresh.description)
+                Text(game.game.competitors?.count.formatted() ?? "0")
             }
         }
         .onAppear(perform: {
