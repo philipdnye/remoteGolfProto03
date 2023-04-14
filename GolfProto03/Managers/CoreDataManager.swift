@@ -108,6 +108,16 @@ class CoreDataManager {
         }
     }
     
+    func getCompetitorById(id: NSManagedObjectID) -> Competitor? {
+        do {
+            return try
+            persistentContainer.viewContext.existingObject(with: id) as? Competitor
+        } catch {
+            print(error)
+            return nil
+        }
+    }
+    
     func deleteClub(_ club: Club) {
         persistentContainer.viewContext.delete(club)
         
@@ -172,7 +182,15 @@ class CoreDataManager {
             print("Failed to delete game \(error)")
         }
     }
-    
+    func deleteCompetitor(_ competitor: Competitor) {
+        persistentContainer.viewContext.delete(competitor)
+        do {
+            try persistentContainer.viewContext.save()
+        } catch {
+            persistentContainer.viewContext.rollback()
+            print("Failed to delete competitor \(error)")
+        }
+    }
     
     
     func getAllClubs() -> [Club] {

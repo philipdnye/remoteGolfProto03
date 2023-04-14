@@ -10,7 +10,6 @@ import Foundation
 import CoreData
 import UIKit
 
-
 extension Player {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Player> {
@@ -25,13 +24,15 @@ extension Player {
     @NSManaged public var mobile: String?
     @NSManaged public var photo: UIImage?
     @NSManaged public var handicap: NSSet?
-   
+    @NSManaged public var competitors: NSSet?
+
     public var handicapArray: [Handicap] {
         let set = handicap as? Set<Handicap> ?? []
         return set.sorted {
             $0.startDate ?? Date() > $1.startDate ?? Date()
         }
     }
+    
 }
 
 // MARK: Generated accessors for handicap
@@ -48,6 +49,23 @@ extension Player {
 
     @objc(removeHandicap:)
     @NSManaged public func removeFromHandicap(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for competitors
+extension Player {
+
+    @objc(addCompetitorsObject:)
+    @NSManaged public func addToCompetitors(_ value: Competitor)
+
+    @objc(removeCompetitorsObject:)
+    @NSManaged public func removeFromCompetitors(_ value: Competitor)
+
+    @objc(addCompetitors:)
+    @NSManaged public func addToCompetitors(_ values: NSSet)
+
+    @objc(removeCompetitors:)
+    @NSManaged public func removeFromCompetitors(_ values: NSSet)
 
 }
 

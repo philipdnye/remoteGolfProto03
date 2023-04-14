@@ -22,6 +22,8 @@ class PlayerListViewModel: NSObject, ObservableObject {
         }
     }
     
+    
+    
     func getAllPlayers () {
         let request: NSFetchRequest<Player> = Player.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "lastName", ascending: true)]
@@ -64,10 +66,14 @@ struct PlayerViewModel: Hashable {
     var mobile: String {
         return player.mobile ?? ""
     }
-//    var photo: UIImage {
-//      
-//        return player.photo ?? UIImage()
-//        
-//
+    var photo: UIImage {
+      
+        return player.photo ?? UIImage()
+        
+
+    }
+    
+//    var competitors: [Competitor] {
+//        return player.competitors
 //    }
 }

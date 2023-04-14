@@ -10,7 +10,6 @@ import Foundation
 import CoreData
 import UIKit
 
-
 extension TeeBox {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<TeeBox> {
@@ -21,10 +20,10 @@ extension TeeBox {
     @NSManaged public var courseRating: Double
     @NSManaged public var slopeRating: Int16
     @NSManaged public var teeBoxColor: UIColor?
-    @NSManaged public var competitors: NSSet?
+    @NSManaged public var game: NSSet?
     @NSManaged public var holes: NSSet?
     @NSManaged public var origin: Course?
-    @NSManaged public var game: NSSet?
+    @NSManaged public var competitors: NSSet?
     
     public var holesArray: [Hole] {
         let set = holes as? Set<Hole> ?? []
@@ -36,11 +35,24 @@ extension TeeBox {
     public var wrappedColour: String {
         colour ?? "Unknown colour"
     }
-
 }
 
-// MARK: Generated accessors for competitors
+// MARK: Generated accessors for game
+extension TeeBox {
 
+    @objc(addGameObject:)
+    @NSManaged public func addToGame(_ value: Game)
+
+    @objc(removeGameObject:)
+    @NSManaged public func removeFromGame(_ value: Game)
+
+    @objc(addGame:)
+    @NSManaged public func addToGame(_ values: NSSet)
+
+    @objc(removeGame:)
+    @NSManaged public func removeFromGame(_ values: NSSet)
+
+}
 
 // MARK: Generated accessors for holes
 extension TeeBox {
@@ -59,20 +71,20 @@ extension TeeBox {
 
 }
 
-// MARK: Generated accessors for game
+// MARK: Generated accessors for competitors
 extension TeeBox {
 
-    @objc(addGameObject:)
-    @NSManaged public func addToGame(_ value: Game)
+    @objc(addCompetitorsObject:)
+    @NSManaged public func addToCompetitors(_ value: Competitor)
 
-    @objc(removeGameObject:)
-    @NSManaged public func removeFromGame(_ value: Game)
+    @objc(removeCompetitorsObject:)
+    @NSManaged public func removeFromCompetitors(_ value: Competitor)
 
-    @objc(addGame:)
-    @NSManaged public func addToGame(_ values: NSSet)
+    @objc(addCompetitors:)
+    @NSManaged public func addToCompetitors(_ values: NSSet)
 
-    @objc(removeGame:)
-    @NSManaged public func removeFromGame(_ values: NSSet)
+    @objc(removeCompetitors:)
+    @NSManaged public func removeFromCompetitors(_ values: NSSet)
 
 }
 
