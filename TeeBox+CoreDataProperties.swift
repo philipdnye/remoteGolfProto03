@@ -40,21 +40,7 @@ extension TeeBox {
 }
 
 // MARK: Generated accessors for competitors
-extension TeeBox {
 
-    @objc(addCompetitorsObject:)
-    @NSManaged public func addToCompetitors(_ value: Competitor)
-
-    @objc(removeCompetitorsObject:)
-    @NSManaged public func removeFromCompetitors(_ value: Competitor)
-
-    @objc(addCompetitors:)
-    @NSManaged public func addToCompetitors(_ values: NSSet)
-
-    @objc(removeCompetitors:)
-    @NSManaged public func removeFromCompetitors(_ values: NSSet)
-
-}
 
 // MARK: Generated accessors for holes
 extension TeeBox {

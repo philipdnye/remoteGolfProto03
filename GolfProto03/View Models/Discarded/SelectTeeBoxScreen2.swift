@@ -23,17 +23,19 @@ struct SelectTeeBoxScreen2: View {
                         .tag(Optional($0.teeBox))
                 }
             }
-            
+            Button("Save"){
+                addGameVM.save()
+            }
             
             
                 .onAppear(perform: {
                     teeBoxListVM.getTeeBoxesByCourse(vm: course)
                     
                 })
-                .onReceive([self.addGameVM.selectedTeeBox].publisher.first()){teeBox in
-                    addGameVM.save()
-            
-                }
+//                .onReceive([self.addGameVM.selectedTeeBox].publisher.first()){teeBox in
+//                    addGameVM.save()
+//            
+//                }
             
             
         }

@@ -13,15 +13,19 @@ class AddGameViewModel: ObservableObject {
     @StateObject private var clubListVM = ClubListViewModel()
     var name: String = ""
     var date: Date = Date()
+//    var defaultTeebox: TeeBox = TeeBox()
 
     @Published var selectedClub: ClubViewModel = ClubViewModel(club: Club())
-    @Published var selectedCourse: CourseViewModel = CourseViewModel(course: Course())
-    @Published var selectedTeeBox: TeeBoxViewModel = TeeBoxViewModel(teeBox: TeeBox())
+    
+    
+    
+    @Published var selectedCourse: Course = Course()
+    @Published var selectedTeeBox: TeeBox = TeeBox()
     
 
     
     func save() {
-        if name != "" {
+      
             let manager = CoreDataManager.shared
             let game = Game(context: manager.persistentContainer.viewContext)
             
@@ -29,10 +33,10 @@ class AddGameViewModel: ObservableObject {
             game.date = date
             game.club = selectedClub.club
             
-//            game.defaultTeeBox = selectedTeeBox.teeBox
+//            game.defaultTeeBox? = selectedTeeBox.teeBox
 //            game.club = game.defaultTeeBox?.origin?.origin
             manager.save()
-        }
+        
         
         
     }

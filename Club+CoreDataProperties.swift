@@ -2,14 +2,13 @@
 //  Club+CoreDataProperties.swift
 //  GolfProto03
 //
-//  Created by Philip Nye on 13/04/2023.
+//  Created by Philip Nye on 14/04/2023.
 //
 //
 
 import Foundation
 import CoreData
 import UIKit
-
 
 extension Club {
 
@@ -65,12 +64,6 @@ extension Club {
             $0.name ?? "" < $1.name ??  ""
         }
     }
-    public var gameArray: [Game] {
-        let set = games as? Set<Game> ?? []
-        return set.sorted {
-            $0.date ?? Date() < $1.date ??  Date()
-        }
-    }
 }
 
 // MARK: Generated accessors for course22
@@ -90,20 +83,20 @@ extension Club {
 
 }
 
-// MARK: Generated accessors for game
+// MARK: Generated accessors for games
 extension Club {
 
-    @objc(addGameObject:)
-    @NSManaged public func addToGame(_ value: Game)
+    @objc(addGamesObject:)
+    @NSManaged public func addToGames(_ value: Game)
 
-    @objc(removeGameObject:)
-    @NSManaged public func removeFromGame(_ value: Game)
+    @objc(removeGamesObject:)
+    @NSManaged public func removeFromGames(_ value: Game)
 
-    @objc(addGame:)
-    @NSManaged public func addToGame(_ values: NSSet)
+    @objc(addGames:)
+    @NSManaged public func addToGames(_ values: NSSet)
 
-    @objc(removeGame:)
-    @NSManaged public func removeFromGame(_ values: NSSet)
+    @objc(removeGames:)
+    @NSManaged public func removeFromGames(_ values: NSSet)
 
 }
 

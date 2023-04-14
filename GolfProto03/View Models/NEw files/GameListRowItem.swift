@@ -17,7 +17,8 @@ struct GameListRowItem: View {
                
                         .font(.title2)
                         .foregroundColor(.orange)
-            Text(game.club.wrappedName)
+            Text(game.defaultTeeBox.origin?.name ?? "Unknown course")
+            Text(game.defaultTeeBox.origin?.origin?.wrappedName ?? "")
             
         }
     }

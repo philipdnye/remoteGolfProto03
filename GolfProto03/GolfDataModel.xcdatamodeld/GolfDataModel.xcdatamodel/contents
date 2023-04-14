@@ -13,15 +13,9 @@
         <relationship name="course22" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Course" inverseName="origin" inverseEntity="Course"/>
         <relationship name="games" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Game" inverseName="club" inverseEntity="Game"/>
     </entity>
-    <entity name="Competitor" representedClassName="Competitor" syncable="YES" codeGenerationType="class">
-        <attribute name="courseHandicap" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="playingHandicap" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="game" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Game" inverseName="competitors" inverseEntity="Game"/>
-        <relationship name="player" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Player" inverseName="competitor" inverseEntity="Player"/>
-        <relationship name="teebox" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TeeBox" inverseName="competitors" inverseEntity="TeeBox"/>
-    </entity>
-    <entity name="Course" representedClassName="Course" syncable="YES" codeGenerationType="class">
+    <entity name="Course" representedClassName="Course" syncable="YES">
         <attribute name="name" attributeType="String" defaultValueString="Original course"/>
+        <relationship name="games" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Game" inverseName="defaultCourse" inverseEntity="Game"/>
         <relationship name="origin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Club" inverseName="course22" inverseEntity="Club"/>
         <relationship name="teeBoxes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TeeBox" inverseName="origin" inverseEntity="TeeBox"/>
     </entity>
@@ -30,7 +24,7 @@
         <attribute name="gameFormat" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="club" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Club" inverseName="games" inverseEntity="Club"/>
-        <relationship name="competitors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Competitor" inverseName="game" inverseEntity="Competitor"/>
+        <relationship name="defaultCourse" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Course" inverseName="games" inverseEntity="Course"/>
         <relationship name="defaultTeeBox" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TeeBox" inverseName="game" inverseEntity="TeeBox"/>
     </entity>
     <entity name="Handicap" representedClassName="Handicap" syncable="YES" codeGenerationType="class">
@@ -57,7 +51,6 @@
         <attribute name="lastName" optional="YES" attributeType="String"/>
         <attribute name="mobile" optional="YES" attributeType="String"/>
         <attribute name="photo" optional="YES" attributeType="Transformable" valueTransformerName="UIImageTransformer" customClassName="UIImage"/>
-        <relationship name="competitor" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Competitor" inverseName="player" inverseEntity="Competitor"/>
         <relationship name="handicap" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Handicap" inverseName="origin" inverseEntity="Handicap"/>
     </entity>
     <entity name="TeeBox" representedClassName="TeeBox" syncable="YES">
@@ -65,7 +58,6 @@
         <attribute name="courseRating" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="slopeRating" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="teeBoxColor" optional="YES" attributeType="Transformable" valueTransformerName="UIColorTransformer" customClassName="UIColor"/>
-        <relationship name="competitors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Competitor" inverseName="teebox" inverseEntity="Competitor"/>
         <relationship name="game" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Game" inverseName="defaultTeeBox" inverseEntity="Game"/>
         <relationship name="holes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Hole" inverseName="origin" inverseEntity="Hole"/>
         <relationship name="origin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Course" inverseName="teeBoxes" inverseEntity="Course"/>
