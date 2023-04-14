@@ -85,6 +85,8 @@ struct GameDetailScreen: View {
                                    HStack{
                                        Text(competitor.player?.firstName ?? "")
                                        Text(competitor.player?.lastName ?? "")
+                                       Text(competitor.player?.handicapArray.currentHandicapIndex().formatted() ?? "0.0")
+                                       Text(competitor.teeBox?.wrappedColour ?? "")
                                    }
                     
                                    
@@ -122,6 +124,7 @@ struct GameDetailScreen: View {
                             let competitor = Competitor(context: manager.persistentContainer.viewContext)
                             competitor.game = game.game
                             competitor.player = playerListVM.players[index].player
+                            competitor.teeBox = game.defaultTeeBox
                             manager.save()
                             refresh.toggle()
 //                            players.allPlayers[index].selectedForGame = true
