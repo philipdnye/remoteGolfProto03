@@ -27,7 +27,7 @@ extension Club {
     @NSManaged public var name: String?
     @NSManaged public var postCode: String?
     @NSManaged public var course22: NSSet?
-    @NSManaged public var game: NSSet?
+    @NSManaged public var games: NSSet?
     
     public var wrappedName: String {
         name ?? "Unknown name"
@@ -65,7 +65,12 @@ extension Club {
             $0.name ?? "" < $1.name ??  ""
         }
     }
-
+    public var gameArray: [Game] {
+        let set = games as? Set<Game> ?? []
+        return set.sorted {
+            $0.date ?? Date() < $1.date ??  Date()
+        }
+    }
 }
 
 // MARK: Generated accessors for course22

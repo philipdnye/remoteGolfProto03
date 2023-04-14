@@ -50,7 +50,7 @@ class TeeBoxListViewModel: NSObject, ObservableObject {
 //
 //}
 
-struct TeeBoxViewModel {
+struct TeeBoxViewModel: Hashable {
 
     let teeBox: TeeBox
 

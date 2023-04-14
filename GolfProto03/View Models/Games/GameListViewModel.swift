@@ -61,5 +61,10 @@ struct GameViewModel: Hashable {
     
     var club: Club {
         return game.club ?? Club(context: CoreDataManager.shared.persistentContainer.viewContext)
+        
+    }
+    
+    var defaultTeeBox: TeeBox {
+        return game.defaultTeeBox ?? TeeBox(context: CoreDataManager.shared.persistentContainer.viewContext)
     }
 }

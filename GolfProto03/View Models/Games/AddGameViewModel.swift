@@ -10,14 +10,15 @@ import SwiftUI
 
 
 class AddGameViewModel: ObservableObject {
-   
+    @StateObject private var clubListVM = ClubListViewModel()
     var name: String = ""
     var date: Date = Date()
-    
+
     @Published var selectedClub: ClubViewModel = ClubViewModel(club: Club())
+    @Published var selectedCourse: CourseViewModel = CourseViewModel(course: Course())
+    @Published var selectedTeeBox: TeeBoxViewModel = TeeBoxViewModel(teeBox: TeeBox())
     
-//   @Published var club: Club = Club(context: CoreDataManager.shared.persistentContainer.viewContext)
-    @StateObject private var clubListVM = ClubListViewModel()
+
     
     func save() {
         if name != "" {
@@ -28,7 +29,13 @@ class AddGameViewModel: ObservableObject {
             game.date = date
             game.club = selectedClub.club
             
+//            game.defaultTeeBox = selectedTeeBox.teeBox
+//            game.club = game.defaultTeeBox?.origin?.origin
             manager.save()
         }
+        
+        
     }
 }
+
+

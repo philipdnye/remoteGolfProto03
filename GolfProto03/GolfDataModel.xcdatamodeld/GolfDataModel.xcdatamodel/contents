@@ -11,7 +11,7 @@
         <attribute name="name" attributeType="String" defaultValueString="New club"/>
         <attribute name="postCode" optional="YES" attributeType="String"/>
         <relationship name="course22" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Course" inverseName="origin" inverseEntity="Course"/>
-        <relationship name="game" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Game" inverseName="club" inverseEntity="Game"/>
+        <relationship name="games" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Game" inverseName="club" inverseEntity="Game"/>
     </entity>
     <entity name="Competitor" representedClassName="Competitor" syncable="YES" codeGenerationType="class">
         <attribute name="courseHandicap" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -29,8 +29,9 @@
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="gameFormat" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="club" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Club" inverseName="game" inverseEntity="Club"/>
+        <relationship name="club" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Club" inverseName="games" inverseEntity="Club"/>
         <relationship name="competitors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Competitor" inverseName="game" inverseEntity="Competitor"/>
+        <relationship name="defaultTeeBox" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TeeBox" inverseName="game" inverseEntity="TeeBox"/>
     </entity>
     <entity name="Handicap" representedClassName="Handicap" syncable="YES" codeGenerationType="class">
         <attribute name="handicapIndex" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -65,6 +66,7 @@
         <attribute name="slopeRating" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="teeBoxColor" optional="YES" attributeType="Transformable" valueTransformerName="UIColorTransformer" customClassName="UIColor"/>
         <relationship name="competitors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Competitor" inverseName="teebox" inverseEntity="Competitor"/>
+        <relationship name="game" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Game" inverseName="defaultTeeBox" inverseEntity="Game"/>
         <relationship name="holes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Hole" inverseName="origin" inverseEntity="Hole"/>
         <relationship name="origin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Course" inverseName="teeBoxes" inverseEntity="Course"/>
     </entity>

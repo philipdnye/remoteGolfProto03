@@ -17,6 +17,7 @@ struct GameDetailScreen: View {
         VStack{
             Text(game.name)
             Text(game.club.wrappedName)
+            Text(game.defaultTeeBox.wrappedColour)
         }
     }
 }
