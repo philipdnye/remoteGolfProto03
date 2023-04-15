@@ -15,6 +15,22 @@ enum AddGameViewFocusable: Hashable {
     case teebox
 }
 
+func updateCurrentGameFormat (currentGF: CurrentGameFormat,gameFormat: GameFormatType) {
+    currentGF.id = gameFormats[gameFormat.rawValue].id
+    currentGF.format = gameFormats[gameFormat.rawValue].format
+    currentGF.description = gameFormats[gameFormat.rawValue].description
+    currentGF.noOfPlayersNeeded = gameFormats[gameFormat.rawValue].noOfPlayersNeeded
+    currentGF.playerHandAllowances = gameFormats[gameFormat.rawValue].playerHandAllowances
+    currentGF.assignShotsRecd = gameFormats[gameFormat.rawValue].assignShotsRecd
+    currentGF.assignTeamGrouping = gameFormats[gameFormat.rawValue].assignTeamGrouping
+    currentGF.competitorSort = gameFormats[gameFormat.rawValue].competitorSort
+    currentGF.playFormat = gameFormats[gameFormat.rawValue].playFormat
+    currentGF.extraShotsTeamAdj = gameFormats[gameFormat.rawValue].extraShotsTeamAdj
+    currentGF.bogey = gameFormats[gameFormat.rawValue].bogey
+    currentGF.medal = gameFormats[gameFormat.rawValue].medal
+    currentGF.stableford = gameFormats[gameFormat.rawValue].stableford
+}
+
 struct AddGameScreen: View {
     
     @StateObject private var clubListVM = ClubListViewModel()
@@ -26,7 +42,7 @@ struct AddGameScreen: View {
     var body: some View {
       
         let currentGF = CurrentGameFormat()
-        var currentGameSettings: Game = Game()
+       
        
         Form{
             TextField("Enter name for this game",text: $addGameVM.name)
@@ -82,33 +98,35 @@ struct AddGameScreen: View {
 
                 .onReceive([self.addGameVM.pickerGameFormat].publisher.first()){
                     gameFormat in
-//                    currentGF.id = gameFormats[Int(currentGameSettings.gameFormat)].id
-//                    currentGF.format = gameFormats[Int(currentGameSettings.gameFormat)].format
-//                    currentGF.description = gameFormats[Int(currentGameSettings.gameFormat)].description
-//                    currentGF.noOfPlayersNeeded = gameFormats[Int(currentGameSettings.gameFormat)].noOfPlayersNeeded
-//                    currentGF.playerHandAllowances = gameFormats[Int(currentGameSettings.gameFormat)].playerHandAllowances
-//                    currentGF.assignShotsRecd = gameFormats[Int(currentGameSettings.gameFormat)].assignShotsRecd
-//                    currentGF.assignTeamGrouping = gameFormats[Int(currentGameSettings.gameFormat)].assignTeamGrouping
-//                    currentGF.competitorSort = gameFormats[Int(currentGameSettings.gameFormat)].competitorSort
-//                    currentGF.playFormat = gameFormats[Int(currentGameSettings.gameFormat)].playFormat
-//                    currentGF.extraShotsTeamAdj = gameFormats[Int(currentGameSettings.gameFormat)].extraShotsTeamAdj
-//                    currentGF.bogey = gameFormats[Int(currentGameSettings.gameFormat)].bogey
-//                    currentGF.medal = gameFormats[Int(currentGameSettings.gameFormat)].medal
-//                    currentGF.stableford = gameFormats[Int(currentGameSettings.gameFormat)].stableford
+                    updateCurrentGameFormat(currentGF: currentGF, gameFormat: gameFormat)
+                    
+//                    currentGF.id = gameFormats[gameFormat.rawValue].id
+//                    currentGF.format = gameFormats[gameFormat.rawValue].format
+//                    currentGF.description = gameFormats[gameFormat.rawValue].description
+//                    currentGF.noOfPlayersNeeded = gameFormats[gameFormat.rawValue].noOfPlayersNeeded
+//                    currentGF.playerHandAllowances = gameFormats[gameFormat.rawValue].playerHandAllowances
+//                    currentGF.assignShotsRecd = gameFormats[gameFormat.rawValue].assignShotsRecd
+//                    currentGF.assignTeamGrouping = gameFormats[gameFormat.rawValue].assignTeamGrouping
+//                    currentGF.competitorSort = gameFormats[gameFormat.rawValue].competitorSort
+//                    currentGF.playFormat = gameFormats[gameFormat.rawValue].playFormat
+//                    currentGF.extraShotsTeamAdj = gameFormats[gameFormat.rawValue].extraShotsTeamAdj
+//                    currentGF.bogey = gameFormats[gameFormat.rawValue].bogey
+//                    currentGF.medal = gameFormats[gameFormat.rawValue].medal
+//                    currentGF.stableford = gameFormats[gameFormat.rawValue].stableford
+                    
 //                    
-//                    print("Game attribute GameFormat set to \(currentGameSettings.gameFormat)")
-//                    print("id: \(currentGF.id)")
-//                    print("format: \(currentGF.format)")
-//                    print("description: \(currentGF.description)")
-//                    print("noOFPlayers: \(currentGF.noOfPlayersNeeded)")
-//                    print("playerHandAllowances: \(currentGF.playerHandAllowances)")
-//                    print("assignShotsRecd: \(currentGF.assignShotsRecd)")
-//                    print("competitorSort: \(currentGF.competitorSort)")
-//                    print("playFormat: \(currentGF.playFormat)")
-//                    print("extraShots: \(currentGF.extraShotsTeamAdj)")
-//                    print("Stableford: \(currentGF.stableford)")
-//                    print("Medal: \(currentGF.medal)")
-//                    print("Bogey: \(currentGF.bogey)")
+                    print("id: \(currentGF.id)")
+                    print("format: \(currentGF.format)")
+                    print("description: \(currentGF.description)")
+                    print("noOFPlayers: \(currentGF.noOfPlayersNeeded)")
+                    print("playerHandAllowances: \(currentGF.playerHandAllowances)")
+                    print("assignShotsRecd: \(currentGF.assignShotsRecd)")
+                    print("competitorSort: \(currentGF.competitorSort)")
+                    print("playFormat: \(currentGF.playFormat)")
+                    print("extraShots: \(currentGF.extraShotsTeamAdj)")
+                    print("Stableford: \(currentGF.stableford)")
+                    print("Medal: \(currentGF.medal)")
+                    print("Bogey: \(currentGF.bogey)")
                 }
                 
                 Picker("Score format", selection:$addGameVM.pickerScoringFormat){

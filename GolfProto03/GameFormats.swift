@@ -8,20 +8,20 @@
 import Foundation
 
 
-class CurrentGameFormat {
-    var id: Int = 99
-    var format: GameFormatName = GameFormatName.fourBallBBMatch
-    var description: String = ""
-    var noOfPlayersNeeded: Int = 0
-    var playerHandAllowances: [Double] = []
-    var assignShotsRecd: Assignment = Assignment.Indiv
-    var assignTeamGrouping: Assignment = Assignment.Indiv
-    var competitorSort: Assignment = Assignment.Indiv
-    var playFormat: PlayFormat = PlayFormat.strokeplay
-    var extraShotsTeamAdj: Double = 1.0
-    var stableford: Bool = false
-    var medal: Bool = true
-    var bogey: Bool = false
+class CurrentGameFormat: ObservableObject {
+    @Published var id: Int = 99
+    @Published var format: GameFormatName = GameFormatName.fourBallBBMatch
+    @Published var description: String = ""
+    @Published var noOfPlayersNeeded: Int = 0
+    @Published var playerHandAllowances: [Double] = []
+    @Published var assignShotsRecd: Assignment = Assignment.Indiv
+    @Published var assignTeamGrouping: Assignment = Assignment.Indiv
+    @Published var competitorSort: Assignment = Assignment.Indiv
+    @Published var playFormat: PlayFormat = PlayFormat.strokeplay
+    @Published var extraShotsTeamAdj: Double = 1.0
+    @Published var stableford: Bool = false
+    @Published var medal: Bool = true
+    @Published var bogey: Bool = false
 }
 
 

@@ -14,18 +14,14 @@ class AddGameViewModel: ObservableObject {
     var name: String = ""
     var date: Date = Date()
     var teeBox: TeeBox = TeeBox()
-//    var gameFormat: Int16 = 0
+
 
     
     @Published var pickedClub: Int = 0
     @Published var pickedCourse: Int = 0
     @Published var pickedTeeBox: Int = 0
     
-    
-    
-    @Published var selectedClub: ClubViewModel = ClubViewModel(club: Club())
-    @Published var selectedCourse: Course = Course()
-    @Published var selectedTeeBox: TeeBox = TeeBox()
+
     
     @Published var pickerScoringFormat: ScoreFormat = .medal
     @Published var pickerHandicapFormat: HandicapFormat = .handicap

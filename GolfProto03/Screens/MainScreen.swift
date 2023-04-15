@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainScreen: View {
-
+@StateObject var currentGameFormat = CurrentGameFormat()
     
     init(){
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(.orange)]
@@ -64,6 +64,7 @@ struct MainScreen: View {
             
         }
         .accentColor(.orange)
+        .environmentObject(currentGameFormat)
 
     }
 }

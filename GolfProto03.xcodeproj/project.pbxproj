@@ -69,11 +69,8 @@
 		D49CC87A29E5800600388CB1 /* GameListRowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49CC87929E5800600388CB1 /* GameListRowItem.swift */; };
 		D49CC87C29E5817800388CB1 /* GameDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49CC87B29E5817800388CB1 /* GameDetailScreen.swift */; };
 		D49CC87E29E5859100388CB1 /* AddCompetitorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49CC87D29E5859100388CB1 /* AddCompetitorViewModel.swift */; };
-		D49CC88429E9421600388CB1 /* SelectTeeBoxScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49CC88329E9421600388CB1 /* SelectTeeBoxScreen.swift */; };
-		D49CC88629E94A5000388CB1 /* SelectTeeBoxScreen2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49CC88529E94A5000388CB1 /* SelectTeeBoxScreen2.swift */; };
 		D49CC88D29E9552A00388CB1 /* Club+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49CC88B29E9552A00388CB1 /* Club+CoreDataClass.swift */; };
 		D49CC88E29E9552A00388CB1 /* Club+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49CC88C29E9552A00388CB1 /* Club+CoreDataProperties.swift */; };
-		D49CC89B29E96C1200388CB1 /* SelectDefaultTeeBoxScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49CC89A29E96C1200388CB1 /* SelectDefaultTeeBoxScreen.swift */; };
 		D49CC8A329E97CB700388CB1 /* Course+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49CC8A129E97CB700388CB1 /* Course+CoreDataClass.swift */; };
 		D49CC8A429E97CB700388CB1 /* Course+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49CC8A229E97CB700388CB1 /* Course+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
@@ -144,11 +141,8 @@
 		D49CC87929E5800600388CB1 /* GameListRowItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListRowItem.swift; sourceTree = "<group>"; };
 		D49CC87B29E5817800388CB1 /* GameDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailScreen.swift; sourceTree = "<group>"; };
 		D49CC87D29E5859100388CB1 /* AddCompetitorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCompetitorViewModel.swift; sourceTree = "<group>"; };
-		D49CC88329E9421600388CB1 /* SelectTeeBoxScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTeeBoxScreen.swift; sourceTree = "<group>"; };
-		D49CC88529E94A5000388CB1 /* SelectTeeBoxScreen2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTeeBoxScreen2.swift; sourceTree = "<group>"; };
 		D49CC88B29E9552A00388CB1 /* Club+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Club+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		D49CC88C29E9552A00388CB1 /* Club+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Club+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		D49CC89A29E96C1200388CB1 /* SelectDefaultTeeBoxScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDefaultTeeBoxScreen.swift; sourceTree = "<group>"; };
 		D49CC8A129E97CB700388CB1 /* Course+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Course+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		D49CC8A229E97CB700388CB1 /* Course+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Course+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -256,7 +250,6 @@
 		D41D4E2E29CEF509001ACF68 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
-				D49CC89C29E9713600388CB1 /* Discarded */,
 				D49CC89729E9659E00388CB1 /* NEw files */,
 				D41D4E6D29CEF5F7001ACF68 /* Clubs */,
 				D41D4E6829CEF5F7001ACF68 /* Players */,
@@ -400,16 +393,6 @@
 			path = "NEw files";
 			sourceTree = "<group>";
 		};
-		D49CC89C29E9713600388CB1 /* Discarded */ = {
-			isa = PBXGroup;
-			children = (
-				D49CC88329E9421600388CB1 /* SelectTeeBoxScreen.swift */,
-				D49CC89A29E96C1200388CB1 /* SelectDefaultTeeBoxScreen.swift */,
-				D49CC88529E94A5000388CB1 /* SelectTeeBoxScreen2.swift */,
-			);
-			path = Discarded;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -488,7 +471,6 @@
 				D41D4E5529CEF5AB001ACF68 /* AddCoursesScreen.swift in Sources */,
 				D41D4E8729CEF5F7001ACF68 /* TeeBoxListViewModel.swift in Sources */,
 				D41D4E4D29CEF5AB001ACF68 /* EditClubScreen.swift in Sources */,
-				D49CC88629E94A5000388CB1 /* SelectTeeBoxScreen2.swift in Sources */,
 				D4232EB329E9BCFE00E73190 /* Extensions_Game.swift in Sources */,
 				D49CC88E29E9552A00388CB1 /* Club+CoreDataProperties.swift in Sources */,
 				D41D4E4E29CEF5AB001ACF68 /* ClubListScreen.swift in Sources */,
@@ -510,12 +492,10 @@
 				D41D4E9A29CEF721001ACF68 /* CoreDataManager.swift in Sources */,
 				D41D4E7B29CEF5F7001ACF68 /* AddHandicapViewModel.swift in Sources */,
 				D41D4E5629CEF5AB001ACF68 /* CourseListRowItem.swift in Sources */,
-				D49CC89B29E96C1200388CB1 /* SelectDefaultTeeBoxScreen.swift in Sources */,
 				D4232EA329E9A08500E73190 /* TeeBox+CoreDataProperties.swift in Sources */,
 				D41D4E6729CEF5CB001ACF68 /* PlayerDetailScreen.swift in Sources */,
 				D41D4E8429CEF5F7001ACF68 /* EditCourseViewModel.swift in Sources */,
 				D41D4E7F29CEF5F7001ACF68 /* EditTeeBoxViewModel.swift in Sources */,
-				D49CC88429E9421600388CB1 /* SelectTeeBoxScreen.swift in Sources */,
 				D41D4E3729CEF576001ACF68 /* ImagePicker.swift in Sources */,
 				D41D4E7C29CEF5F7001ACF68 /* AddPlayerViewModel.swift in Sources */,
 				D41D4E6529CEF5CB001ACF68 /* AddHandicapScreen.swift in Sources */,
