@@ -19,7 +19,7 @@ struct TestViewClubArray: View {
     
     @StateObject private var clubListVM = ClubListViewModel()
     @StateObject private var addGameVM = AddGameViewModel()
-    
+    @Environment(\.presentationMode) var presentationMode
 
     @FocusState private var AddGameViewInFocus: AddGameViewFocusable?
     
@@ -65,11 +65,12 @@ struct TestViewClubArray: View {
             }
             
             Section{
-                Picker("Game format", selection: $addGameVM.pickerGameFormat){
+                Picker("Game", selection: $addGameVM.pickerGameFormat){
                     ForEach(GameFormatType.allCases.sorted(by: {
                         $0.rawValue > $1.rawValue
                     }), id: \.self) {gameFormat in
                         Text(gameFormat.stringValue())
+                            .frame(width: 300)
                             .tag(gameFormat)
                     }
                 }
@@ -97,6 +98,18 @@ struct TestViewClubArray: View {
                 }
                
                 
+            }
+            Section {
+                HStack{
+                    Spacer()
+                    Button("Create game"){
+                        addGameVM.teeBox = clubListVM.clubs2.getElement(at: addGameVM.pickedClub)?.courseArray.getElement(at: addGameVM.pickedCourse)?.teeBoxArray.getElement(at: addGameVM.pickedTeeBox) ?? TeeBox()
+                        addGameVM.save()
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                    
+                    Spacer()
+                }
             }
             
         }

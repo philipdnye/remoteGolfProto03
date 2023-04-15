@@ -15,12 +15,12 @@ struct GameListRowItem: View {
         HStack{
             Text(game.name)
                
-                        .font(.title2)
-                        .foregroundColor(.orange)
-            Text(game.defaultTeeBox.origin?.name ?? "Unknown course")
-            Text(game.defaultTeeBox.origin?.origin?.wrappedName ?? "")
+            Text(game.defaultTeeBox.wrappedColour)
+            Text(game.defaultTeeBox.origin?.name ?? "")
+
             
         }
+        .font(.caption2)
     }
 }
 

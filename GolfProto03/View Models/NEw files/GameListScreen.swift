@@ -59,7 +59,7 @@ struct GameListScreen: View {
         .sheet(isPresented: $isPresented, onDismiss: {
             gameListVM.getAllGames()
         }, content: {
-            AddGameScreen()
+            TestViewClubArray()
         })
         
         .onAppear(perform: {
