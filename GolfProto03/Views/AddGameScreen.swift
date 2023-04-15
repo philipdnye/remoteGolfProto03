@@ -7,50 +7,25 @@
 
 import SwiftUI
 
-enum AddGameViewFocusable: Hashable {
-    case name
-    case date
-    case club
-    case course
-    case teebox
-}
 
-func updateCurrentGameFormat (currentGF: CurrentGameFormat,gameFormat: GameFormatType) {
-    currentGF.id = gameFormats[gameFormat.rawValue].id
-    currentGF.format = gameFormats[gameFormat.rawValue].format
-    currentGF.description = gameFormats[gameFormat.rawValue].description
-    currentGF.noOfPlayersNeeded = gameFormats[gameFormat.rawValue].noOfPlayersNeeded
-    currentGF.playerHandAllowances = gameFormats[gameFormat.rawValue].playerHandAllowances
-    currentGF.assignShotsRecd = gameFormats[gameFormat.rawValue].assignShotsRecd
-    currentGF.assignTeamGrouping = gameFormats[gameFormat.rawValue].assignTeamGrouping
-    currentGF.competitorSort = gameFormats[gameFormat.rawValue].competitorSort
-    currentGF.playFormat = gameFormats[gameFormat.rawValue].playFormat
-    currentGF.extraShotsTeamAdj = gameFormats[gameFormat.rawValue].extraShotsTeamAdj
-    currentGF.bogey = gameFormats[gameFormat.rawValue].bogey
-    currentGF.medal = gameFormats[gameFormat.rawValue].medal
-    currentGF.stableford = gameFormats[gameFormat.rawValue].stableford
-    
-    print("id: \(currentGF.id)")
-    print("format: \(currentGF.format)")
-    print("description: \(currentGF.description)")
-    print("noOFPlayers: \(currentGF.noOfPlayersNeeded)")
-    print("playerHandAllowances: \(currentGF.playerHandAllowances)")
-    print("assignShotsRecd: \(currentGF.assignShotsRecd)")
-    print("competitorSort: \(currentGF.competitorSort)")
-    print("playFormat: \(currentGF.playFormat)")
-    print("extraShots: \(currentGF.extraShotsTeamAdj)")
-    print("Stableford: \(currentGF.stableford)")
-    print("Medal: \(currentGF.medal)")
-    print("Bogey: \(currentGF.bogey)")
-}
+
+
 
 struct AddGameScreen: View {
     
     @StateObject private var clubListVM = ClubListViewModel()
     @StateObject private var addGameVM = AddGameViewModel()
+    @StateObject private var playerListVM = PlayerListViewModel()
     @Environment(\.presentationMode) var presentationMode
 
     @FocusState private var AddGameViewInFocus: AddGameViewFocusable?
+    
+   private func createGame () {
+        addGameVM.teeBox = clubListVM.clubs2.getElement(at: addGameVM.pickedClub)?.courseArray.getElement(at: addGameVM.pickedCourse)?.teeBoxArray.getElement(at: addGameVM.pickedTeeBox) ?? TeeBox()
+
+        addGameVM.save()
+        presentationMode.wrappedValue.dismiss()
+    }
     
     var body: some View {
       
@@ -58,43 +33,126 @@ struct AddGameScreen: View {
        
        
         Form{
-            TextField("Enter name for this game",text: $addGameVM.name)
-    
-                .keyboardType(.default)
-                .focused($AddGameViewInFocus, equals: .name)
-            
-            DatePicker(selection: $addGameVM.date, in: ...Date(),displayedComponents: .date) {
-                Text("Game played on: ")
-             
+            Section{
+                TextField("Enter name for this game",text: $addGameVM.name)
+                
+                    .keyboardType(.default)
+                    .focused($AddGameViewInFocus, equals: .name)
+                
+                DatePicker(selection: $addGameVM.date, in: ...Date(),displayedComponents: .date) {
+                    Text("Game played on: ")
+                    
+                    
+                }
+                .focused($AddGameViewInFocus, equals: .date)
+                
+                Picker("Select club", selection: $addGameVM.pickedClub) {
+                    ForEach(0..<clubListVM.clubs2.count, id: \.self){
+                        Text(clubListVM.clubs2[$0].wrappedName)
+                            .tag($0)
+                            .focused($AddGameViewInFocus, equals: .club)
+                    }
+                }
+                
+                
+                
+                Picker("Select course", selection: $addGameVM.pickedCourse) {
+                    ForEach(0..<(clubListVM.clubs2.getElement(at: addGameVM.pickedClub)?.courseArray.count ?? 0), id: \.self){
+                        Text(clubListVM.clubs2.getElement(at: addGameVM.pickedClub)?.courseArray.getElement(at: $0)?.name ?? "")
+                            .tag($0)
+                            .focused($AddGameViewInFocus, equals: .course)
+                    }
+                }
+                
+                Picker("Default tees for game", selection: $addGameVM.pickedTeeBox){
+                    ForEach(0..<(clubListVM.clubs2.getElement(at: addGameVM.pickedClub)?.courseArray.getElement(at: addGameVM.pickedCourse)?.teeBoxArray.count ?? 0), id: \.self){
+                        Text(clubListVM.clubs2.getElement(at: addGameVM.pickedClub)?.courseArray.getElement(at: addGameVM.pickedCourse)?.teeBoxArray.getElement(at: $0)?.wrappedColour ?? "")
+                            .tag($0)
+                            .focused($AddGameViewInFocus, equals: .teebox)
+                    }
+                }
+            }
+            Section {
+                
+                ForEach(playerListVM.players.filter({$0.selectedForGame == true}), id: \.self){player in
+                    HStack{
+                        Text(player.firstName)
+                        Text(player.lastName)
+                        Text(player.player.handicapArray.currentHandicapIndex().formatted())
+                        Text(player.selectedForGame.description)
+                    }
+                    .swipeActions(allowsFullSwipe: true) {
+                    
+                    Button {
+
+                        let manager = CoreDataManager.shared
+                    let selectedPlayer = manager.getPlayerById(id: player.id)
+                        selectedPlayer?.selectedForGame.toggle()
+                       
+                        manager.save()
+                        playerListVM.getAllPlayers()
+                      
+                } label: {
+                Label("Mute", systemImage: "person.fill.badge.minus")
+            }
+            .tint(.red)
+                    
+                    
+                                                }
+                }
                 
             }
-            .focused($AddGameViewInFocus, equals: .date)
             
-            Picker("Select club", selection: $addGameVM.pickedClub) {
-                ForEach(0..<clubListVM.clubs2.count, id: \.self){
-                    Text(clubListVM.clubs2[$0].wrappedName)
-                        .tag($0)
-                        .focused($AddGameViewInFocus, equals: .club)
-                }
-            }
+        header: {
+            
+            Text("PLAYERS ADDED TO THE GAME")
+                .foregroundColor(.orange)
+        } footer: {
+            Text("Remove players by swiping to the left.")
+                .foregroundColor(.orange)
+            
+            
+        }
 
-
-            
-            Picker("Select course", selection: $addGameVM.pickedCourse) {
-                ForEach(0..<(clubListVM.clubs2.getElement(at: addGameVM.pickedClub)?.courseArray.count ?? 0), id: \.self){
-                    Text(clubListVM.clubs2.getElement(at: addGameVM.pickedClub)?.courseArray.getElement(at: $0)?.name ?? "")
-                        .tag($0)
-                        .focused($AddGameViewInFocus, equals: .course)
-                }
+            Section {
+                ForEach(playerListVM.players.filter({$0.selectedForGame == false}), id: \.self){player in
+                    HStack{
+                        Text(player.firstName)
+                        Text(player.lastName)
+                        Text(player.player.handicapArray.currentHandicapIndex().formatted())
+                        Text(player.selectedForGame.description)
+                    }
+                    .swipeActions(allowsFullSwipe: true) {
+                    
+                    Button {
+//                    let index = playerListVM.players.firstIndex(where: {$0 == player}) ?? 0
+                        let manager = CoreDataManager.shared
+                    let selectedPlayer = manager.getPlayerById(id: player.id)
+                        selectedPlayer?.selectedForGame.toggle()
+                       
+                        manager.save()
+                        playerListVM.getAllPlayers()
+                      
+                } label: {
+                Label("Mute", systemImage: "person.fill.badge.plus")
             }
-            
-            Picker("Default tees for game", selection: $addGameVM.pickedTeeBox){
-                ForEach(0..<(clubListVM.clubs2.getElement(at: addGameVM.pickedClub)?.courseArray.getElement(at: addGameVM.pickedCourse)?.teeBoxArray.count ?? 0), id: \.self){
-                    Text(clubListVM.clubs2.getElement(at: addGameVM.pickedClub)?.courseArray.getElement(at: addGameVM.pickedCourse)?.teeBoxArray.getElement(at: $0)?.wrappedColour ?? "")
-                        .tag($0)
-                        .focused($AddGameViewInFocus, equals: .teebox)
+            .tint(.indigo)
+                    
+                    
+                                                }
                 }
-            }
+                //AvailablePlayers()
+           
+            
+        }
+    header: {
+        Text("AVAILABLE PLAYERS")
+            .foregroundColor(.green)
+    }
+    footer: {
+        Text("Add players by swiping to the left.")
+            .foregroundColor(.green)
+    }
             
             Section{
                 Picker("Game", selection: $addGameVM.pickerGameFormat){
@@ -111,7 +169,7 @@ struct AddGameScreen: View {
 
                 .onReceive([self.addGameVM.pickerGameFormat].publisher.first()){
                     gameFormat in
-                    updateCurrentGameFormat(currentGF: currentGF, gameFormat: gameFormat)
+                    addGameVM.updateCurrentGameFormat(currentGF: currentGF, gameFormat: gameFormat)
 
                 }
                 
@@ -143,10 +201,7 @@ struct AddGameScreen: View {
                 HStack{
                     Spacer()
                     Button("Create game"){
-                        addGameVM.teeBox = clubListVM.clubs2.getElement(at: addGameVM.pickedClub)?.courseArray.getElement(at: addGameVM.pickedCourse)?.teeBoxArray.getElement(at: addGameVM.pickedTeeBox) ?? TeeBox()
-
-                        addGameVM.save()
-                        presentationMode.wrappedValue.dismiss()
+                       createGame()
                     }
                     
                     Spacer()
@@ -158,6 +213,7 @@ struct AddGameScreen: View {
         .onAppear(perform: {
 
             clubListVM.getAllClubs2()
+            playerListVM.getAllPlayers()
 
         })
         

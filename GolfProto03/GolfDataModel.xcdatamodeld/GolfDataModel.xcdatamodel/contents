@@ -64,6 +64,7 @@
         <attribute name="lastName" optional="YES" attributeType="String"/>
         <attribute name="mobile" optional="YES" attributeType="String"/>
         <attribute name="photo" optional="YES" attributeType="Transformable" valueTransformerName="UIImageTransformer" customClassName="UIImage"/>
+        <attribute name="selectedForGame" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <relationship name="competitors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Competitor" inverseName="player" inverseEntity="Competitor"/>
         <relationship name="handicap" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Handicap" inverseName="origin" inverseEntity="Handicap"/>
     </entity>

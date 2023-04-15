@@ -2,7 +2,7 @@
 //  Player+CoreDataProperties.swift
 //  GolfProto03
 //
-//  Created by Philip Nye on 14/04/2023.
+//  Created by Philip Nye on 15/04/2023.
 //
 //
 
@@ -23,8 +23,9 @@ extension Player {
     @NSManaged public var lastName: String?
     @NSManaged public var mobile: String?
     @NSManaged public var photo: UIImage?
-    @NSManaged public var handicap: NSSet?
+    @NSManaged public var selectedForGame: Bool
     @NSManaged public var competitors: NSSet?
+    @NSManaged public var handicap: NSSet?
 
     public var handicapArray: [Handicap] {
         let set = handicap as? Set<Handicap> ?? []
@@ -33,23 +34,6 @@ extension Player {
         }
     }
     
-}
-
-// MARK: Generated accessors for handicap
-extension Player {
-
-    @objc(addHandicapObject:)
-    @NSManaged public func addToHandicap(_ value: Handicap)
-
-    @objc(removeHandicapObject:)
-    @NSManaged public func removeFromHandicap(_ value: Handicap)
-
-    @objc(addHandicap:)
-    @NSManaged public func addToHandicap(_ values: NSSet)
-
-    @objc(removeHandicap:)
-    @NSManaged public func removeFromHandicap(_ values: NSSet)
-
 }
 
 // MARK: Generated accessors for competitors
@@ -66,6 +50,23 @@ extension Player {
 
     @objc(removeCompetitors:)
     @NSManaged public func removeFromCompetitors(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for handicap
+extension Player {
+
+    @objc(addHandicapObject:)
+    @NSManaged public func addToHandicap(_ value: Handicap)
+
+    @objc(removeHandicapObject:)
+    @NSManaged public func removeFromHandicap(_ value: Handicap)
+
+    @objc(addHandicap:)
+    @NSManaged public func addToHandicap(_ values: NSSet)
+
+    @objc(removeHandicap:)
+    @NSManaged public func removeFromHandicap(_ values: NSSet)
 
 }
 

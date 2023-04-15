@@ -72,6 +72,10 @@ struct PlayerViewModel: Hashable {
         
 
     }
+    var selectedForGame: Bool {
+        return player.selectedForGame
+    }
+    
     
 //    var competitors: [Competitor] {
 //        return player.competitors
