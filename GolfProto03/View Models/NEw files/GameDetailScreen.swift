@@ -127,19 +127,18 @@ struct GameDetailScreen: View {
                             competitor.teeBox = game.defaultTeeBox
                             manager.save()
                             refresh.toggle()
-//                            players.allPlayers[index].selectedForGame = true
-                            //                        resetGameFormatPicker()
+
                         } label: {
                             Label("Mute", systemImage: "person.fill.badge.plus")
                         }
                         .tint(.indigo)
-                        //.disabled(players.allPlayers.UnDeleted().filter({$0.selectedForGame == true}).count == 4)
+                      
                         
                     }
                     
                 }
-                Text(refresh.description)
-                Text(game.game.competitors?.count.formatted() ?? "0")
+//                Text(refresh.description)
+//                Text(game.game.competitors?.count.formatted() ?? "0")
             }
             Section{
                 Picker("Score format", selection:$addGameVM.pickerScoringFormat){

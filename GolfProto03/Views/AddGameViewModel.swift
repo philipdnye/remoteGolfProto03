@@ -13,12 +13,16 @@ class AddGameViewModel: ObservableObject {
     @StateObject private var clubListVM = ClubListViewModel()
     var name: String = ""
     var date: Date = Date()
-//    var defaultTeebox: TeeBox = TeeBox()
 
+
+    
+    @Published var pickedClub: Int = 0
+    @Published var pickedCourse: Int = 0
+    @Published var pickedTeeBox: Int = 0
+    
+    
+    
     @Published var selectedClub: ClubViewModel = ClubViewModel(club: Club())
-    
-    
-    
     @Published var selectedCourse: Course = Course()
     @Published var selectedTeeBox: TeeBox = TeeBox()
     
