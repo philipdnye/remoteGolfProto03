@@ -29,6 +29,19 @@ func updateCurrentGameFormat (currentGF: CurrentGameFormat,gameFormat: GameForma
     currentGF.bogey = gameFormats[gameFormat.rawValue].bogey
     currentGF.medal = gameFormats[gameFormat.rawValue].medal
     currentGF.stableford = gameFormats[gameFormat.rawValue].stableford
+    
+    print("id: \(currentGF.id)")
+    print("format: \(currentGF.format)")
+    print("description: \(currentGF.description)")
+    print("noOFPlayers: \(currentGF.noOfPlayersNeeded)")
+    print("playerHandAllowances: \(currentGF.playerHandAllowances)")
+    print("assignShotsRecd: \(currentGF.assignShotsRecd)")
+    print("competitorSort: \(currentGF.competitorSort)")
+    print("playFormat: \(currentGF.playFormat)")
+    print("extraShots: \(currentGF.extraShotsTeamAdj)")
+    print("Stableford: \(currentGF.stableford)")
+    print("Medal: \(currentGF.medal)")
+    print("Bogey: \(currentGF.bogey)")
 }
 
 struct AddGameScreen: View {
@@ -93,40 +106,13 @@ struct AddGameScreen: View {
                     }
                 }
                 .onAppear(perform: {
-                    addGameVM.pickerGameFormat = .fourBallBB2P
+                    addGameVM.pickerGameFormat = .fourBallBBMatch
                 })
 
                 .onReceive([self.addGameVM.pickerGameFormat].publisher.first()){
                     gameFormat in
                     updateCurrentGameFormat(currentGF: currentGF, gameFormat: gameFormat)
-                    
-//                    currentGF.id = gameFormats[gameFormat.rawValue].id
-//                    currentGF.format = gameFormats[gameFormat.rawValue].format
-//                    currentGF.description = gameFormats[gameFormat.rawValue].description
-//                    currentGF.noOfPlayersNeeded = gameFormats[gameFormat.rawValue].noOfPlayersNeeded
-//                    currentGF.playerHandAllowances = gameFormats[gameFormat.rawValue].playerHandAllowances
-//                    currentGF.assignShotsRecd = gameFormats[gameFormat.rawValue].assignShotsRecd
-//                    currentGF.assignTeamGrouping = gameFormats[gameFormat.rawValue].assignTeamGrouping
-//                    currentGF.competitorSort = gameFormats[gameFormat.rawValue].competitorSort
-//                    currentGF.playFormat = gameFormats[gameFormat.rawValue].playFormat
-//                    currentGF.extraShotsTeamAdj = gameFormats[gameFormat.rawValue].extraShotsTeamAdj
-//                    currentGF.bogey = gameFormats[gameFormat.rawValue].bogey
-//                    currentGF.medal = gameFormats[gameFormat.rawValue].medal
-//                    currentGF.stableford = gameFormats[gameFormat.rawValue].stableford
-                    
-//                    
-                    print("id: \(currentGF.id)")
-                    print("format: \(currentGF.format)")
-                    print("description: \(currentGF.description)")
-                    print("noOFPlayers: \(currentGF.noOfPlayersNeeded)")
-                    print("playerHandAllowances: \(currentGF.playerHandAllowances)")
-                    print("assignShotsRecd: \(currentGF.assignShotsRecd)")
-                    print("competitorSort: \(currentGF.competitorSort)")
-                    print("playFormat: \(currentGF.playFormat)")
-                    print("extraShots: \(currentGF.extraShotsTeamAdj)")
-                    print("Stableford: \(currentGF.stableford)")
-                    print("Medal: \(currentGF.medal)")
-                    print("Bogey: \(currentGF.bogey)")
+
                 }
                 
                 Picker("Score format", selection:$addGameVM.pickerScoringFormat){
