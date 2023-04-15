@@ -61,9 +61,9 @@
 		D4232EB329E9BCFE00E73190 /* Extensions_Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4232EB229E9BCFE00E73190 /* Extensions_Game.swift */; };
 		D4232EB729EA817100E73190 /* Extensions_Club.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4232EB629EA817100E73190 /* Extensions_Club.swift */; };
 		D4232EB829EA848D00E73190 /* AddGameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4232EB429EA74F200E73190 /* AddGameScreen.swift */; };
-		D46A73D429EB1A4A00327818 /* AvailablePlayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46A73D329EB1A4A00327818 /* AvailablePlayers.swift */; };
 		D46A73DB29EB213100327818 /* Player+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46A73D929EB213100327818 /* Player+CoreDataClass.swift */; };
 		D46A73DC29EB213100327818 /* Player+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46A73DA29EB213100327818 /* Player+CoreDataProperties.swift */; };
+		D46A73E029EB55AD00327818 /* AddGamePlayerRowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46A73DF29EB55AD00327818 /* AddGamePlayerRowItem.swift */; };
 		D49CC87029E570FA00388CB1 /* GameListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49CC86F29E570FA00388CB1 /* GameListViewModel.swift */; };
 		D49CC87329E57B2D00388CB1 /* AddGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49CC87229E57B2D00388CB1 /* AddGameViewModel.swift */; };
 		D49CC87829E57E5E00388CB1 /* GameListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49CC87729E57E5E00388CB1 /* GameListScreen.swift */; };
@@ -134,9 +134,9 @@
 		D4232EB229E9BCFE00E73190 /* Extensions_Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions_Game.swift; sourceTree = SOURCE_ROOT; };
 		D4232EB429EA74F200E73190 /* AddGameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGameScreen.swift; sourceTree = "<group>"; };
 		D4232EB629EA817100E73190 /* Extensions_Club.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions_Club.swift; sourceTree = "<group>"; };
-		D46A73D329EB1A4A00327818 /* AvailablePlayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailablePlayers.swift; sourceTree = "<group>"; };
 		D46A73D929EB213100327818 /* Player+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		D46A73DA29EB213100327818 /* Player+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		D46A73DF29EB55AD00327818 /* AddGamePlayerRowItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGamePlayerRowItem.swift; sourceTree = "<group>"; };
 		D49CC86F29E570FA00388CB1 /* GameListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameListViewModel.swift; path = "GolfProto03/View Models/NEw files/GameListViewModel.swift"; sourceTree = SOURCE_ROOT; };
 		D49CC87229E57B2D00388CB1 /* AddGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddGameViewModel.swift; path = GolfProto03/Views/AddGameViewModel.swift; sourceTree = SOURCE_ROOT; };
 		D49CC87729E57E5E00388CB1 /* GameListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListScreen.swift; sourceTree = "<group>"; };
@@ -283,8 +283,8 @@
 			isa = PBXGroup;
 			children = (
 				D4232EB429EA74F200E73190 /* AddGameScreen.swift */,
+				D46A73DF29EB55AD00327818 /* AddGamePlayerRowItem.swift */,
 				D49CC87229E57B2D00388CB1 /* AddGameViewModel.swift */,
-				D46A73D329EB1A4A00327818 /* AvailablePlayers.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -467,7 +467,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D41D4E8329CEF5F7001ACF68 /* ClubListViewModel.swift in Sources */,
-				D46A73D429EB1A4A00327818 /* AvailablePlayers.swift in Sources */,
 				D49CC87A29E5800600388CB1 /* GameListRowItem.swift in Sources */,
 				D49CC87E29E5859100388CB1 /* AddCompetitorViewModel.swift in Sources */,
 				D41D4E6629CEF5CB001ACF68 /* AddPlayerScreen.swift in Sources */,
@@ -490,6 +489,7 @@
 				D41D4E8529CEF5F7001ACF68 /* AddTeeBoxViewModel.swift in Sources */,
 				D41D4E5729CEF5AB001ACF68 /* EditTeeBoxScreen.swift in Sources */,
 				D49CC8A429E97CB700388CB1 /* Course+CoreDataProperties.swift in Sources */,
+				D46A73E029EB55AD00327818 /* AddGamePlayerRowItem.swift in Sources */,
 				D41D4E1D29CEF4BC001ACF68 /* GolfProto03App.swift in Sources */,
 				D41D4E8829CEF5F7001ACF68 /* HoleListViewModel.swift in Sources */,
 				D41D4E9A29CEF721001ACF68 /* CoreDataManager.swift in Sources */,

@@ -78,6 +78,9 @@ class AddGameViewModel: ObservableObject {
             game.date = date
             game.defaultTeeBox = teeBox
             game.gameFormat = Int16(pickerGameFormat.rawValue)
+        
+        // code here to create the competitors from the selected players, and return all their 'selectedForGame' values back to false
+        //code here to add default teeboxes for players
             
             manager.save()
        

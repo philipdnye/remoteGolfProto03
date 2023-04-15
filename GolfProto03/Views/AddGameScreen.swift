@@ -27,6 +27,17 @@ struct AddGameScreen: View {
         presentationMode.wrappedValue.dismiss()
     }
     
+    private func togglePlayerSelected (player: PlayerViewModel) {
+        let manager = CoreDataManager.shared
+        let selectedPlayer = manager.getPlayerById(id: player.id)
+        selectedPlayer?.selectedForGame.toggle()
+       
+        manager.save()
+        playerListVM.getAllPlayers()
+        
+        //need a function to calculate the players course handicap
+    }
+    
     var body: some View {
       
         let currentGF = CurrentGameFormat()
@@ -35,17 +46,17 @@ struct AddGameScreen: View {
         Form{
             Section{
                 TextField("Enter name for this game",text: $addGameVM.name)
-                
+
                     .keyboardType(.default)
                     .focused($AddGameViewInFocus, equals: .name)
-                
+
                 DatePicker(selection: $addGameVM.date, in: ...Date(),displayedComponents: .date) {
                     Text("Game played on: ")
-                    
-                    
+
+
                 }
                 .focused($AddGameViewInFocus, equals: .date)
-                
+
                 Picker("Select club", selection: $addGameVM.pickedClub) {
                     ForEach(0..<clubListVM.clubs2.count, id: \.self){
                         Text(clubListVM.clubs2[$0].wrappedName)
@@ -53,9 +64,9 @@ struct AddGameScreen: View {
                             .focused($AddGameViewInFocus, equals: .club)
                     }
                 }
-                
-                
-                
+
+
+
                 Picker("Select course", selection: $addGameVM.pickedCourse) {
                     ForEach(0..<(clubListVM.clubs2.getElement(at: addGameVM.pickedClub)?.courseArray.count ?? 0), id: \.self){
                         Text(clubListVM.clubs2.getElement(at: addGameVM.pickedClub)?.courseArray.getElement(at: $0)?.name ?? "")
@@ -63,7 +74,7 @@ struct AddGameScreen: View {
                             .focused($AddGameViewInFocus, equals: .course)
                     }
                 }
-                
+
                 Picker("Default tees for game", selection: $addGameVM.pickedTeeBox){
                     ForEach(0..<(clubListVM.clubs2.getElement(at: addGameVM.pickedClub)?.courseArray.getElement(at: addGameVM.pickedCourse)?.teeBoxArray.count ?? 0), id: \.self){
                         Text(clubListVM.clubs2.getElement(at: addGameVM.pickedClub)?.courseArray.getElement(at: addGameVM.pickedCourse)?.teeBoxArray.getElement(at: $0)?.wrappedColour ?? "")
@@ -75,22 +86,13 @@ struct AddGameScreen: View {
             Section {
                 
                 ForEach(playerListVM.players.filter({$0.selectedForGame == true}), id: \.self){player in
-                    HStack{
-                        Text(player.firstName)
-                        Text(player.lastName)
-                        Text(player.player.handicapArray.currentHandicapIndex().formatted())
-                        Text(player.selectedForGame.description)
-                    }
+                    AddGamePlayerRowItem(player: player)
+
                     .swipeActions(allowsFullSwipe: true) {
                     
                     Button {
-
-                        let manager = CoreDataManager.shared
-                    let selectedPlayer = manager.getPlayerById(id: player.id)
-                        selectedPlayer?.selectedForGame.toggle()
-                       
-                        manager.save()
-                        playerListVM.getAllPlayers()
+                        togglePlayerSelected(player: player)
+                        
                       
                 } label: {
                 Label("Mute", systemImage: "person.fill.badge.minus")
@@ -115,23 +117,15 @@ struct AddGameScreen: View {
         }
 
             Section {
+         
                 ForEach(playerListVM.players.filter({$0.selectedForGame == false}), id: \.self){player in
-                    HStack{
-                        Text(player.firstName)
-                        Text(player.lastName)
-                        Text(player.player.handicapArray.currentHandicapIndex().formatted())
-                        Text(player.selectedForGame.description)
-                    }
+                    AddGamePlayerRowItem(player: player)
+
                     .swipeActions(allowsFullSwipe: true) {
                     
                     Button {
-//                    let index = playerListVM.players.firstIndex(where: {$0 == player}) ?? 0
-                        let manager = CoreDataManager.shared
-                    let selectedPlayer = manager.getPlayerById(id: player.id)
-                        selectedPlayer?.selectedForGame.toggle()
-                       
-                        manager.save()
-                        playerListVM.getAllPlayers()
+                        togglePlayerSelected(player: player)
+                        
                       
                 } label: {
                 Label("Mute", systemImage: "person.fill.badge.plus")
@@ -141,7 +135,7 @@ struct AddGameScreen: View {
                     
                                                 }
                 }
-                //AvailablePlayers()
+                
            
             
         }
