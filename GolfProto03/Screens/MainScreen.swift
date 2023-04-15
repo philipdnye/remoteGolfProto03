@@ -36,7 +36,7 @@ struct MainScreen: View {
             
             
             NavigationStack{
-                PlayerListScreen()
+                TestViewClubArray()
                 
                     .navigationBarTitle("Players")
                     .navigationBarTitleDisplayMode(.inline)

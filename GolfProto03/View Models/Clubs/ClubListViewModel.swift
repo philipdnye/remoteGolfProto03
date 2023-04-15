@@ -12,7 +12,7 @@ import SwiftUI
 class ClubListViewModel: NSObject, ObservableObject {
     
     @Published var clubs = [ClubViewModel]()
-    
+    @Published var clubs2 = [Club]()
     private var fetchedResultsController: NSFetchedResultsController<Club>!
     
     func deleteClub(club: ClubViewModel) {
@@ -33,6 +33,20 @@ class ClubListViewModel: NSObject, ObservableObject {
         }
 
     }
+    func getAllClubs2 () {
+        let request: NSFetchRequest<Club> = Club.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataManager.shared.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController.delegate = self
+        try? fetchedResultsController.performFetch()
+        DispatchQueue.main.async {
+            self.clubs2 = (self.fetchedResultsController.fetchedObjects ?? [])
+        }
+
+    }
+    
+    
+    
     func getFirstClub () {
         let request: NSFetchRequest<Club> = Club.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]

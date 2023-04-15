@@ -22,6 +22,10 @@ class AddGameViewModel: ObservableObject {
     @Published var selectedCourse: Course = Course()
     @Published var selectedTeeBox: TeeBox = TeeBox()
     
+    @Published var pickerScoringFormat: ScoreFormat = .medal
+    @Published var pickerHandicapFormat: HandicapFormat = .handicap
+    @Published var pickerPlayFormat: PlayFormat = .strokeplay
+    @Published var pickerGameFormat: GameFormatType = .fourBallBBMatch
 
     
     func save() {

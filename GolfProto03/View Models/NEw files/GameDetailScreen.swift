@@ -141,6 +141,38 @@ struct GameDetailScreen: View {
                 Text(refresh.description)
                 Text(game.game.competitors?.count.formatted() ?? "0")
             }
+            Section{
+                Picker("Score format", selection:$addGameVM.pickerScoringFormat){
+                    ForEach(ScoreFormat.allCases, id: \.self){format in
+                        
+                        Text(format.stringValue())
+                            .tag(format)
+                    }
+                }
+                Picker("Handicap",selection: $addGameVM.pickerHandicapFormat){
+                    ForEach(HandicapFormat.allCases, id: \.self){format in
+                        Text(format.stringValue())
+                            .tag(format)
+                        
+                    }
+                }
+                Picker("Play format",selection: $addGameVM.pickerPlayFormat){
+                    ForEach(PlayFormat.allCases, id: \.self){format in
+                        Text(format.stringValue())
+                            .tag(format)
+                        
+                    }
+                }
+                Picker("Game format", selection: $addGameVM.pickerGameFormat){
+                    ForEach(GameFormatType.allCases.sorted(by: {
+                        $0.rawValue > $1.rawValue
+                    }), id: \.self) {gameFormat in
+                        Text(gameFormat.stringValue())
+                            .tag(gameFormat)
+                    }
+                }
+                
+            }
         }
         .onAppear(perform: {
             gameListVM.getAllGames()

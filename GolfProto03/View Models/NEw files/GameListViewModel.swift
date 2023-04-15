@@ -92,6 +92,22 @@ struct GameViewModel: Hashable {
     var defaultCourse: Course {
         return game.defaultCourse ?? Course(context: CoreDataManager.shared.persistentContainer.viewContext)
     }
+    
+    var length: Int16 {
+        return game.length
+    }
+    
+    var gameFormat: Int16 {
+        return game.gameFormat
+    }
+    
+    var playFormat: Int16 {
+        return game.playFormat
+    }
+    
+    var scoreFormat: Int16 {
+        return game.scoreFormat
+    }
 }
 
 
