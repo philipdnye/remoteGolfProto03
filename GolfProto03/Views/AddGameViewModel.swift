@@ -14,6 +14,7 @@ class AddGameViewModel: ObservableObject {
     var name: String = ""
     var date: Date = Date()
     var teeBox: TeeBox = TeeBox()
+//    var gameFormat: Int16 = 0
 
     
     @Published var pickedClub: Int = 0
@@ -40,6 +41,8 @@ class AddGameViewModel: ObservableObject {
             game.name = name
             game.date = date
             game.defaultTeeBox = teeBox
+            game.gameFormat = Int16(pickerGameFormat.rawValue)
+            
             manager.save()
        
     }

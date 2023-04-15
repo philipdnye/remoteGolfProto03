@@ -80,18 +80,18 @@ struct GameViewModel: Hashable {
         return game.date ?? Date()
     }
     
-    var club: Club {
-        return game.club ?? Club(context: CoreDataManager.shared.persistentContainer.viewContext)
-        
-    }
+//    var club: Club {
+//        return game.club ?? Club(context: CoreDataManager.shared.persistentContainer.viewContext)
+//        
+//    }
     
     var defaultTeeBox: TeeBox {
         return game.defaultTeeBox ?? TeeBox(context: CoreDataManager.shared.persistentContainer.viewContext)
     }
     
-    var defaultCourse: Course {
-        return game.defaultCourse ?? Course(context: CoreDataManager.shared.persistentContainer.viewContext)
-    }
+//    var defaultCourse: Course {
+//        return game.defaultCourse ?? Course(context: CoreDataManager.shared.persistentContainer.viewContext)
+//    }
     
     var length: Int16 {
         return game.length

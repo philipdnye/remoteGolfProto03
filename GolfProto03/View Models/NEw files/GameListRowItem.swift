@@ -17,6 +17,8 @@ struct GameListRowItem: View {
                
             Text(game.defaultTeeBox.wrappedColour)
             Text(game.defaultTeeBox.origin?.name ?? "")
+            Text(game.defaultTeeBox.origin?.origin?.wrappedName ?? "")
+            Text(game.game.game_format.stringValue())
 
             
         }
