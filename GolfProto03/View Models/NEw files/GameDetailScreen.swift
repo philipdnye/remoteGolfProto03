@@ -32,11 +32,11 @@ struct GameDetailScreen: View {
     
     var body: some View {
         Form{
-            Section{
+           
                 Text(game.game.name ?? "")
                 Text(game.date.formatted())
                 
-                   
+                
                 Text(game.defaultTeeBox.wrappedColour)
                 Text(game.defaultTeeBox.origin?.name ?? "")
                 Text(game.defaultTeeBox.origin?.origin?.wrappedName ?? "")
@@ -48,6 +48,17 @@ struct GameDetailScreen: View {
                             .tag(gameFormat)
                     }
                 }
+            ForEach(game.game.competitorArray, id: \.self){competitor in
+                HStack{
+                    Text(competitor.player?.firstName ?? "")
+                    Text(competitor.player?.lastName ?? "")
+                    Text(competitor.teeBox?.wrappedColour ?? "")
+                    Text(competitor.player?.selectedForGame.description ?? "")
+                }
+            }
+            
+                
+            
                 .onAppear(perform: {
                     addGameVM.pickerGameFormat = game.game.game_format
                 })
@@ -182,7 +193,7 @@ struct GameDetailScreen: View {
 //                }
 //
 //            }
-        }
+        
         .onAppear(perform: {
             gameListVM.getAllGames()
             playerListVM.getAllPlayers()

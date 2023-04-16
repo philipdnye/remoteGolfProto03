@@ -22,8 +22,8 @@ struct AddGameScreen: View {
     
    private func createGame () {
         addGameVM.teeBox = clubListVM.clubs2.getElement(at: addGameVM.pickedClub)?.courseArray.getElement(at: addGameVM.pickedCourse)?.teeBoxArray.getElement(at: addGameVM.pickedTeeBox) ?? TeeBox()
-
-        addGameVM.save()
+       addGameVM.selectedPlayers = playerListVM.players.filter({$0.selectedForGame == true})
+        addGameVM.createGame()
         presentationMode.wrappedValue.dismiss()
     }
     
@@ -226,6 +226,10 @@ struct AddGameScreen: View {
         }
     }
 }
+
+
+
+
 
 struct AddGameScreen_Previews: PreviewProvider {
     static var previews: some View {

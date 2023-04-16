@@ -50,11 +50,14 @@ class AddGameViewModel: ObservableObject {
     }
     
     
+    
+    @StateObject private var playerListVM = PlayerListViewModel()
     @StateObject private var clubListVM = ClubListViewModel()
+    
     var name: String = ""
     var date: Date = Date()
     var teeBox: TeeBox = TeeBox()
-
+    var selectedPlayers: [PlayerViewModel] = []
 
     
     @Published var pickedClub: Int = 0
@@ -69,8 +72,8 @@ class AddGameViewModel: ObservableObject {
     @Published var pickerGameFormat: GameFormatType = .fourBallBBMatch
 
     
-    func save() {
-      
+    func createGame() {
+           
             let manager = CoreDataManager.shared
             let game = Game(context: manager.persistentContainer.viewContext)
             
@@ -79,12 +82,16 @@ class AddGameViewModel: ObservableObject {
             game.defaultTeeBox = teeBox
             game.gameFormat = Int16(pickerGameFormat.rawValue)
         
-        // code here to create the competitors from the selected players, and return all their 'selectedForGame' values back to false
-        //code here to add default teeboxes for players
-            
+                for player in selectedPlayers {
+                    let competitor = Competitor(context: manager.persistentContainer.viewContext)
+                    competitor.player = player.player
+                    competitor.game = game
+                    competitor.teeBox = game.defaultTeeBox
+                    player.player.selectedForGame.toggle()
+                }
+
             manager.save()
        
     }
 }
-
 
