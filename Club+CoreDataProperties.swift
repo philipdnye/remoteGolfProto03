@@ -26,7 +26,7 @@ extension Club {
     @NSManaged public var name: String?
     @NSManaged public var postCode: String?
     @NSManaged public var course22: NSSet?
-    @NSManaged public var games: NSSet?
+//    @NSManaged public var games: NSSet?
     
     public var wrappedName: String {
         name ?? "Unknown name"
@@ -83,22 +83,22 @@ extension Club {
 
 }
 
-// MARK: Generated accessors for games
-extension Club {
-
-    @objc(addGamesObject:)
-    @NSManaged public func addToGames(_ value: Game)
-
-    @objc(removeGamesObject:)
-    @NSManaged public func removeFromGames(_ value: Game)
-
-    @objc(addGames:)
-    @NSManaged public func addToGames(_ values: NSSet)
-
-    @objc(removeGames:)
-    @NSManaged public func removeFromGames(_ values: NSSet)
-
-}
+//// MARK: Generated accessors for games
+//extension Club {
+//
+//    @objc(addGamesObject:)
+//    @NSManaged public func addToGames(_ value: Game)
+//
+//    @objc(removeGamesObject:)
+//    @NSManaged public func removeFromGames(_ value: Game)
+//
+//    @objc(addGames:)
+//    @NSManaged public func addToGames(_ values: NSSet)
+//
+//    @objc(removeGames:)
+//    @NSManaged public func removeFromGames(_ values: NSSet)
+//
+//}
 
 extension Club : Identifiable {
 

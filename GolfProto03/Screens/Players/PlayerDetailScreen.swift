@@ -45,7 +45,15 @@ struct PlayerDetailScreen: View {
             } footer: {
                 Text("Add a new handicap index using the '+' button")
             }
-     
+                Section {
+                    // list of games for player
+                    ForEach(player.player.competitorArray, id: \.self){
+                        Text($0.game?.name ?? "")
+                    }
+                    
+                    
+                    
+                }
             }
 //            .sheet(isPresented: $showingSheet) {
 //                AddHandicapScreen(player: player)

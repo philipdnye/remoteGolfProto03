@@ -33,7 +33,13 @@ extension Player {
             $0.startDate ?? Date() > $1.startDate ?? Date()
         }
     }
-    
+    public var competitorArray: [Competitor] {
+        let set = competitors as? Set<Competitor> ?? []
+        return set.sorted {
+            $0.player?.lastName ?? "" < $1.player?.lastName ?? ""
+            
+        }
+    }
 }
 
 // MARK: Generated accessors for competitors

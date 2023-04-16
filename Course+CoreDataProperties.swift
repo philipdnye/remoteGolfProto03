@@ -19,7 +19,7 @@ extension Course {
     @NSManaged public var name: String?
     @NSManaged public var origin: Club?
     @NSManaged public var teeBoxes: NSSet?
-    @NSManaged public var games: NSSet?
+//    @NSManaged public var games: NSSet?
 
     public var teeBoxArray: [TeeBox] {
         let set = teeBoxes as? Set<TeeBox> ?? []

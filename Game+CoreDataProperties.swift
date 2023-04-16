@@ -23,9 +23,9 @@ extension Game {
     @NSManaged public var handicapFormat: Int16
     @NSManaged public var playFormat: Int16
     @NSManaged public var length: Int16
-    @NSManaged public var club: Club?
+//    @NSManaged public var club: Club?
     @NSManaged public var competitors: NSSet?
-    @NSManaged public var defaultCourse: Course?
+//    @NSManaged public var defaultCourse: Course?
     @NSManaged public var defaultTeeBox: TeeBox?
     
     public var competitorArray: [Competitor] {

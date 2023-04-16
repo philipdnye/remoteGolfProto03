@@ -11,7 +11,6 @@
         <attribute name="name" attributeType="String" defaultValueString="New club"/>
         <attribute name="postCode" optional="YES" attributeType="String"/>
         <relationship name="course22" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Course" inverseName="origin" inverseEntity="Course"/>
-        <relationship name="games" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Game" inverseName="club" inverseEntity="Game"/>
     </entity>
     <entity name="Competitor" representedClassName="Competitor" syncable="YES" codeGenerationType="class">
         <attribute name="courseHandicap" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -23,7 +22,6 @@
     </entity>
     <entity name="Course" representedClassName="Course" syncable="YES">
         <attribute name="name" attributeType="String" defaultValueString="Original course"/>
-        <relationship name="games" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Game" inverseName="defaultCourse" inverseEntity="Game"/>
         <relationship name="origin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Club" inverseName="course22" inverseEntity="Club"/>
         <relationship name="teeBoxes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TeeBox" inverseName="origin" inverseEntity="TeeBox"/>
     </entity>
@@ -35,9 +33,7 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="playFormat" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="scoreFormat" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="club" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Club" inverseName="games" inverseEntity="Club"/>
         <relationship name="competitors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Competitor" inverseName="game" inverseEntity="Competitor"/>
-        <relationship name="defaultCourse" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Course" inverseName="games" inverseEntity="Course"/>
         <relationship name="defaultTeeBox" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TeeBox" inverseName="game" inverseEntity="TeeBox"/>
     </entity>
     <entity name="Handicap" representedClassName="Handicap" syncable="YES" codeGenerationType="class">
