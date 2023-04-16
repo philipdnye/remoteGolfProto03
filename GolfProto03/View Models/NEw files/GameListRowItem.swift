@@ -12,17 +12,23 @@ struct GameListRowItem: View {
     @Binding var needsRefresh: Bool
     let game: GameViewModel
     var body: some View {
-        HStack{
-            Text(game.name)
-               
-            Text(game.defaultTeeBox.wrappedColour)
-            Text(game.defaultTeeBox.origin?.name ?? "")
-            Text(game.defaultTeeBox.origin?.origin?.wrappedName ?? "")
-            Text(game.game.game_format.stringValue())
-
-            
+        VStack{
+            HStack{
+                Text(game.name)
+                
+                Text(game.defaultTeeBox.wrappedColour)
+                Text(game.defaultTeeBox.origin?.name ?? "")
+                Text(game.defaultTeeBox.origin?.origin?.wrappedName ?? "")
+                Text(game.game.game_format.stringValue())
+                
+                
+            }
+            .font(.caption2)
+            HStack{
+                Text(game.game.sc_format.stringValue())
+                Text(game.game.hcap_format.stringValue())
+            }
         }
-        .font(.caption2)
     }
 }
 

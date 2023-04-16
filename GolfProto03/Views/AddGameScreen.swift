@@ -55,6 +55,22 @@ struct AddGameScreen: View {
         manager.save()
         playerListVM.getAllPlayers()
         
+        // need code here to not only determine default format for selected no of players,
+        // but also forces a value into the picker
+        
+        switch playerListVM.players.filter({$0.selectedForGame == true}).count {
+        case 1:
+            addGameVM.pickerGameFormat = .noneOnePlayer
+        case 2:
+            addGameVM.pickerGameFormat = .singlesMatchplay
+        case 3:
+            addGameVM.pickerGameFormat = .sixPoint
+        case 4:
+            addGameVM.pickerGameFormat = .fourBallBBMatch
+        default:
+            addGameVM.pickerGameFormat = .noFormat
+        }
+        
         //need a function to calculate the players course handicap
     }
     
@@ -170,7 +186,11 @@ struct AddGameScreen: View {
             
             Section{
                 
-                let playerCount = playerListVM.players.filter({$0.selectedForGame == true}).count
+           let playerCount = playerListVM.players.filter({$0.selectedForGame == true}).count
+                    
+                    
+                
+                
                 let filteredGameFormats = GameFormatType.allCases.filter({$0.NoOfPlayers() == playerCount})
                 
                 

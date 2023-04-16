@@ -60,15 +60,20 @@ class AddGameViewModel: ObservableObject {
     var selectedPlayers: [PlayerViewModel] = []
 
     
+//    var gameDetail_HandicapFormat: Int16 = 0
+//    var gameDetail_ScoreFormat: Int16 = 0
+//    var gameDetail_GameFormat: Int16 = 0
+    
     @Published var pickedClub: Int = 0
     @Published var pickedCourse: Int = 0
     @Published var pickedTeeBox: Int = 0
     
-
+    
+    
     
     @Published var pickerScoringFormat: ScoreFormat = .medal
     @Published var pickerHandicapFormat: HandicapFormat = .handicap
-    @Published var pickerPlayFormat: PlayFormat = .strokeplay
+//    @Published var pickerPlayFormat: PlayFormat = .strokeplay
     @Published var pickerGameFormat: GameFormatType = .fourBallBBMatch
 
     
@@ -98,5 +103,14 @@ class AddGameViewModel: ObservableObject {
         manager.save()
        
     }
+    
+//    func updateHandicapFormat(game: GameViewModel) {
+//        let manager = CoreDataManager.shared
+//        let currentGame = manager.getGameById(id: game.id)
+//        currentGame?.handicapFormat = gameDetail_HandicapFormat
+//        currentGame?.scoreFormat = gameDetail_ScoreFormat
+//        currentGame?.gameFormat = gameDetail_GameFormat
+//        manager.save()
+//    }
 }
 

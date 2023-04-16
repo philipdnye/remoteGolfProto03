@@ -24,7 +24,7 @@ struct GameDetailScreen: View {
             gameListVM.getAllCompetitors()
             
             
-         
+            
         }
     }
     
@@ -68,8 +68,8 @@ struct GameDetailScreen: View {
             Section{
                 let manager = CoreDataManager.shared
                 let playerCount = game.game.competitorArray.count
-                let filteredGameFormats = GameFormatType.allCases.filter({$0.NoOfPlayers() == playerCount})
-                let currentGame = manager.getGameById(id: game.id)
+//                let filteredGameFormats = GameFormatType.allCases.filter({$0.NoOfPlayers() == playerCount})
+//                let currentGame = manager.getGameById(id: game.id)
                 
                 Picker("Game", selection: $addGameVM.pickerGameFormat){
                     ForEach(GameFormatType.allCases.sorted(by: {
@@ -79,27 +79,24 @@ struct GameDetailScreen: View {
                             .tag(gameFormat)
                     }
                 }
-                .onAppear(perform:{
-                    addGameVM.pickerGameFormat = game.game.game_format
-                    
-                })
-//                .onReceive([self.addGameVM.pickerGameFormat].publisher.first()){
-//                    gameFormat in
-//                    addGameVM.updateCurrentGameFormat(currentGF: currentGF, gameFormat: gameFormat)
-//                    currentGame?.gameFormat = Int16(addGameVM.pickerGameFormat.rawValue)
-//                    print(currentGame?.gameFormat ?? 40)
-//                    manager.save()
-//                }
+                
+                //                .onReceive([self.addGameVM.pickerGameFormat].publisher.first()){
+                //                    gameFormat in
+                //                    addGameVM.updateCurrentGameFormat(currentGF: currentGF, gameFormat: gameFormat)
+                //                    currentGame?.gameFormat = Int16(addGameVM.pickerGameFormat.rawValue)
+                //                    print(currentGame?.gameFormat ?? 40)
+                //                    manager.save()
+                //                }
                 //                let filteredScoringFormats = FilterScoreFormats(pickedGameFormatID: addGameVM.pickerGameFormat.rawValue)
                 //
                 //
-                //                Picker("Score format", selection:$addGameVM.pickerScoringFormat){
-                //                    ForEach(filteredScoringFormats, id: \.self){format in
-                //
-                //                        Text(format.stringValue())
-                //                            .tag(format)
-                //                    }
-                //                }
+                Picker("Score format", selection:$addGameVM.pickerScoringFormat){
+                    ForEach(ScoreFormat.allCases, id: \.self){format in
+                        
+                        Text(format.stringValue())
+                            .tag(format)
+                    }
+                }
                 //
                 //                .onReceive([self.addGameVM.pickerScoringFormat].publisher.first()){
                 //                    scoringFormat in
@@ -111,41 +108,42 @@ struct GameDetailScreen: View {
                 //
                 //
                 //
-                //                Picker("Handicap",selection: $addGameVM.pickerHandicapFormat){
-                //                    ForEach(HandicapFormat.allCases, id: \.self){format in
-                //                        Text(format.stringValue())
-                //                            .tag(format)
-                //
-                //                    }
-                //                }
-                //                .onReceive([self.addGameVM.pickerHandicapFormat].publisher.first()){
-                //                    handicapFormat in
-                //
-                //
-                //                    currentGame?.handicapFormat = Int16(addGameVM.pickerHandicapFormat.rawValue)
-                //                    print("hcap format \(currentGame?.handicapFormat ?? 99)")
-                //                    manager.save()
-                //                }
+                Picker("Handicap",selection: $addGameVM.pickerHandicapFormat){
+                    ForEach(HandicapFormat.allCases, id: \.self){format in
+                        Text(format.stringValue())
+                            .tag(format)
+                        
+                    }
+                }
+//                .onReceive([self.addGameVM.pickerHandicapFormat].publisher.first()){
+//                    handicapFormat in
+//                    addGameVM.gameDetail_HandicapFormat = Int16(addGameVM.pickerHandicapFormat.rawValue)
+//                    addGameVM.gameDetail_ScoreFormat = Int16(addGameVM.pickerScoringFormat.rawValue)
+//                    addGameVM.gameDetail_GameFormat = Int16(addGameVM.pickerGameFormat.rawValue)
+//                    
+//                    addGameVM.updateHandicapFormat(game: game)
+//                }
+                
+                ForEach(game.game.competitorArray, id: \.self){competitor in
+                    HStack{
+                        Text(competitor.player?.firstName ?? "")
+                        Text(competitor.player?.lastName ?? "")
+                        Text(competitor.handicapIndex.formatted())
+                        Text(competitor.courseHandicap.formatted())
+                        Text(competitor.teeBox?.wrappedColour ?? "")
+                        Text(competitor.player?.selectedForGame.description ?? "")
+                    }
+                }
+                
+                
+                
+                
+                
+                
+                
+                
                 
             }
-            
-            ForEach(game.game.competitorArray, id: \.self){competitor in
-                HStack{
-                    Text(competitor.player?.firstName ?? "")
-                    Text(competitor.player?.lastName ?? "")
-                    Text(competitor.handicapIndex.formatted())
-                    Text(competitor.courseHandicap.formatted())
-                    Text(competitor.teeBox?.wrappedColour ?? "")
-                    Text(competitor.player?.selectedForGame.description ?? "")
-                }
-            }
-            
-            
-            
-            
-            
-            
-            
             .onAppear(perform: {
                 gameListVM.getAllGames()
                 playerListVM.getAllPlayers()
@@ -156,11 +154,8 @@ struct GameDetailScreen: View {
             
         }
         
-        
     }
-       
 }
-
 struct GameDetailScreen_Previews: PreviewProvider {
     static var previews: some View {
         let game = GameViewModel(game: Game(context: CoreDataManager.shared.viewContext))
