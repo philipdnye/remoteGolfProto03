@@ -301,6 +301,84 @@ enum GameFormatType: Int, CaseIterable {
             return "Pine/Chap - 2P"
         }
     }
+        func NoOfPlayers() -> Int {
+            switch(self){
+            case .fourBallBBStroke:
+                return 4
+            case .fourBallBBMatch:
+                return 4
+            case .fourBallCombinedStroke:
+                return 4
+            case .fourBallCombinedMatch:
+                return 4
+            case .fourSomesStroke:
+                return 4
+            case .fourSomesMatch:
+                return 4
+            case .greenSomesStroke:
+                return 4
+            case .greenSomesMatch:
+                return 4
+            case .sixPoint:
+                return 3
+            case .twoPlayScramble:
+                return 2
+            case .threePlayScramble:
+                return 3
+            case .fourPlayScramble:
+                return 4
+            case .twoVtwoscramble:
+                return 4
+            case .noneOnePlayer:
+                return 1
+            case .noneTwoPlayer:
+                return 2
+            case .noneThreePlayer:
+                return 3
+            case .noneFourPlayer:
+                return 4
+            case .singlesMatchplay:
+                return 2
+            case .twoPlaySkins:
+                return 2
+            case .threePlaySkins:
+                return 3
+            case .fourPlaySkins:
+                return 4
+            case .noFormat:
+                return 0
+            case .best1of4:
+                return 4
+            case .best2of4:
+                return 4
+            case .best3of4:
+                return 4
+            case .best4of4:
+                return 4
+            case .pinehurstChapmanStroke:
+                return 4
+            case .pinehurstChapmanMatch:
+                return 4
+            case .best1of3:
+                return 3
+            case .best2of3:
+                return 3
+            case .best3of3:
+                return 3
+            case .fourBallBB2P:
+                return 2
+            case .fourBallCombined2P:
+                return 2
+            case .fourSomes2P:
+                return 2
+            case .greenSomes2P:
+                return 2
+            case .pinehurstChapman2P:
+                return 2
+            }
+        
+        
+    }
 }
 
 

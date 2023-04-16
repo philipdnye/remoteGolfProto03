@@ -87,10 +87,15 @@ class AddGameViewModel: ObservableObject {
                     competitor.player = player.player
                     competitor.game = game
                     competitor.teeBox = game.defaultTeeBox
+                    competitor.handicapIndex = player.player.handicapArray.currentHandicapIndex()
+                    competitor.courseHandicap = competitor.CourseHandicap()
                     player.player.selectedForGame.toggle()
                 }
-
-            manager.save()
+           
+            game.scoreFormat = Int16(pickerScoringFormat.rawValue)
+            game.handicapFormat = Int16(pickerHandicapFormat.rawValue)
+           
+        manager.save()
        
     }
 }

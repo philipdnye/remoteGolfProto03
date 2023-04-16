@@ -28,177 +28,137 @@ struct GameDetailScreen: View {
         }
     }
     
+    private func FilterScoreFormats(pickedGameFormatID: Int) -> [ScoreFormat] {
+        //        creates an array of ScoringFormats permitted by the picked GameFormat
+        var filteredScoreFormats = ScoreFormat.allCases
+        let pickedGameFormat = gameFormats.filter({$0.id == pickedGameFormatID})[0]
+        if pickedGameFormat.medal == false {
+            let firstIndex = filteredScoreFormats.firstIndex(where: {$0 == ScoreFormat.medal})
+            filteredScoreFormats.remove(at: firstIndex ?? 0)
+        }
+        if pickedGameFormat.stableford == false {
+            let firstIndex = filteredScoreFormats.firstIndex(where: {$0 == ScoreFormat.stableford})
+            filteredScoreFormats.remove(at: firstIndex ?? 0)
+        }
+        if pickedGameFormat.bogey == false {
+            let firstIndex = filteredScoreFormats.firstIndex(where: {$0 == ScoreFormat.bogey})
+            filteredScoreFormats.remove(at: firstIndex ?? 0)
+        }
+        return filteredScoreFormats
+    }
+    
+    
+    
     let game: GameViewModel
     
     var body: some View {
+        let currentGF = CurrentGameFormat()
+        
         Form{
-           
-                Text(game.game.name ?? "")
-                Text(game.date.formatted())
+            
+            Text(game.game.name ?? "")
+            Text(game.date.formatted())
+            
+            
+            Text(game.defaultTeeBox.wrappedColour)
+            Text(game.defaultTeeBox.origin?.name ?? "")
+            Text(game.defaultTeeBox.origin?.origin?.wrappedName ?? "")
+            
+            
+            Section{
+                let manager = CoreDataManager.shared
+                let playerCount = game.game.competitorArray.count
+                let filteredGameFormats = GameFormatType.allCases.filter({$0.NoOfPlayers() == playerCount})
+                let currentGame = manager.getGameById(id: game.id)
                 
-                
-                Text(game.defaultTeeBox.wrappedColour)
-                Text(game.defaultTeeBox.origin?.name ?? "")
-                Text(game.defaultTeeBox.origin?.origin?.wrappedName ?? "")
                 Picker("Game", selection: $addGameVM.pickerGameFormat){
                     ForEach(GameFormatType.allCases.sorted(by: {
-                        $0.rawValue > $1.rawValue
+                        $0.rawValue < $1.rawValue
                     }), id: \.self) {gameFormat in
                         Text(gameFormat.stringValue())
                             .tag(gameFormat)
                     }
                 }
+                .onAppear(perform:{
+                    addGameVM.pickerGameFormat = game.game.game_format
+                    
+                })
+//                .onReceive([self.addGameVM.pickerGameFormat].publisher.first()){
+//                    gameFormat in
+//                    addGameVM.updateCurrentGameFormat(currentGF: currentGF, gameFormat: gameFormat)
+//                    currentGame?.gameFormat = Int16(addGameVM.pickerGameFormat.rawValue)
+//                    print(currentGame?.gameFormat ?? 40)
+//                    manager.save()
+//                }
+                //                let filteredScoringFormats = FilterScoreFormats(pickedGameFormatID: addGameVM.pickerGameFormat.rawValue)
+                //
+                //
+                //                Picker("Score format", selection:$addGameVM.pickerScoringFormat){
+                //                    ForEach(filteredScoringFormats, id: \.self){format in
+                //
+                //                        Text(format.stringValue())
+                //                            .tag(format)
+                //                    }
+                //                }
+                //
+                //                .onReceive([self.addGameVM.pickerScoringFormat].publisher.first()){
+                //                    scoringFormat in
+                //
+                //
+                //                    currentGame?.scoreFormat = Int16(addGameVM.pickerScoringFormat.rawValue)
+                //                    manager.save()
+                //                }
+                //
+                //
+                //
+                //                Picker("Handicap",selection: $addGameVM.pickerHandicapFormat){
+                //                    ForEach(HandicapFormat.allCases, id: \.self){format in
+                //                        Text(format.stringValue())
+                //                            .tag(format)
+                //
+                //                    }
+                //                }
+                //                .onReceive([self.addGameVM.pickerHandicapFormat].publisher.first()){
+                //                    handicapFormat in
+                //
+                //
+                //                    currentGame?.handicapFormat = Int16(addGameVM.pickerHandicapFormat.rawValue)
+                //                    print("hcap format \(currentGame?.handicapFormat ?? 99)")
+                //                    manager.save()
+                //                }
+                
+            }
+            
             ForEach(game.game.competitorArray, id: \.self){competitor in
                 HStack{
                     Text(competitor.player?.firstName ?? "")
                     Text(competitor.player?.lastName ?? "")
+                    Text(competitor.handicapIndex.formatted())
+                    Text(competitor.courseHandicap.formatted())
                     Text(competitor.teeBox?.wrappedColour ?? "")
                     Text(competitor.player?.selectedForGame.description ?? "")
                 }
             }
             
-                
             
-                .onAppear(perform: {
-                    addGameVM.pickerGameFormat = game.game.game_format
-                })
-                
-//                Text(game.club.wrappedName)
-//                Text(game.defaultCourse.name ?? "unknown course")
-//                Text(game.defaultTeeBox.wrappedColour)
-                
-//
-//                Picker("Select course", selection: $addGameVM.selectedCourse){
-//                    Text("Select course").tag(Optional<Course>(nil))
-//
-//                    ForEach(game.club.courseArray, id: \.self){course in
-//                        Text(course.name ?? "")
-//                            .tag(Optional(course))
-//                    }
-//
-//                }
-//
-//                Button("Save course to Game"){
-//                    game.game.defaultCourse = addGameVM.selectedCourse
-//                    CoreDataManager.shared.save()
-//                    refresh.toggle()
-//                }
-//
-//                Picker("Select teebox", selection:$addGameVM.selectedTeeBox){
-//                    Text("select teebox").tag(Optional<TeeBox>(nil))
-//                    ForEach(game.defaultCourse.teeBoxArray, id: \.self){teeBox in
-//                        Text(teeBox.wrappedColour)
-//                            .tag(Optional(teeBox))
-//                    }
-//                }
-//
-//
-//
-//            Button("Save teeBox to Game"){
-//                game.game.defaultTeeBox = addGameVM.selectedTeeBox
-//                CoreDataManager.shared.save()
-//                refresh.toggle()
-//            }
+            
+            
+            
+            
+            
+            .onAppear(perform: {
+                gameListVM.getAllGames()
+                playerListVM.getAllPlayers()
+                addGameVM.pickerGameFormat = game.game.game_format
+                addGameVM.pickerScoringFormat = game.game.sc_format
+                addGameVM.pickerHandicapFormat = game.game.hcap_format
+            })
+            
         }
-            
-//            Section{
-//                ForEach(game.game.competitorArray){competitor in
-//                                   HStack{
-//                                       Text(competitor.player?.firstName ?? "")
-//                                       Text(competitor.player?.lastName ?? "")
-//                                       Text(competitor.player?.handicapArray.currentHandicapIndex().formatted() ?? "0.0")
-//                                       Text(competitor.teeBox?.wrappedColour ?? "")
-//                                   }
-//
-//
-////                                   .swipeActions(allowsFullSwipe: true){
-////                                       Button{
-////                                           let index = game.game.competitorArray.firstIndex(where: {$0 == competitor}) ?? 0
-////                                           let manager = CoreDataManager.shared
-////
-////                                       } label: {
-////                                           Label("Mute", systemImage: "person.fill.badge.minus")
-////                                       }
-////                                       .tint(.red)
-////                                   }
-//                               }
-//                .onDelete(perform: deleteCompetitor)
-//
-//            }
-//
-            
-            
-//            Section {
-//                ForEach(playerListVM.players, id: \.id){ player in
-//                    HStack{
-//                        Text(player.firstName)
-//                        Text(player.lastName)
-//                    }
-//
-//                    .swipeActions(allowsFullSwipe: true) {
-//
-//                        Button {
-//                            let index = playerListVM.players.firstIndex(where: {$0 == player}) ?? 0
-//                            print(index)
-//
-//                            let manager = CoreDataManager.shared
-//                            let competitor = Competitor(context: manager.persistentContainer.viewContext)
-//                            competitor.game = game.game
-//                            competitor.player = playerListVM.players[index].player
-//                            competitor.teeBox = game.defaultTeeBox
-//                            manager.save()
-//                            refresh.toggle()
-//
-//                        } label: {
-//                            Label("Mute", systemImage: "person.fill.badge.plus")
-//                        }
-//                        .tint(.indigo)
-//
-//
-//                    }
-//
-//                }
-////                Text(refresh.description)
-////                Text(game.game.competitors?.count.formatted() ?? "0")
-//            }
-//            Section{
-//                Picker("Score format", selection:$addGameVM.pickerScoringFormat){
-//                    ForEach(ScoreFormat.allCases, id: \.self){format in
-//
-//                        Text(format.stringValue())
-//                            .tag(format)
-//                    }
-//                }
-//                Picker("Handicap",selection: $addGameVM.pickerHandicapFormat){
-//                    ForEach(HandicapFormat.allCases, id: \.self){format in
-//                        Text(format.stringValue())
-//                            .tag(format)
-//
-//                    }
-//                }
-//                Picker("Play format",selection: $addGameVM.pickerPlayFormat){
-//                    ForEach(PlayFormat.allCases, id: \.self){format in
-//                        Text(format.stringValue())
-//                            .tag(format)
-//
-//                    }
-//                }
-//                Picker("Game format", selection: $addGameVM.pickerGameFormat){
-//                    ForEach(GameFormatType.allCases.sorted(by: {
-//                        $0.rawValue > $1.rawValue
-//                    }), id: \.self) {gameFormat in
-//                        Text(gameFormat.stringValue())
-//                            .tag(gameFormat)
-//                    }
-//                }
-//
-//            }
         
-        .onAppear(perform: {
-            gameListVM.getAllGames()
-            playerListVM.getAllPlayers()
-        })
+        
     }
+       
 }
 
 struct GameDetailScreen_Previews: PreviewProvider {

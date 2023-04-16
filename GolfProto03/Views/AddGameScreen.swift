@@ -27,6 +27,26 @@ struct AddGameScreen: View {
         presentationMode.wrappedValue.dismiss()
     }
     
+    private func FilterScoreFormats(pickedGameFormatID: Int) -> [ScoreFormat] {
+        //        creates an array of ScoringFormats permitted by the picked GameFormat
+        var filteredScoreFormats = ScoreFormat.allCases
+        let pickedGameFormat = gameFormats.filter({$0.id == pickedGameFormatID})[0]
+        if pickedGameFormat.medal == false {
+            let firstIndex = filteredScoreFormats.firstIndex(where: {$0 == ScoreFormat.medal})
+            filteredScoreFormats.remove(at: firstIndex ?? 0)
+        }
+        if pickedGameFormat.stableford == false {
+            let firstIndex = filteredScoreFormats.firstIndex(where: {$0 == ScoreFormat.stableford})
+            filteredScoreFormats.remove(at: firstIndex ?? 0)
+        }
+        if pickedGameFormat.bogey == false {
+            let firstIndex = filteredScoreFormats.firstIndex(where: {$0 == ScoreFormat.bogey})
+            filteredScoreFormats.remove(at: firstIndex ?? 0)
+        }
+        return filteredScoreFormats
+    }
+    
+    
     private func togglePlayerSelected (player: PlayerViewModel) {
         let manager = CoreDataManager.shared
         let selectedPlayer = manager.getPlayerById(id: player.id)
@@ -112,10 +132,10 @@ struct AddGameScreen: View {
         } footer: {
             Text("Remove players by swiping to the left.")
                 .foregroundColor(.orange)
-            
+                
             
         }
-
+    
             Section {
          
                 ForEach(playerListVM.players.filter({$0.selectedForGame == false}), id: \.self){player in
@@ -149,9 +169,14 @@ struct AddGameScreen: View {
     }
             
             Section{
+                
+                let playerCount = playerListVM.players.filter({$0.selectedForGame == true}).count
+                let filteredGameFormats = GameFormatType.allCases.filter({$0.NoOfPlayers() == playerCount})
+                
+                
                 Picker("Game", selection: $addGameVM.pickerGameFormat){
-                    ForEach(GameFormatType.allCases.sorted(by: {
-                        $0.rawValue > $1.rawValue
+                    ForEach(filteredGameFormats.sorted(by: {
+                        $0.rawValue < $1.rawValue
                     }), id: \.self) {gameFormat in
                         Text(gameFormat.stringValue())
                             .tag(gameFormat)
@@ -167,8 +192,11 @@ struct AddGameScreen: View {
 
                 }
                 
+                let filteredScoringFormats = FilterScoreFormats(pickedGameFormatID: addGameVM.pickerGameFormat.rawValue)
+
+                
                 Picker("Score format", selection:$addGameVM.pickerScoringFormat){
-                    ForEach(ScoreFormat.allCases, id: \.self){format in
+                    ForEach(filteredScoringFormats, id: \.self){format in
                         
                         Text(format.stringValue())
                             .tag(format)
@@ -181,13 +209,13 @@ struct AddGameScreen: View {
                         
                     }
                 }
-                Picker("Play format",selection: $addGameVM.pickerPlayFormat){
-                    ForEach(PlayFormat.allCases, id: \.self){format in
-                        Text(format.stringValue())
-                            .tag(format)
-                        
-                    }
-                }
+//                Picker("Play format",selection: $addGameVM.pickerPlayFormat){
+//                    ForEach(PlayFormat.allCases, id: \.self){format in
+//                        Text(format.stringValue())
+//                            .tag(format)
+//
+//                    }
+//                }
                
                 
             }
@@ -197,6 +225,7 @@ struct AddGameScreen: View {
                     Button("Create game"){
                        createGame()
                     }
+                    //.disabled(playerCount == 0)
                     
                     Spacer()
                 }
