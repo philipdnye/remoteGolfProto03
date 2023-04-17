@@ -8,18 +8,24 @@
 import SwiftUI
 
 struct ChangeCompetitorTeeBoxSheet: View {
-//    let competitor: CompetitorViewModel
+    let competitor: Competitor
     let game: GameViewModel
     var body: some View {
-        Text(game.name)
-        //Text(competitor.player.firstName ?? "")
+        VStack{
+            Text(game.name)
+            HStack{
+                Text(competitor.FirstName())
+                Text(competitor.LastName())
+            }
+        }
     }
 }
 
 struct ChangeCompetitorTeeBoxSheet_Previews: PreviewProvider {
     static var previews: some View {
-        //let competitor = CompetitorViewModel(competitor: Competitor(context: CoreDataManager.shared.viewContext))
+        let competitor = CompetitorViewModel(competitor: Competitor(context: CoreDataManager.shared.viewContext)).competitor
         let game = GameViewModel(game: Game(context: CoreDataManager.shared.viewContext))
-        ChangeCompetitorTeeBoxSheet(game: game)
+        
+        ChangeCompetitorTeeBoxSheet(competitor: competitor, game: game)
     }
 }

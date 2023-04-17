@@ -43,7 +43,7 @@ struct GameListScreen: View {
         }
         
         .navigationDestination(for: GameViewModel.self){game in
-            GameDetailScreen(needsRefresh: $needsRefresh, game: game)
+            GameDetailScreen2(game: game)
         }
         .toolbar {
             

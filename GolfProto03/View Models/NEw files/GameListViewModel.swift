@@ -43,6 +43,27 @@ class GameListViewModel: NSObject, ObservableObject {
         }
     }
     
+    
+    private func FilterScoreFormats(pickedGameFormatID: Int) -> [ScoreFormat] {
+        //        creates an array of ScoringFormats permitted by the picked GameFormat
+        var filteredScoreFormats = ScoreFormat.allCases
+        let pickedGameFormat = gameFormats.filter({$0.id == pickedGameFormatID})[0]
+        if pickedGameFormat.medal == false {
+            let firstIndex = filteredScoreFormats.firstIndex(where: {$0 == ScoreFormat.medal})
+            filteredScoreFormats.remove(at: firstIndex ?? 0)
+        }
+        if pickedGameFormat.stableford == false {
+            let firstIndex = filteredScoreFormats.firstIndex(where: {$0 == ScoreFormat.stableford})
+            filteredScoreFormats.remove(at: firstIndex ?? 0)
+        }
+        if pickedGameFormat.bogey == false {
+            let firstIndex = filteredScoreFormats.firstIndex(where: {$0 == ScoreFormat.bogey})
+            filteredScoreFormats.remove(at: firstIndex ?? 0)
+        }
+        return filteredScoreFormats
+    }
+    
+    
     func getAllCompetitors () {
         let request: NSFetchRequest<Competitor> = Competitor.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "handicapIndex", ascending: false)]
@@ -92,6 +113,29 @@ struct GameViewModel: Hashable {
 //    var defaultCourse: Course {
 //        return game.defaultCourse ?? Course(context: CoreDataManager.shared.persistentContainer.viewContext)
 //    }
+    var defaultTeeBoxColour: String {
+        return game.defaultTeeBox?.wrappedColour ?? ""
+    }
+    
+    var courseName: String {
+        return game.defaultTeeBox?.origin?.name ?? ""
+    }
+    
+    var clubName: String {
+        return game.defaultTeeBox?.origin?.origin?.wrappedName ?? ""
+    }
+    var scoreFormatName: String {
+        return game.sc_format.stringValue()
+    }
+    var gameFormatName: String {
+        game.game_format.Succint_Description()
+    }
+    var handicapFormatName: String {
+        game.hcap_format.stringValue()
+    }
+    var succinctDescription: String {
+        return game.game_format.Succint_Description()
+    }
     
     var length: Int16 {
         return game.length
@@ -108,6 +152,8 @@ struct GameViewModel: Hashable {
     var scoreFormat: Int16 {
         return game.scoreFormat
     }
+    
+    
 }
 
 
@@ -134,5 +180,16 @@ struct CompetitorViewModel: Hashable {
     }
     var game: Game {
         return competitor.game ?? Game(context: CoreDataManager.shared.persistentContainer.viewContext)
+    }
+    
+    var playerFirstName: String {
+        return competitor.player?.firstName ?? ""
+    }
+    var playerLastName: String {
+        return competitor.player?.lastName ?? ""
+    }
+    
+    var teeBoxColour: String {
+        return competitor.teeBox?.wrappedColour ?? ""
     }
 }

@@ -14,3 +14,21 @@ extension Competitor {
         return CH
     }
 }
+extension Competitor {
+    func FirstName() -> String {
+        let FN = (self.player?.firstName ?? "")
+        return FN
+    }
+}
+extension Competitor {
+    func LastName() -> String {
+        let LN = (self.player?.lastName ?? "")
+        return LN
+    }
+}
+extension Competitor {
+    func TeeBoxColour() -> String {
+        let TBC = (self.teeBox?.wrappedColour ?? "")
+        return TBC
+    }
+}
