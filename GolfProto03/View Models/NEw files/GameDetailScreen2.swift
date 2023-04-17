@@ -57,11 +57,7 @@ struct GameDetailScreen2: View {
             GameSummary
             Form{
                 ForEach(Array(game.game.competitorArray), id: \.self){competitor in
-                    HStack{
-                        Text(competitor.FirstName())
-                        Text(competitor.LastName())
-                        Text(competitor.TeeBoxColour())
-                    }
+                    CompetitorRowItem_GameDetail(competitor: competitor)
                     .swipeActions(edge: .trailing, allowsFullSwipe: false){
                         Button{
                             currentGF.swipedCompetitor = competitor
