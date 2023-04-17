@@ -377,8 +377,86 @@ enum GameFormatType: Int, CaseIterable {
                 return 2
             }
         
-        
     }
+    func Succint_Description() -> String {
+        //does not need to cover matchplay or strokeplay as covered elsewhere
+        switch(self){
+        case .fourBallBBStroke:
+            return "4 ball better ball"
+        case .fourBallBBMatch:
+            return "4 ball better ball"
+        case .fourBallCombinedStroke:
+            return "4 ball combined score"
+        case .fourBallCombinedMatch:
+            return "4 ball combined score"
+        case .fourSomesStroke:
+            return "Foursomes"
+        case .fourSomesMatch:
+            return "Foursomes"
+        case .greenSomesStroke:
+            return "Greensomes"
+        case .greenSomesMatch:
+            return "Greensomes"
+        case .sixPoint:
+            return "Six point game"
+        case .twoPlayScramble:
+            return "2 player Texas Scramble"
+        case .threePlayScramble:
+            return "3 player Texas Scramble"
+        case .fourPlayScramble:
+            return "4 player Texas Scramble"
+        case .twoVtwoscramble:
+            return "2 v 2 Texas Scramble"
+        case .noneOnePlayer:
+            return "1 player - casual round"
+        case .noneTwoPlayer:
+            return "2 player - casual round"
+        case .noneThreePlayer:
+            return "3 player - casual round"
+        case .noneFourPlayer:
+            return "4 player - casual round"
+        case .singlesMatchplay:
+            return "Singles"
+        case .twoPlaySkins:
+            return "2 player Skins"
+        case .threePlaySkins:
+            return "3 player Skins"
+        case .fourPlaySkins:
+            return "4 player Skins"
+        case .noFormat:
+            return "no format"
+        case .best1of4:
+            return "Best 1 from 4"
+        case .best2of4:
+            return "Best 2 from 4"
+        case .best3of4:
+            return "Best 3 from 4"
+        case .best4of4:
+            return "Best 4 from 4"
+        case .pinehurstChapmanStroke:
+            return "Pinehurst/Chapman"
+        case .pinehurstChapmanMatch:
+            return "Pinehurst/Chapman"
+        case .best1of3:
+            return "Best 1 from 3"
+        case .best2of3:
+            return "Best 2 from 3"
+        case .best3of3:
+            return "Best 3 from 3"
+        case .fourBallBB2P:
+            return "4 ball better ball - 2 players"
+        case .fourBallCombined2P:
+            return "4 ball combined - 2 players"
+        case .fourSomes2P:
+            return "Foursomes - 2 players"
+        case .greenSomes2P:
+            return "Greensomes - 2 players"
+        case .pinehurstChapman2P:
+            return "Pinehurst/Chapman - 2 players"
+        }
+    
+}
+    
 }
 
 

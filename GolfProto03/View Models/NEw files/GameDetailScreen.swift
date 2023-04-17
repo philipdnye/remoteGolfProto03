@@ -14,7 +14,8 @@ struct GameDetailScreen: View {
     @StateObject var addGameVM = AddGameViewModel()
     @Binding var needsRefresh: Bool
     @State private var refresh: Bool = false
-    
+    @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var currentGF: CurrentGameFormat
     private func deleteCompetitor(at indexSet: IndexSet) {
         indexSet.forEach { index in
             let competitor = game.game.competitorArray[index]
@@ -52,51 +53,77 @@ struct GameDetailScreen: View {
     let game: GameViewModel
     
     var body: some View {
-        let currentGF = CurrentGameFormat()
+//        let currentGF = CurrentGameFormat()
         
         Form{
+            Group{
+                Text(game.game.name ?? "")
+                Text(game.date.formatted())
+                
+                
+                Text(game.defaultTeeBox.wrappedColour)
+                Text(game.defaultTeeBox.origin?.name ?? "")
+                Text(game.defaultTeeBox.origin?.origin?.wrappedName ?? "")
+                Text(game.game.game_format.stringValue())
+                Text(game.game.sc_format.stringValue())
+                Text(game.game.hcap_format.stringValue())
+                Text(currentGF.description.description)
+               
+            }
+            Group{
+                Text("\(currentGF.id)")
+                Text(refresh.description)
+                Text(game.game.game_format.Succint_Description())
+                Text(currentGF.playFormat.stringValue())
+//                Button("update"){
+//                    addGameVM.updateCurrentGameFormat(currentGF: currentGF, gameFormat: game.game.game_format)
+//                    refresh.toggle()
+//                }
+                    
+            }
             
-            Text(game.game.name ?? "")
-            Text(game.date.formatted())
-            
-            
-            Text(game.defaultTeeBox.wrappedColour)
-            Text(game.defaultTeeBox.origin?.name ?? "")
-            Text(game.defaultTeeBox.origin?.origin?.wrappedName ?? "")
-            
+            //Text(currentGF.noOfPlayersNeeded)
             
             Section{
-                let manager = CoreDataManager.shared
-                let playerCount = game.game.competitorArray.count
+//                let manager = CoreDataManager.shared
+//                let playerCount = game.game.competitorArray.count
 //                let filteredGameFormats = GameFormatType.allCases.filter({$0.NoOfPlayers() == playerCount})
 //                let currentGame = manager.getGameById(id: game.id)
-                
-                Picker("Game", selection: $addGameVM.pickerGameFormat){
-                    ForEach(GameFormatType.allCases.sorted(by: {
-                        $0.rawValue < $1.rawValue
-                    }), id: \.self) {gameFormat in
-                        Text(gameFormat.stringValue())
-                            .tag(gameFormat)
-                    }
-                }
-                
-                //                .onReceive([self.addGameVM.pickerGameFormat].publisher.first()){
-                //                    gameFormat in
-                //                    addGameVM.updateCurrentGameFormat(currentGF: currentGF, gameFormat: gameFormat)
-                //                    currentGame?.gameFormat = Int16(addGameVM.pickerGameFormat.rawValue)
-                //                    print(currentGame?.gameFormat ?? 40)
-                //                    manager.save()
-                //                }
+//
+//                Picker("Game", selection: $addGameVM.pickerGameFormat){
+//                    ForEach(GameFormatType.allCases.sorted(by: {
+//                    //ForEach(GameFormatType.allCases.sorted(by: {
+//                        $0.rawValue < $1.rawValue
+//                    }), id: \.self) {gameFormat in
+//                        Text(gameFormat.stringValue())
+//                            .tag(gameFormat)
+//                    }
+//                }
+//
+//                .onReceive([self.addGameVM.pickerGameFormat].publisher.first()){
+//                    gameFormat in
+//                    addGameVM.updateCurrentGameFormat(currentGF: currentGF, gameFormat: gameFormat)
+//                    currentGame?.gameFormat = Int16(gameFormat.rawValue)
+//                    print(currentGame?.gameFormat ?? 40)
+//                    manager.save()
+////                    gameListVM.getAllGames()
+//                    //addGameVM.updateGameFormat_GameDetail(gameFormat: gameFormat, game: game)
+//                  //func here
+//                }
+//                                    currentGame?.gameFormat = Int16(addGameVM.pickerGameFormat.rawValue)
+//                                    print(currentGame?.gameFormat ?? 40)
+//                                    manager.save()
+//                                }
                 //                let filteredScoringFormats = FilterScoreFormats(pickedGameFormatID: addGameVM.pickerGameFormat.rawValue)
                 //
                 //
-                Picker("Score format", selection:$addGameVM.pickerScoringFormat){
-                    ForEach(ScoreFormat.allCases, id: \.self){format in
-                        
-                        Text(format.stringValue())
-                            .tag(format)
-                    }
-                }
+//                Picker("Score format", selection:$addGameVM.pickerScoringFormat){
+//                    ForEach(ScoreFormat.allCases, id: \.self){format in
+//
+//                        Text(format.stringValue())
+//                            .tag(format)
+//                    }
+//                }
                 //
                 //                .onReceive([self.addGameVM.pickerScoringFormat].publisher.first()){
                 //                    scoringFormat in
@@ -108,15 +135,17 @@ struct GameDetailScreen: View {
                 //
                 //
                 //
-                Picker("Handicap",selection: $addGameVM.pickerHandicapFormat){
-                    ForEach(HandicapFormat.allCases, id: \.self){format in
-                        Text(format.stringValue())
-                            .tag(format)
-                        
-                    }
-                }
+//                Picker("Handicap",selection: $addGameVM.pickerHandicapFormat){
+//                    ForEach(HandicapFormat.allCases, id: \.self){format in
+//                        Text(format.stringValue())
+//                            .tag(format)
+//
+//                    }
+//                }
 //                .onReceive([self.addGameVM.pickerHandicapFormat].publisher.first()){
 //                    handicapFormat in
+//                    print("chaning handicap")
+//                }
 //                    addGameVM.gameDetail_HandicapFormat = Int16(addGameVM.pickerHandicapFormat.rawValue)
 //                    addGameVM.gameDetail_ScoreFormat = Int16(addGameVM.pickerScoringFormat.rawValue)
 //                    addGameVM.gameDetail_GameFormat = Int16(addGameVM.pickerGameFormat.rawValue)
@@ -144,21 +173,49 @@ struct GameDetailScreen: View {
                 
                 
             }
-            .onAppear(perform: {
-                gameListVM.getAllGames()
-                playerListVM.getAllPlayers()
-                addGameVM.pickerGameFormat = game.game.game_format
-                addGameVM.pickerScoringFormat = game.game.sc_format
-                addGameVM.pickerHandicapFormat = game.game.hcap_format
-            })
+            
             
         }
         
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+
+                        ToolbarItem(placement: .navigationBarLeading) {
+
+                            Button {
+                                dismiss()
+                           //code here to save the current game changes
+                                print("Custom Action")
+
+                            } label: {
+                            
+                                HStack {
+
+                                    Image(systemName: "chevron.backward")
+                                    Text("Games")
+                                }
+                            }
+                        }
+                        
+                    }
+        .onAppear(perform: {
+            gameListVM.getAllGames()
+            playerListVM.getAllPlayers()
+//                addGameVM.pickerGameFormat = game.game.game_format
+//                addGameVM.pickerScoringFormat = game.game.sc_format
+//                addGameVM.pickerHandicapFormat = game.game.hcap_format
+//            addGameVM.updateCurrentGameFormat(currentGF: currentGF, gameFormat: game.game.game_format)
+            print("current GF ID: \(currentGF.id)")
+        })
+       
     }
 }
 struct GameDetailScreen_Previews: PreviewProvider {
     static var previews: some View {
-        let game = GameViewModel(game: Game(context: CoreDataManager.shared.viewContext))
-        GameDetailScreen(needsRefresh: .constant(false), game: game)
+        NavigationStack{
+            let game = GameViewModel(game: Game(context: CoreDataManager.shared.viewContext))
+            GameDetailScreen(needsRefresh: .constant(false), game: game)
+                .environmentObject(CurrentGameFormat())
+        }
     }
 }

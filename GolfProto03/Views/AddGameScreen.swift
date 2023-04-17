@@ -12,18 +12,55 @@ import SwiftUI
 
 
 struct AddGameScreen: View {
-    
+    //@StateObject private var gameListVM = GameListViewModel()
     @StateObject private var clubListVM = ClubListViewModel()
     @StateObject private var addGameVM = AddGameViewModel()
     @StateObject private var playerListVM = PlayerListViewModel()
     @Environment(\.presentationMode) var presentationMode
-
+    @EnvironmentObject var currentGF: CurrentGameFormat
     @FocusState private var AddGameViewInFocus: AddGameViewFocusable?
     
    private func createGame () {
-        addGameVM.teeBox = clubListVM.clubs2.getElement(at: addGameVM.pickedClub)?.courseArray.getElement(at: addGameVM.pickedCourse)?.teeBoxArray.getElement(at: addGameVM.pickedTeeBox) ?? TeeBox()
-       addGameVM.selectedPlayers = playerListVM.players.filter({$0.selectedForGame == true})
-        addGameVM.createGame()
+//        addGameVM.teeBox = clubListVM.clubs2.getElement(at: addGameVM.pickedClub)?.courseArray.getElement(at: addGameVM.pickedCourse)?.teeBoxArray.getElement(at: addGameVM.pickedTeeBox) ?? TeeBox()
+//       addGameVM.selectedPlayers = playerListVM.players.filter({$0.selectedForGame == true})
+       
+       
+       let manager = CoreDataManager.shared
+       let game = Game(context: manager.persistentContainer.viewContext)
+       
+       game.name = addGameVM.name
+       game.date = addGameVM.date
+       game.defaultTeeBox = clubListVM.clubs2.getElement(at: addGameVM.pickedClub)?.courseArray.getElement(at: addGameVM.pickedCourse)?.teeBoxArray.getElement(at: addGameVM.pickedTeeBox) ?? TeeBox()
+       game.gameFormat = Int16(addGameVM.pickerGameFormat.rawValue)
+   
+           for player in playerListVM.players.filter({$0.selectedForGame == true}) {
+               let competitor = Competitor(context: manager.persistentContainer.viewContext)
+               competitor.player = player.player
+               competitor.game = game
+               competitor.teeBox = game.defaultTeeBox
+               competitor.handicapIndex = player.player.handicapArray.currentHandicapIndex()
+               competitor.courseHandicap = competitor.CourseHandicap()
+               player.player.selectedForGame.toggle()
+           }
+      
+       game.scoreFormat = Int16(addGameVM.pickerScoringFormat.rawValue)
+       game.handicapFormat = Int16(addGameVM.pickerHandicapFormat.rawValue)
+      
+   manager.save()
+        currentGF.id = gameFormats[Int(game.gameFormat)].id
+        currentGF.format = gameFormats[Int(game.gameFormat)].format
+        currentGF.description = gameFormats[Int(game.gameFormat)].description
+        currentGF.noOfPlayersNeeded = gameFormats[Int(game.gameFormat)].noOfPlayersNeeded
+        currentGF.playerHandAllowances = gameFormats[Int(game.gameFormat)].playerHandAllowances
+        currentGF.assignShotsRecd = gameFormats[Int(game.gameFormat)].assignShotsRecd
+        currentGF.assignTeamGrouping = gameFormats[Int(game.gameFormat)].assignTeamGrouping
+        currentGF.competitorSort = gameFormats[Int(game.gameFormat)].competitorSort
+        currentGF.playFormat = gameFormats[Int(game.gameFormat)].playFormat
+        currentGF.extraShotsTeamAdj = gameFormats[Int(game.gameFormat)].extraShotsTeamAdj
+        currentGF.bogey = gameFormats[Int(game.gameFormat)].bogey
+        currentGF.medal = gameFormats[Int(game.gameFormat)].medal
+        currentGF.stableford = gameFormats[Int(game.gameFormat)].stableford
+
         presentationMode.wrappedValue.dismiss()
     }
     
@@ -76,7 +113,7 @@ struct AddGameScreen: View {
     
     var body: some View {
       
-        let currentGF = CurrentGameFormat()
+//        let currentGF = CurrentGameFormat()
        
        
         Form{
@@ -202,15 +239,8 @@ struct AddGameScreen: View {
                             .tag(gameFormat)
                     }
                 }
-                .onAppear(perform: {
-                    addGameVM.pickerGameFormat = .fourBallBBMatch
-                })
 
-                .onReceive([self.addGameVM.pickerGameFormat].publisher.first()){
-                    gameFormat in
-                    addGameVM.updateCurrentGameFormat(currentGF: currentGF, gameFormat: gameFormat)
-
-                }
+         
                 
                 let filteredScoringFormats = FilterScoreFormats(pickedGameFormatID: addGameVM.pickerGameFormat.rawValue)
 
@@ -283,5 +313,6 @@ struct AddGameScreen: View {
 struct AddGameScreen_Previews: PreviewProvider {
     static var previews: some View {
         AddGameScreen()
+            .environmentObject(CurrentGameFormat())
     }
 }
