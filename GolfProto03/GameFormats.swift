@@ -22,6 +22,9 @@ class CurrentGameFormat: ObservableObject {
     @Published var stableford: Bool = false
     @Published var medal: Bool = true
     @Published var bogey: Bool = false
+    
+    //variables to be used briefly in game creation
+    @Published var swipedCompetitor: CompetitorViewModel = CompetitorViewModel(competitor: Competitor())
 }
 
 

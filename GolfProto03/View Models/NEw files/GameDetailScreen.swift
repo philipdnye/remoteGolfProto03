@@ -16,6 +16,9 @@ struct GameDetailScreen: View {
     @State private var refresh: Bool = false
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var currentGF: CurrentGameFormat
+    @State private var isPresented: Bool = false
+//    @State var swipedCompetitor: CompetitorViewModel = CompetitorViewModel(competitor: Competitor())
+   
     private func deleteCompetitor(at indexSet: IndexSet) {
         indexSet.forEach { index in
             let competitor = game.game.competitorArray[index]
@@ -48,7 +51,9 @@ struct GameDetailScreen: View {
         return filteredScoreFormats
     }
     
-    
+    private func onAdd() {
+        isPresented = true
+    }
     
     let game: GameViewModel
     
@@ -61,18 +66,20 @@ struct GameDetailScreen: View {
                 Text(game.date.formatted())
                 
                 
-                Text(game.defaultTeeBox.wrappedColour)
-                Text(game.defaultTeeBox.origin?.name ?? "")
-                Text(game.defaultTeeBox.origin?.origin?.wrappedName ?? "")
-                Text(game.game.game_format.stringValue())
+//                Text(game.defaultTeeBox.wrappedColour)
+//                Text(game.defaultTeeBox.origin?.name ?? "")
+//                Text(game.defaultTeeBox.origin?.origin?.wrappedName ?? "")
+//                Text(game.game.game_format.stringValue())
                 Text(game.game.sc_format.stringValue())
+            }
+            Group{
                 Text(game.game.hcap_format.stringValue())
                 Text(currentGF.description.description)
                
             }
             Group{
-                Text("\(currentGF.id)")
-                Text(refresh.description)
+//                Text("\(currentGF.id)")
+//                Text(refresh.description)
                 Text(game.game.game_format.Succint_Description())
                 Text(currentGF.playFormat.stringValue())
 //                Button("update"){
@@ -153,6 +160,7 @@ struct GameDetailScreen: View {
 //                    addGameVM.updateHandicapFormat(game: game)
 //                }
                 
+               
                 ForEach(game.game.competitorArray, id: \.self){competitor in
                     HStack{
                         Text(competitor.player?.firstName ?? "")
@@ -162,9 +170,21 @@ struct GameDetailScreen: View {
                         Text(competitor.teeBox?.wrappedColour ?? "")
                         Text(competitor.player?.selectedForGame.description ?? "")
                     }
+                    .swipeActions(edge:.leading, allowsFullSwipe: false) {
+                    
+                    Button {
+                       // currentGF.swipedCompetitor = competitor
+                        onAdd()
+                        
+                      
+                } label: {
+                    Text("Teebox")
+            }
+            .tint(.mint)
+                    
+                    
+                                                }
                 }
-                
-                
                 
                 
                 
@@ -198,9 +218,33 @@ struct GameDetailScreen: View {
                         }
                         
                     }
+        
+        .sheet(isPresented: $isPresented, onDismiss: {
+            gameListVM.getAllGames()
+        }, content: {
+            ChangeCompetitorTeeBoxSheet(game: game)
+        })
+        
         .onAppear(perform: {
             gameListVM.getAllGames()
             playerListVM.getAllPlayers()
+            
+            currentGF.id = gameFormats[Int(game.gameFormat)].id
+            currentGF.format = gameFormats[Int(game.gameFormat)].format
+            currentGF.description = gameFormats[Int(game.gameFormat)].description
+            currentGF.noOfPlayersNeeded = gameFormats[Int(game.gameFormat)].noOfPlayersNeeded
+            currentGF.playerHandAllowances = gameFormats[Int(game.gameFormat)].playerHandAllowances
+            currentGF.assignShotsRecd = gameFormats[Int(game.gameFormat)].assignShotsRecd
+            currentGF.assignTeamGrouping = gameFormats[Int(game.gameFormat)].assignTeamGrouping
+            currentGF.competitorSort = gameFormats[Int(game.gameFormat)].competitorSort
+            currentGF.playFormat = gameFormats[Int(game.gameFormat)].playFormat
+            currentGF.extraShotsTeamAdj = gameFormats[Int(game.gameFormat)].extraShotsTeamAdj
+            currentGF.bogey = gameFormats[Int(game.gameFormat)].bogey
+            currentGF.medal = gameFormats[Int(game.gameFormat)].medal
+            currentGF.stableford = gameFormats[Int(game.gameFormat)].stableford
+
+            
+            
 //                addGameVM.pickerGameFormat = game.game.game_format
 //                addGameVM.pickerScoringFormat = game.game.sc_format
 //                addGameVM.pickerHandicapFormat = game.game.hcap_format
@@ -214,7 +258,7 @@ struct GameDetailScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack{
             let game = GameViewModel(game: Game(context: CoreDataManager.shared.viewContext))
-            GameDetailScreen(needsRefresh: .constant(false), game: game)
+            GameDetailScreen(needsRefresh: .constant(false),  game: game)
                 .environmentObject(CurrentGameFormat())
         }
     }
