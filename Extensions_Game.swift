@@ -45,3 +45,15 @@ extension Game {
         }
     }
 }
+
+
+extension Game {
+    var game_duration: GameDuration {
+        get {
+            return GameDuration(rawValue: Int(self.duration)) ?? .H18
+        } set {
+            self.duration = Int16(newValue.rawValue)
+        }
+    }
+}
+

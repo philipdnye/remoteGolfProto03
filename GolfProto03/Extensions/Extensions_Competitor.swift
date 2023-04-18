@@ -32,3 +32,17 @@ extension Competitor {
         return TBC
     }
 }
+
+extension Competitor {
+    func CourseRating() -> Double {
+        let CR = self.teeBox?.courseRating ?? 70.0
+        return CR
+    }
+}
+
+extension Competitor {
+    func SlopeRating() -> Int {
+        let SR = Int(self.teeBox?.slopeRating ?? 122)
+        return SR
+    }
+}

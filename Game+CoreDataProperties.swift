@@ -22,11 +22,17 @@ extension Game {
     @NSManaged public var scoreFormat: Int16
     @NSManaged public var handicapFormat: Int16
     @NSManaged public var playFormat: Int16
-    @NSManaged public var length: Int16
+    @NSManaged public var duration: Int16
 //    @NSManaged public var club: Club?
     @NSManaged public var competitors: NSSet?
 //    @NSManaged public var defaultCourse: Course?
     @NSManaged public var defaultTeeBox: TeeBox?
+    @NSManaged public var started: Bool
+    @NSManaged public var finished: Bool
+    @NSManaged public var startTime: Date?
+    @NSManaged public var finishTime: Date?
+    @NSManaged public var startingHole: Int16
+    
     
     public var competitorArray: [Competitor] {
         let set = competitors as? Set<Competitor> ?? []

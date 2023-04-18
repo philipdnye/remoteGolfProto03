@@ -27,12 +27,17 @@
     </entity>
     <entity name="Game" representedClassName="Game" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="duration" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="finished" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="finishTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="gameFormat" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="handicapFormat" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="length" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="playFormat" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="scoreFormat" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="started" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="startingHole" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="startTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="competitors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Competitor" inverseName="game" inverseEntity="Competitor"/>
         <relationship name="defaultTeeBox" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TeeBox" inverseName="game" inverseEntity="TeeBox"/>
     </entity>
@@ -60,7 +65,7 @@
         <attribute name="lastName" optional="YES" attributeType="String"/>
         <attribute name="mobile" optional="YES" attributeType="String"/>
         <attribute name="photo" optional="YES" attributeType="Transformable" valueTransformerName="UIImageTransformer" customClassName="UIImage"/>
-        <attribute name="selectedForGame" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="selectedForGame" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <relationship name="competitors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Competitor" inverseName="player" inverseEntity="Competitor"/>
         <relationship name="handicap" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Handicap" inverseName="origin" inverseEntity="Handicap"/>
     </entity>

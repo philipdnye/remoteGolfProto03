@@ -7,11 +7,11 @@
 
 import Foundation
 
-//extension Player {
-//    func Initials() -> String {
-//        let firstInitial = self.firstName?.prefix(1).capitalized
-//        let lastInitial = self.lastName?.prefix(1).capitalized
-//        let initials = firstInitial+lastInitial
-//        return initials
-//    }
-//}
+extension Player {
+    func Initials() -> String {
+        let firstInitial = String(self.firstName?.prefix(1).capitalized ?? "")
+        let lastInitial = String(self.lastName?.prefix(1).capitalized ?? "")
+        let initials = firstInitial + lastInitial
+        return initials
+    }
+}

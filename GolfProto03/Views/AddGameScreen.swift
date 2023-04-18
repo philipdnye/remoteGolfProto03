@@ -29,7 +29,9 @@ struct AddGameScreen: View {
        game.date = addGameVM.date
        game.defaultTeeBox = clubListVM.clubs2.getElement(at: addGameVM.pickedClub)?.courseArray.getElement(at: addGameVM.pickedCourse)?.teeBoxArray.getElement(at: addGameVM.pickedTeeBox) ?? TeeBox()
        game.gameFormat = Int16(addGameVM.pickerGameFormat.rawValue)
-   
+       game.duration = Int16(addGameVM.pickerGameDuration)
+       game.startingHole = Int16(addGameVM.pickerStartingHole)
+       
            for player in playerListVM.players.filter({$0.selectedForGame == true}) {
                let competitor = Competitor(context: manager.persistentContainer.viewContext)
                competitor.player = player.player
@@ -43,7 +45,7 @@ struct AddGameScreen: View {
        game.scoreFormat = Int16(addGameVM.pickerScoringFormat.rawValue)
        game.handicapFormat = Int16(addGameVM.pickerHandicapFormat.rawValue)
       
-   manager.save()
+       manager.save()
 
        gameListVM.updateCurrentGameFormat(currentGF: currentGF, game: game)
         presentationMode.wrappedValue.dismiss()
@@ -122,6 +124,23 @@ struct AddGameScreen: View {
                             .focused($AddGameViewInFocus, equals: .teebox)
                     }
                 }
+                
+                Picker("Game duration", selection: $addGameVM.pickerGameDuration){
+                    ForEach(GameDuration.allCases, id: \.self){
+                        Text($0.stringValue())
+                            .tag($0.rawValue)
+                    }
+                }
+                
+                Picker("Starting hole", selection: $addGameVM.pickerStartingHole){
+                    ForEach(1..<19){
+                        Text($0.formatted())
+                            .tag($0)
+                    }
+                }
+                
+                
+                
             }
             Section {
                 

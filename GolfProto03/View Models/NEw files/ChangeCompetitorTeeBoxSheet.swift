@@ -46,17 +46,7 @@ struct ChangeCompetitorTeeBoxSheet: View {
                 }
                 Spacer()
             }
-            
-//            ForEach(game.game.defaultTeeBox?.origin?.teeBoxArray ?? [], id: \.self){teeBox in
-//                HStack{
-//                    Text(teeBox.wrappedColour)
-//                    HStack{
-//                    }.frame(width:20, height:20)
-//                        .background(Color(teeBox.teeBoxColor ?? UIColor(.clear)))
-//                        .border(.black.opacity(0.2))
-//                }
-//            }
-//            Text(game.game.defaultTeeBox?.origin?.name ?? "")
+
         }
         .onAppear(perform:{
             addGameVM.newTeeBox = competitor.teeBox ?? TeeBox()

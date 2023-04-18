@@ -13,20 +13,26 @@ struct GameDetailScreen2: View {
     @EnvironmentObject var currentGF: CurrentGameFormat
     
     @State private var isPresented: Bool = false
+    @State private var isPresentedHcap: Bool = false
     @State private var needsRefresh: Bool = false
+    
     var GameSummary: some View {
         VStack{
-            Text(game.name)
-            Text(game.defaultTeeBoxColour)
-            Text(game.clubName)
-            Text(game.courseName)
-            Text(game.handicapFormatName)
-            Text(game.scoreFormatName)
-            Text(game.succinctDescription)
-            
-            Text(currentGF.description.description)
-            Text(currentGF.playFormat.stringValue())
-            
+            Group{
+                Text(game.name)
+                Text(game.defaultTeeBoxColour)
+                Text(game.clubName)
+                Text(game.courseName)
+                Text(game.handicapFormatName)
+                Text(game.scoreFormatName)
+                Text(game.succinctDescription)
+            }
+            Group {
+                Text(currentGF.description.description)
+                Text(currentGF.playFormat.stringValue())
+                Text(game.durationName)
+                Text(game.startingHole.formatted())
+            }
         }
     }
     func OnAppear() {
@@ -38,6 +44,11 @@ struct GameDetailScreen2: View {
     private func onAdd() {
         
         isPresented.toggle()
+    }
+    
+    private func onAddHcap() {
+        
+        isPresentedHcap.toggle()
     }
     let game: GameViewModel
     
@@ -58,6 +69,16 @@ struct GameDetailScreen2: View {
                             }
                             .tint(.mint)
                         }
+                        .swipeActions(edge: .leading, allowsFullSwipe: false){
+                            Button{
+                                currentGF.swipedCompetitor = competitor
+                               onAddHcap()
+                            } label: {
+                                Label("Handicap calculation",systemImage: "h.circle")
+                            }
+                            .tint(darkTeal)
+                        }
+                    
                 }
             } //section
             header: {
@@ -76,6 +97,13 @@ struct GameDetailScreen2: View {
                     
                 }, content: {
                     ChangeCompetitorTeeBoxSheet(competitor: currentGF.swipedCompetitor, game: game, isPresented: $isPresented, neeedsRefresh: $needsRefresh)
+                        .presentationDetents([.fraction(0.4)])
+                })
+        
+                .sheet(isPresented: $isPresentedHcap, onDismiss: {
+                    
+                }, content: {
+                    CourseHandicapCalcScreen(isPresentedHcap: $isPresentedHcap, competitor: currentGF.swipedCompetitor)
                         .presentationDetents([.fraction(0.4)])
                 })
         

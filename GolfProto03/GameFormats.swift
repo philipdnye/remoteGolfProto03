@@ -22,10 +22,27 @@ class CurrentGameFormat: ObservableObject {
     @Published var stableford: Bool = false
     @Published var medal: Bool = true
     @Published var bogey: Bool = false
+   
     
     //variables to be used briefly in game creation
     @Published var swipedCompetitor: Competitor = Competitor()
 }
+
+
+enum GameDuration: Int, CaseIterable {
+    case H9 = 0
+    case H18 = 1
+    func stringValue() -> String {
+        switch (self){
+        case .H9:
+            return "9 holes"
+        case .H18:
+            return "18 holes"
+        }
+    }
+}
+
+
 
 
 enum ScoreFormat: Int, CaseIterable {

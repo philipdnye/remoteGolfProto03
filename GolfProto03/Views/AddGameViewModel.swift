@@ -41,6 +41,11 @@ class AddGameViewModel: ObservableObject {
 
     @Published var pickerGameFormat: GameFormatType = .fourBallBBMatch
 
+    @Published var pickerStartingHole: Int = 1
+    @Published var pickerGameDuration: Int = 1
+    
+    
+    
     @Published var newTeeBox: TeeBox = TeeBox()
 
     

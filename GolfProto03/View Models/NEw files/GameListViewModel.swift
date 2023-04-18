@@ -116,6 +116,25 @@ struct GameViewModel: Hashable {
     
     var date: Date {
         return game.date ?? Date()
+    
+    }
+    
+    var gameStarted: Bool {
+        return game.started
+    }
+    
+    var gameFinished: Bool {
+        return game.finished
+    }
+    
+    var startTime: Date {
+        return game.startTime ?? Date()
+    }
+    var finishTime: Date {
+        return game.finishTime ?? Date()
+    }
+    var startingHole: Int16 {
+        return game.startingHole
     }
     
 //    var club: Club {
@@ -154,8 +173,12 @@ struct GameViewModel: Hashable {
         return game.game_format.Succint_Description()
     }
     
-    var length: Int16 {
-        return game.length
+    var durationName: String {
+        return game.game_duration.stringValue()
+    }
+    
+    var duration: Int16 {
+        return game.duration
     }
     
     var gameFormat: Int16 {
@@ -209,4 +232,12 @@ struct CompetitorViewModel: Hashable {
     var teeBoxColour: String {
         return competitor.teeBox?.wrappedColour ?? ""
     }
+    var teeboxSlopeRating: Int {
+        return Int(competitor.teeBox?.slopeRating ?? 120)
+    }
+    var teeboxCourseRating: Double {
+        return Double(competitor.teeBox?.courseRating ?? 70.0)
+    }
+    
+    
 }
