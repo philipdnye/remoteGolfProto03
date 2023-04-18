@@ -12,19 +12,16 @@ import SwiftUI
 
 
 struct AddGameScreen: View {
-    //@StateObject private var gameListVM = GameListViewModel()
+    @StateObject private var gameListVM = GameListViewModel()
     @StateObject private var clubListVM = ClubListViewModel()
     @StateObject private var addGameVM = AddGameViewModel()
     @StateObject private var playerListVM = PlayerListViewModel()
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var currentGF: CurrentGameFormat
     @FocusState private var AddGameViewInFocus: AddGameViewFocusable?
-    
+ 
    private func createGame () {
-//        addGameVM.teeBox = clubListVM.clubs2.getElement(at: addGameVM.pickedClub)?.courseArray.getElement(at: addGameVM.pickedCourse)?.teeBoxArray.getElement(at: addGameVM.pickedTeeBox) ?? TeeBox()
-//       addGameVM.selectedPlayers = playerListVM.players.filter({$0.selectedForGame == true})
-       
-       
+
        let manager = CoreDataManager.shared
        let game = Game(context: manager.persistentContainer.viewContext)
        
@@ -47,42 +44,12 @@ struct AddGameScreen: View {
        game.handicapFormat = Int16(addGameVM.pickerHandicapFormat.rawValue)
       
    manager.save()
-        currentGF.id = gameFormats[Int(game.gameFormat)].id
-        currentGF.format = gameFormats[Int(game.gameFormat)].format
-        currentGF.description = gameFormats[Int(game.gameFormat)].description
-        currentGF.noOfPlayersNeeded = gameFormats[Int(game.gameFormat)].noOfPlayersNeeded
-        currentGF.playerHandAllowances = gameFormats[Int(game.gameFormat)].playerHandAllowances
-        currentGF.assignShotsRecd = gameFormats[Int(game.gameFormat)].assignShotsRecd
-        currentGF.assignTeamGrouping = gameFormats[Int(game.gameFormat)].assignTeamGrouping
-        currentGF.competitorSort = gameFormats[Int(game.gameFormat)].competitorSort
-        currentGF.playFormat = gameFormats[Int(game.gameFormat)].playFormat
-        currentGF.extraShotsTeamAdj = gameFormats[Int(game.gameFormat)].extraShotsTeamAdj
-        currentGF.bogey = gameFormats[Int(game.gameFormat)].bogey
-        currentGF.medal = gameFormats[Int(game.gameFormat)].medal
-        currentGF.stableford = gameFormats[Int(game.gameFormat)].stableford
 
+       gameListVM.updateCurrentGameFormat(currentGF: currentGF, game: game)
         presentationMode.wrappedValue.dismiss()
     }
     
-    private func FilterScoreFormats(pickedGameFormatID: Int) -> [ScoreFormat] {
-        //        creates an array of ScoringFormats permitted by the picked GameFormat
-        var filteredScoreFormats = ScoreFormat.allCases
-        let pickedGameFormat = gameFormats.filter({$0.id == pickedGameFormatID})[0]
-        if pickedGameFormat.medal == false {
-            let firstIndex = filteredScoreFormats.firstIndex(where: {$0 == ScoreFormat.medal})
-            filteredScoreFormats.remove(at: firstIndex ?? 0)
-        }
-        if pickedGameFormat.stableford == false {
-            let firstIndex = filteredScoreFormats.firstIndex(where: {$0 == ScoreFormat.stableford})
-            filteredScoreFormats.remove(at: firstIndex ?? 0)
-        }
-        if pickedGameFormat.bogey == false {
-            let firstIndex = filteredScoreFormats.firstIndex(where: {$0 == ScoreFormat.bogey})
-            filteredScoreFormats.remove(at: firstIndex ?? 0)
-        }
-        return filteredScoreFormats
-    }
-    
+
     
     private func togglePlayerSelected (player: PlayerViewModel) {
         let manager = CoreDataManager.shared
@@ -242,7 +209,7 @@ struct AddGameScreen: View {
 
          
                 
-                let filteredScoringFormats = FilterScoreFormats(pickedGameFormatID: addGameVM.pickerGameFormat.rawValue)
+                let filteredScoringFormats = gameListVM.FilterScoreFormats(pickedGameFormatID: addGameVM.pickerGameFormat.rawValue)
 
                 
                 Picker("Score format", selection:$addGameVM.pickerScoringFormat){
@@ -276,7 +243,13 @@ struct AddGameScreen: View {
                        createGame()
                     }
                     //.disabled(playerCount == 0)
-                    
+                    Button("Dismiss"){
+                        for player in playerListVM.players.filter({$0.selectedForGame == true}) {
+                         
+                            player.player.selectedForGame.toggle()
+                        }
+                        presentationMode.wrappedValue.dismiss()
+                    }
                     Spacer()
                 }
             }
@@ -303,6 +276,7 @@ struct AddGameScreen: View {
 
             }
         }
+        .interactiveDismissDisabled()
     }
 }
 

@@ -38,6 +38,8 @@ struct ChangeCompetitorTeeBoxSheet: View {
                     let competitorId = competitor.objectID
                     let currentCompetitor = manager.getCompetitorById(id: competitorId)
                     currentCompetitor?.teeBox = addGameVM.newTeeBox
+                    //code here to update course handicap
+                    currentCompetitor?.courseHandicap = competitor.CourseHandicap()
                     manager.save()
                     isPresented = false
                     neeedsRefresh.toggle()

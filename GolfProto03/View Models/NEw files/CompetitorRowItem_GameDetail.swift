@@ -16,6 +16,8 @@ struct CompetitorRowItem_GameDetail: View {
             Text(competitor.FirstName())
             Text(competitor.LastName())
             Text(competitor.TeeBoxColour())
+            Text(competitor.handicapIndex.formatted())
+            Text(round(competitor.courseHandicap).formatted())
             Text(needsRefresh.description)
                 .frame(width:0, height:0)
                 .opacity(0)

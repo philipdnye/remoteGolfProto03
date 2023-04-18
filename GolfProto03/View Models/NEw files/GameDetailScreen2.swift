@@ -31,21 +31,9 @@ struct GameDetailScreen2: View {
     }
     func OnAppear() {
         gameListVM.getAllGames()
-//            playerListVM.getAllPlayers()
-        
-        currentGF.id = gameFormats[Int(game.gameFormat)].id
-        currentGF.format = gameFormats[Int(game.gameFormat)].format
-        currentGF.description = gameFormats[Int(game.gameFormat)].description
-        currentGF.noOfPlayersNeeded = gameFormats[Int(game.gameFormat)].noOfPlayersNeeded
-        currentGF.playerHandAllowances = gameFormats[Int(game.gameFormat)].playerHandAllowances
-        currentGF.assignShotsRecd = gameFormats[Int(game.gameFormat)].assignShotsRecd
-        currentGF.assignTeamGrouping = gameFormats[Int(game.gameFormat)].assignTeamGrouping
-        currentGF.competitorSort = gameFormats[Int(game.gameFormat)].competitorSort
-        currentGF.playFormat = gameFormats[Int(game.gameFormat)].playFormat
-        currentGF.extraShotsTeamAdj = gameFormats[Int(game.gameFormat)].extraShotsTeamAdj
-        currentGF.bogey = gameFormats[Int(game.gameFormat)].bogey
-        currentGF.medal = gameFormats[Int(game.gameFormat)].medal
-        currentGF.stableford = gameFormats[Int(game.gameFormat)].stableford
+
+        gameListVM.updateCurrentGameFormat(currentGF: currentGF, game: game.game)
+
     }
     private func onAdd() {
         
@@ -58,18 +46,27 @@ struct GameDetailScreen2: View {
 //            Text(needsRefresh.description)
             GameSummary
             Form{
+                Section {
                 ForEach(Array(game.game.competitorArray), id: \.self){competitor in
                     CompetitorRowItem_GameDetail(competitor: competitor, needsRefresh: $needsRefresh)
-                    .swipeActions(edge: .trailing, allowsFullSwipe: false){
-                        Button{
-                            currentGF.swipedCompetitor = competitor
-                            onAdd()
-                        } label: {
-                            Text("TeeBox")
+                        .swipeActions(edge: .leading, allowsFullSwipe: false){
+                            Button{
+                                currentGF.swipedCompetitor = competitor
+                                onAdd()
+                            } label: {
+                                Text("TeeBox")
+                            }
+                            .tint(.mint)
                         }
-                        .tint(.mint)
-                    }
                 }
+            } //section
+            header: {
+                         
+                         Text("Players in this game")
+                     } footer: {
+                         
+                         Text("Swipe right to change the players teebox")
+                     }
             }
            
         }

@@ -44,7 +44,7 @@ class GameListViewModel: NSObject, ObservableObject {
     }
     
     
-    private func FilterScoreFormats(pickedGameFormatID: Int) -> [ScoreFormat] {
+    func FilterScoreFormats(pickedGameFormatID: Int) -> [ScoreFormat] {
         //        creates an array of ScoringFormats permitted by the picked GameFormat
         var filteredScoreFormats = ScoreFormat.allCases
         let pickedGameFormat = gameFormats.filter({$0.id == pickedGameFormatID})[0]
@@ -75,6 +75,23 @@ class GameListViewModel: NSObject, ObservableObject {
             
                           []).map(CompetitorViewModel.init)
         }
+    }
+    
+    func updateCurrentGameFormat (currentGF: CurrentGameFormat, game: Game) {
+        currentGF.id = gameFormats[Int(game.gameFormat)].id
+        currentGF.format = gameFormats[Int(game.gameFormat)].format
+        currentGF.description = gameFormats[Int(game.gameFormat)].description
+        currentGF.noOfPlayersNeeded = gameFormats[Int(game.gameFormat)].noOfPlayersNeeded
+        currentGF.playerHandAllowances = gameFormats[Int(game.gameFormat)].playerHandAllowances
+        currentGF.assignShotsRecd = gameFormats[Int(game.gameFormat)].assignShotsRecd
+        currentGF.assignTeamGrouping = gameFormats[Int(game.gameFormat)].assignTeamGrouping
+        currentGF.competitorSort = gameFormats[Int(game.gameFormat)].competitorSort
+        currentGF.playFormat = gameFormats[Int(game.gameFormat)].playFormat
+        currentGF.extraShotsTeamAdj = gameFormats[Int(game.gameFormat)].extraShotsTeamAdj
+        currentGF.bogey = gameFormats[Int(game.gameFormat)].bogey
+        currentGF.medal = gameFormats[Int(game.gameFormat)].medal
+        currentGF.stableford = gameFormats[Int(game.gameFormat)].stableford
+
     }
     
 }

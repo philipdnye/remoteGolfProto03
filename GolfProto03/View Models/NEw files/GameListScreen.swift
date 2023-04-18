@@ -12,6 +12,7 @@ struct GameListScreen: View {
     @StateObject private var gameListVM = GameListViewModel()
     @State private var isPresented: Bool = false
     @State private var needsRefresh: Bool = false
+    @StateObject private var playerListVM = PlayerListViewModel()
     
     private func deleteGame(at indexSet: IndexSet) {
         indexSet.forEach { index in
@@ -57,6 +58,7 @@ struct GameListScreen: View {
         //            .navigationTitle("Games")
         //            .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $isPresented, onDismiss: {
+            
             gameListVM.getAllGames()
         }, content: {
            AddGameScreen()
