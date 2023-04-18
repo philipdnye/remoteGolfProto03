@@ -77,7 +77,7 @@ class AddGameViewModel: ObservableObject {
 //    @Published var pickerPlayFormat: PlayFormat = .strokeplay
     @Published var pickerGameFormat: GameFormatType = .fourBallBBMatch
 
-    
+    @Published var newTeeBox: TeeBox = TeeBox()
 //    func createGame() {
 //           
 //            let manager = CoreDataManager.shared

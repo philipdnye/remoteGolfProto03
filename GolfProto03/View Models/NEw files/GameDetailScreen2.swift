@@ -13,6 +13,7 @@ struct GameDetailScreen2: View {
     @EnvironmentObject var currentGF: CurrentGameFormat
     
     @State private var isPresented: Bool = false
+    @State private var needsRefresh: Bool = false
     var GameSummary: some View {
         VStack{
             Text(game.name)
@@ -54,10 +55,11 @@ struct GameDetailScreen2: View {
     
     var body: some View {
         VStack{
+//            Text(needsRefresh.description)
             GameSummary
             Form{
                 ForEach(Array(game.game.competitorArray), id: \.self){competitor in
-                    CompetitorRowItem_GameDetail(competitor: competitor)
+                    CompetitorRowItem_GameDetail(competitor: competitor, needsRefresh: $needsRefresh)
                     .swipeActions(edge: .trailing, allowsFullSwipe: false){
                         Button{
                             currentGF.swipedCompetitor = competitor
@@ -69,13 +71,14 @@ struct GameDetailScreen2: View {
                     }
                 }
             }
+           
         }
         
                 .sheet(isPresented: $isPresented, onDismiss: {
                     gameListVM.getAllGames()
                     
                 }, content: {
-                    ChangeCompetitorTeeBoxSheet(competitor: currentGF.swipedCompetitor, game: game)
+                    ChangeCompetitorTeeBoxSheet(competitor: currentGF.swipedCompetitor, game: game, isPresented: $isPresented, neeedsRefresh: $needsRefresh)
                         .presentationDetents([.fraction(0.4)])
                 })
         
