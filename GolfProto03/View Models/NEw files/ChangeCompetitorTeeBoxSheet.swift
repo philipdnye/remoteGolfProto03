@@ -16,37 +16,44 @@ struct ChangeCompetitorTeeBoxSheet: View {
     //@State private var newTeeBox: TeeBox = TeeBox()
     var body: some View {
         Form{
-            Text(game.name)
-            HStack{
-                Text(competitor.FirstName())
-                Text(competitor.LastName())
-            }
-            Text(game.clubName)
-            Text(game.courseName)
             
-            Picker("Select teebox", selection: $addGameVM.newTeeBox) {
-                ForEach(game.game.defaultTeeBox?.origin?.teeBoxArray ?? [], id: \.self){
-                    Text($0.wrappedColour)
-                        .tag($0)
+            
+            
+            Section{
+                Picker("Select teebox", selection: $addGameVM.newTeeBox) {
+                    ForEach(game.game.defaultTeeBox?.origin?.teeBoxArray ?? [], id: \.self){
+                        Text($0.wrappedColour)
+                            .tag($0)
+                    }
+                }
+                HStack{
+                    Spacer()
+                    Button("Confirm new teebox"){
+                        let manager = CoreDataManager.shared
+                        //                    let currentGame = manager.getGameById(id: game.id)
+                        let competitorId = competitor.objectID
+                        let currentCompetitor = manager.getCompetitorById(id: competitorId)
+                        currentCompetitor?.teeBox = addGameVM.newTeeBox
+                        //code here to update course handicap
+                        currentCompetitor?.courseHandicap = competitor.CourseHandicap()
+                        manager.save()
+                        isPresented = false
+                        neeedsRefresh.toggle()
+                    }
+                    Spacer()
                 }
             }
-            HStack{
-                Spacer()
-                Button("Save new teebox"){
-                    let manager = CoreDataManager.shared
-//                    let currentGame = manager.getGameById(id: game.id)
-                    let competitorId = competitor.objectID
-                    let currentCompetitor = manager.getCompetitorById(id: competitorId)
-                    currentCompetitor?.teeBox = addGameVM.newTeeBox
-                    //code here to update course handicap
-                    currentCompetitor?.courseHandicap = competitor.CourseHandicap()
-                    manager.save()
-                    isPresented = false
-                    neeedsRefresh.toggle()
-                }
-                Spacer()
-            }
-
+        header: {
+                 Text("Change teebox for \(competitor.FirstName().capitalized) \(competitor.LastName().capitalized)")
+//            HStack{
+//                Text(competitor.FirstName().capitalized)
+//                Text(competitor.LastName().capitalized)
+//            }
+                 }
+//        footer: {
+//
+//                     Text("Swipe right to change the players teebox")
+//                 }
         }
         .onAppear(perform:{
             addGameVM.newTeeBox = competitor.teeBox ?? TeeBox()

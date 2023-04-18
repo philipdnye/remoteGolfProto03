@@ -97,7 +97,7 @@ struct GameDetailScreen2: View {
                     
                 }, content: {
                     ChangeCompetitorTeeBoxSheet(competitor: currentGF.swipedCompetitor, game: game, isPresented: $isPresented, neeedsRefresh: $needsRefresh)
-                        .presentationDetents([.fraction(0.4)])
+                        .presentationDetents([.fraction(0.25)])
                 })
         
                 .sheet(isPresented: $isPresentedHcap, onDismiss: {
