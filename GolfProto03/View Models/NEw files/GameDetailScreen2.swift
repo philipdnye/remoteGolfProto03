@@ -16,25 +16,27 @@ struct GameDetailScreen2: View {
     @State private var isPresentedHcap: Bool = false
     @State private var needsRefresh: Bool = false
     
-    var GameSummary: some View {
-        VStack{
-            Group{
-                Text(game.name)
-                Text(game.defaultTeeBoxColour)
-                Text(game.clubName)
-                Text(game.courseName)
-                Text(game.handicapFormatName)
-                Text(game.scoreFormatName)
-                Text(game.succinctDescription)
-            }
-            Group {
-                Text(currentGF.description.description)
-                Text(currentGF.playFormat.stringValue())
-                Text(game.durationName)
-                Text(game.startingHole.formatted())
-            }
-        }
-    }
+//    var GameSummary: some View {
+//        VStack(alignment: .leading, spacing: 0){
+//            GameSummaryForDetailScreen(game: game)
+//            Group{
+//                Text(game.name)
+//                Text(game.defaultTeeBoxColour)
+//                Text(game.clubName)
+//                Text(game.courseName)
+//                Text(game.handicapFormatName)
+//                Text(game.scoreFormatName)
+//                Text(game.succinctDescription)
+//            }
+//            Group {
+//                Text(currentGF.description.description)
+//                Text(currentGF.playFormat.stringValue())
+//                Text(game.durationName)
+//                Text(game.startingHole.formatted())
+//                Text(game.startingHoleString)
+//            }
+//        }
+//    }
     func OnAppear() {
         gameListVM.getAllGames()
 
@@ -53,9 +55,9 @@ struct GameDetailScreen2: View {
     let game: GameViewModel
     
     var body: some View {
-        VStack{
+        VStack(alignment: .leading, spacing: 0){
 //            Text(needsRefresh.description)
-            GameSummary
+            GameSummaryForDetailScreen(game: game)
             Form{
                 Section {
                 ForEach(Array(game.game.competitorArray), id: \.self){competitor in

@@ -137,6 +137,22 @@ struct GameViewModel: Hashable {
         return game.startingHole
     }
     
+    var startingHoleString: String {
+        switch self.startingHole{
+        
+        case 2:
+            return "2nd"
+        case 3:
+            return "3rd"
+        case _ where self.startingHole > 3 || self.startingHole < 19:
+            return "\(self.startingHole)th"
+
+        default:
+            return "1st"
+        }
+    }
+    
+    
 //    var club: Club {
 //        return game.club ?? Club(context: CoreDataManager.shared.persistentContainer.viewContext)
 //        
@@ -169,6 +185,8 @@ struct GameViewModel: Hashable {
     var handicapFormatName: String {
         game.hcap_format.stringValue()
     }
+    
+    
     var succinctDescription: String {
         return game.game_format.Succint_Description()
     }
