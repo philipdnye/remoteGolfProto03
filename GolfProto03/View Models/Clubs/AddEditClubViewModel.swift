@@ -16,9 +16,11 @@ class AddEditClubViewModel: ObservableObject {
     var addressLine3: String = ""
     var addressLine4: String = ""
     var postCode: String = ""
-    var distMetric: String = ""
+//    var distMetric: Int = 0
     var eMail: String = ""
     var clubImage: UIImage = UIImage()
+    
+    @Published var pickerDistMetric: Int = 0
     
     func save() {
         
@@ -61,7 +63,7 @@ class AddEditClubViewModel: ObservableObject {
         club.addressLine3 = addressLine3
         club.addressLine4 = addressLine4
         club.postCode = postCode
-        club.distMetric = distMetric
+        club.distMetric = Int16(pickerDistMetric)
         club.email = eMail
         club.clubImage = clubImage
         course.origin = club

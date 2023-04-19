@@ -36,9 +36,11 @@ struct EditClubScreen: View {
         if !club.postCode.isEmpty {
             self.editClubVM.postCode = club.postCode
         }
-        if !club.distMetric.isEmpty {
-            self.editClubVM.distMetric = club.distMetric
-        }
+//        if !club.distMetric.isEmpty {
+//            self.editClubVM.distMetric = club.distMetric
+//        }
+        self.editClubVM.pickerDistMetric = Int(club.distMetric)
+        
         if !club.postCode.isEmpty {
             self.editClubVM.eMail = club.eMail
         }
@@ -57,7 +59,16 @@ struct EditClubScreen: View {
             TextField("Address line 3", text: $editClubVM.addressLine3)
             TextField("Address line 4", text: $editClubVM.addressLine4)
             TextField("Postcode", text: $editClubVM.postCode)
-            TextField("distMetric", text: $editClubVM.distMetric)
+           Picker("Distance metric",selection: $editClubVM.pickerDistMetric){
+               ForEach(DistMetric.allCases, id: \.self){
+                   Text($0.stringValue())
+                       .tag($0.rawValue)
+                   
+               }
+           }
+           
+           
+           //TextField("distMetric", text: $editClubVM.distMetric) NEEDS to be a picker
             TextField("email", text: $editClubVM.eMail)
             
             HStack {
@@ -114,7 +125,8 @@ struct EditClubScreen: View {
                    club?.addressLine3 = editClubVM.addressLine3
                    club?.addressLine4 = editClubVM.addressLine4
                    club?.postCode = editClubVM.postCode
-                   club?.distMetric = editClubVM.distMetric
+                   //club?.distMetric = editClubVM.distMetric
+                   club?.distMetric = Int16(editClubVM.pickerDistMetric)
                    club?.email = editClubVM.eMail
                    club?.clubImage = self.image
                    

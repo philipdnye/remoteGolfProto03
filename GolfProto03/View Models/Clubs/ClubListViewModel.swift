@@ -105,8 +105,8 @@ struct ClubViewModel: Hashable{
         return club.email ?? ""
     }
     
-    var distMetric: String {
-        return club.distMetric ?? ""
+    var distMetric: Int16 {
+        return club.distMetric
     }
     
     var clubImage: UIImage {

@@ -67,7 +67,7 @@ struct GameListRowItem: View {
                                 
                             HStack(spacing: 0){
                                 Text(String(game.defaultTeeBox.TotalDistance()))
-                                Text(game.game.defaultTeeBox?.origin?.origin?.distMetric ?? "")
+                               // Text(game.game.defaultTeeBox?.origin?.origin?.distMetric ?? "")
                             }
                             
                             

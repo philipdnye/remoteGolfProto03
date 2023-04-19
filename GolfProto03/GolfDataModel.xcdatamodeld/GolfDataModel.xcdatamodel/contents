@@ -6,7 +6,7 @@
         <attribute name="addressLine3" optional="YES" attributeType="String"/>
         <attribute name="addressLine4" optional="YES" attributeType="String"/>
         <attribute name="clubImage" optional="YES" attributeType="Transformable" valueTransformerName="UIImageTransformer" customClassName="UIImage"/>
-        <attribute name="distMetric" optional="YES" attributeType="String"/>
+        <attribute name="distMetric" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="email" optional="YES" attributeType="String"/>
         <attribute name="name" attributeType="String" defaultValueString="New club"/>
         <attribute name="postCode" optional="YES" attributeType="String"/>

@@ -32,9 +32,8 @@ struct TeeBoxListRowItem: View {
             Group{
                 VStack{
                     HStack{
-                        Text("\(teeBox.totalDistance.formatted()) yards")
-                        Text("\(teeBox.totalDistanceFront9.formatted()) yards")
-                        Text("\(teeBox.totalDistanceBack9.formatted()) yards")
+                        TeeBoxDistancesSubScreen(teeBox: teeBox)
+                       
                     }
                     HStack{
                         Text("Par \(teeBox.totalPar.formatted())")

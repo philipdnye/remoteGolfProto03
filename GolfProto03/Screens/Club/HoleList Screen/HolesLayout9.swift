@@ -13,11 +13,12 @@ struct HolesLayout9: View {
     let teeBox: TeeBoxViewModel //is this needed? - yes for the teeBox call and to accept from parent
     let holes: [Hole]
     var body: some View {
+        let DMI = teeBox.teeBox.origin?.origin?.dist_metric.stringValue().capitalizingFirstLetter() ?? ""
         VStack{
             HStack(spacing: 6){
                 Text("Hole")
                     .frame(width: 36, alignment: .center)
-                Text("Yards")
+                Text(DMI)
                     .frame(width: 50, alignment: .center)
                 Text("Par")
                     .frame(width: 30, alignment: .center)

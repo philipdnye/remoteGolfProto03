@@ -42,7 +42,28 @@ enum GameDuration: Int, CaseIterable {
     }
 }
 
-
+enum DistMetric: Int, CaseIterable {
+    case yards = 0
+    case metres = 1
+    
+    func stringValue() -> String{
+        switch(self){
+        case .yards:
+            return "yards"
+        case .metres:
+            return "metres"
+        }
+    }
+    func stringValueInitial() -> String{
+        switch(self){
+        case .yards:
+            return "y"
+        case .metres:
+            return "m"
+        }
+    }
+    
+}
 
 
 enum ScoreFormat: Int, CaseIterable {

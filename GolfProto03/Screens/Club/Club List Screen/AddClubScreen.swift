@@ -35,7 +35,18 @@ struct AddClubScreen: View {
                 TextField("Enter address line 3", text: $addClubVM.addressLine3)
                 TextField("Enter address line 4", text: $addClubVM.addressLine4)
                 TextField("Enter postcode", text: $addClubVM.postCode)
-                TextField("Enter distance metric", text: $addClubVM.distMetric)
+            
+            Picker("Distance metric",selection: $addClubVM.pickerDistMetric){
+                ForEach(DistMetric.allCases, id: \.self){
+                    Text($0.stringValue())
+                        .tag($0.rawValue)
+                    
+                }
+            }
+            
+            
+            
+                //TextField("Enter distance metric", text: $addClubVM.distMetric)
                 TextField("Enter email address", text: $addClubVM.eMail)
        
             HStack {

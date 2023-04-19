@@ -17,10 +17,10 @@ class EditClubViewModel: ObservableObject {
     var addressLine3: String = ""
     var addressLine4: String = ""
     var postCode: String = ""
-    var distMetric: String = ""
+    //var distMetric: Int16 = 0
     var eMail: String = ""
     var clubImage: UIImage = UIImage()
-    
+    @Published var pickerDistMetric: Int = 0
 
     
 }

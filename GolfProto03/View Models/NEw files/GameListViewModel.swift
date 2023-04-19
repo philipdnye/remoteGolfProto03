@@ -144,7 +144,7 @@ struct GameViewModel: Hashable {
             return "2nd"
         case 3:
             return "3rd"
-        case _ where self.startingHole > 3 || self.startingHole < 19:
+        case _ where self.startingHole > 3 || self.startingHole < 19 && self.startingHole > 3:
             return "\(self.startingHole)th"
 
         default:

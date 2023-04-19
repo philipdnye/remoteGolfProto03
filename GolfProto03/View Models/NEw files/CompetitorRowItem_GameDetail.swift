@@ -13,19 +13,39 @@ struct CompetitorRowItem_GameDetail: View {
     @Binding var needsRefresh: Bool
     var body: some View {
         HStack{
-            Text(competitor.FirstName())
-            Text(competitor.LastName())
-            //Text(competitor.TeeBoxColour())
-            Text(competitor.handicapIndex.formatted())
-            Text(round(competitor.courseHandicap).formatted())
-            Text(needsRefresh.description)
+            Text(needsRefresh.description)// this refreshes screen when ttebox changed on pop up sheet
                 .frame(width:0, height:0)
                 .opacity(0)
+            
+            
+            Group{
+                Text(competitor.FirstName())
+                Text(competitor.LastName())
+            }
+            .foregroundColor(darkTeal)
+            .font(.title2)
+            //Text(competitor.TeeBoxColour())
+            Spacer()
         
-           
+                Text("(\(competitor.handicapIndex.formatted()))")
+                .foregroundColor(burntOrange)
+                .font(.title3)
+            
+            Spacer()
+                 .frame(width: 5)
+            
+                Text(round(competitor.courseHandicap).formatted())
+                .frame(width: 30, alignment: .trailing)
+                .foregroundColor(darkTeal)
+                .font(.title3)
+                .fontWeight(.semibold)
+                
+        
+           Spacer()
+                .frame(width: 5)
             HStack{
                 
-            }.frame(width:20, height:20)
+            }.frame(width:25, height:25)
                 .background(Color(competitor.teeBox?.teeBoxColor ?? UIColor(.clear)))
                 .border(.black.opacity(0.2))
         }

@@ -21,7 +21,7 @@ extension Club {
     @NSManaged public var addressLine3: String?
     @NSManaged public var addressLine4: String?
     @NSManaged public var clubImage: UIImage?
-    @NSManaged public var distMetric: String?
+    @NSManaged public var distMetric: Int16
     @NSManaged public var email: String?
     @NSManaged public var name: String?
     @NSManaged public var postCode: String?
@@ -51,9 +51,8 @@ extension Club {
         postCode ?? "Unkown post code"
     }
     
-    public var wrappedDistMetric: String {
-        distMetric ?? "Unkown dist metric"
-    }
+    
+    
     public var wrappedEmail: String {
         email ?? "Unkown email"
     }
