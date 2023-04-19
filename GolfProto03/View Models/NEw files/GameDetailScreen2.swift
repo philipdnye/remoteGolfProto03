@@ -52,6 +52,19 @@ struct GameDetailScreen2: View {
         
         isPresentedHcap.toggle()
     }
+    private func UpdateCompetitorTeam(competitor: Competitor, value: Int16) {
+        let manager = CoreDataManager.shared
+        let competitorId = competitor.objectID
+        let currentCompetitor = manager.getCompetitorById(id: competitorId)
+        currentCompetitor?.team = value
+        manager.save()
+        needsRefresh.toggle()
+        gameListVM.getAllGames()
+        gameListVM.getAllCompetitors()
+    }
+    
+    
+    
     let game: GameViewModel
     
     var body: some View {
@@ -71,6 +84,7 @@ struct GameDetailScreen2: View {
                             }
                             .tint(.mint)
                         }
+                    
                         .swipeActions(edge: .trailing, allowsFullSwipe: false){
                             Button{
                                 currentGF.swipedCompetitor = competitor
@@ -81,14 +95,46 @@ struct GameDetailScreen2: View {
                             .tint(darkTeal)
                         }
                     
+                    
+                        .swipeActions(edge: .leading,allowsFullSwipe: false) {
+                            Button {
+                                UpdateCompetitorTeam(competitor: competitor, value: 1)
+                                    print(game.game.competitorArray.filter{$0.team == 1}.count)
+                            } label: {
+                                Label("Mute",systemImage: "a.circle")
+                            }
+                            .tint(.gray)
+                           
+                            .disabled(competitor.team == TeamAssignment.teamA.rawValue || currentGF.assignTeamGrouping != Assignment.TeamsAB || game.game.competitorArray.filter{$0.team == 1}.count > 2 || game.gameStarted)
+                            
+                        }
+                        .swipeActions(edge: .leading,allowsFullSwipe: false) {
+                            Button {
+                                UpdateCompetitorTeam(competitor: competitor, value: 2)
+                                    print(game.game.competitorArray.filter{$0.team == 2}.count)
+                            } label: {
+                                Label("Mute",systemImage: "b.circle")
+                            }
+                            .tint(.blue)
+                           
+                            .disabled(competitor.team == TeamAssignment.teamB.rawValue || currentGF.assignTeamGrouping != Assignment.TeamsAB || game.game.competitorArray.filter{$0.team == 2}.count > 2 || game.gameStarted)
+                            
+                        }
+                    
+                    
+                    
+                    
+                    
                 }
             } //section
             header: {
                          
                          Text("Players in this game")
                      } footer: {
-                         
-                         Text("Swipe right to change the players teebox")
+                         VStack{
+                             Text("Swipe LEFT to change the players teebox")
+                             Text("Swipe RIGHT to assign TEAMS")
+                         }
                      }
             }
            

@@ -28,13 +28,13 @@ struct CompetitorRowItem_GameDetail: View {
             
             
             .foregroundColor(darkTeal)
-            .font(.title2)
+            .font(.title3)
             //Text(competitor.TeeBoxColour())
             Spacer()
         
                 Text("(\(competitor.handicapIndex.formatted()))")
                 .foregroundColor(burntOrange)
-                .font(.title3)
+                .font(.headline)
             
             Spacer()
                  .frame(width: 5)
@@ -50,7 +50,7 @@ struct CompetitorRowItem_GameDetail: View {
                 .frame(width: 5)
             HStack{
                 
-            }.frame(width:25, height:25)
+            }.frame(width:30, height:30)
                 .background(Color(competitor.teeBox?.teeBoxColor ?? UIColor(.clear)))
                 .border(.black.opacity(0.2))
         }

@@ -30,7 +30,7 @@ struct ChangeCompetitorTeeBoxSheet: View {
                     Spacer()
                     Button("Confirm new teebox"){
                         let manager = CoreDataManager.shared
-                        //                    let currentGame = manager.getGameById(id: game.id)
+                       
                         let competitorId = competitor.objectID
                         let currentCompetitor = manager.getCompetitorById(id: competitorId)
                         currentCompetitor?.teeBox = addGameVM.newTeeBox
