@@ -46,3 +46,12 @@ extension Competitor {
         return SR
     }
 }
+extension Competitor {
+    var team_String: TeamAssignment {
+        get{
+            return TeamAssignment(rawValue: Int(self.team)) ?? .indiv
+        } set {
+            self.team = Int16(newValue.rawValue)
+        }
+    }
+}

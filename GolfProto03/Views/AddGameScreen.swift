@@ -20,6 +20,52 @@ struct AddGameScreen: View {
     @EnvironmentObject var currentGF: CurrentGameFormat
     @FocusState private var AddGameViewInFocus: AddGameViewFocusable?
  
+    
+    func AssignCompetitorTeams(game: Game) {
+        switch currentGF.assignTeamGrouping {
+        case .Indiv:
+            for i in 0..<(game.competitorArray.count) {
+                game.competitorArray[i].team = Int16(TeamAssignment.indiv.rawValue)
+            }
+        case .TeamsAB:
+            switch currentGF.noOfPlayersNeeded {
+            case 4:
+                for i in 0..<(game.competitorArray.count) {
+                    switch i {
+                    case 0:
+                        game.competitorArray[i].team = Int16(TeamAssignment.teamA.rawValue)
+                    case 1:
+                        game.competitorArray[i].team = Int16(TeamAssignment.teamA.rawValue)
+                    case 2:
+                        game.competitorArray[i].team = Int16(TeamAssignment.teamB.rawValue)
+                    case 3:
+                        game.competitorArray[i].team = Int16(TeamAssignment.teamB.rawValue)
+                    default:
+                        game.competitorArray[i].team = Int16(TeamAssignment.indiv.rawValue)
+                    }
+                }
+            case 2:
+                for i in 0..<(game.competitorArray.count)    {
+                    switch i {
+                    case 0:
+                        game.competitorArray[i].team = Int16(TeamAssignment.teamA.rawValue)
+                    case 1:
+                        game.competitorArray[i].team = Int16(TeamAssignment.teamB.rawValue)
+                    default:
+                        game.competitorArray[i].team = Int16(TeamAssignment.indiv.rawValue)
+                    }
+                }
+            default:
+                game.competitorArray[0].team = Int16(TeamAssignment.indiv.rawValue)
+            }
+        case .TeamC:
+            for i in 0..<(game.competitorArray.count) {
+                game.competitorArray[i].team = Int16(TeamAssignment.teamC.rawValue)
+            }
+        }
+    }
+    
+    
    private func createGame () {
 
        let manager = CoreDataManager.shared
@@ -48,7 +94,14 @@ struct AddGameScreen: View {
        manager.save()
 
        gameListVM.updateCurrentGameFormat(currentGF: currentGF, game: game)
-        presentationMode.wrappedValue.dismiss()
+       
+       
+       //code here to assign competitor teams
+       
+       AssignCompetitorTeams(game: game)
+       
+       manager.save()
+       presentationMode.wrappedValue.dismiss()
     }
     
 

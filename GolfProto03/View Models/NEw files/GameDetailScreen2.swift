@@ -62,7 +62,7 @@ struct GameDetailScreen2: View {
                 Section {
                 ForEach(Array(game.game.competitorArray), id: \.self){competitor in
                     CompetitorRowItem_GameDetail(competitor: competitor, needsRefresh: $needsRefresh)
-                        .swipeActions(edge: .leading, allowsFullSwipe: false){
+                        .swipeActions(edge: .trailing, allowsFullSwipe: false){
                             Button{
                                 currentGF.swipedCompetitor = competitor
                                 onAdd()
@@ -71,7 +71,7 @@ struct GameDetailScreen2: View {
                             }
                             .tint(.mint)
                         }
-                        .swipeActions(edge: .leading, allowsFullSwipe: false){
+                        .swipeActions(edge: .trailing, allowsFullSwipe: false){
                             Button{
                                 currentGF.swipedCompetitor = competitor
                                onAddHcap()

@@ -21,7 +21,12 @@ struct CompetitorRowItem_GameDetail: View {
             Group{
                 Text(competitor.FirstName())
                 Text(competitor.LastName())
+                Spacer()
+                    .frame(width: 5)
+                Text(competitor.team_String.stringValueInitial())
             }
+            
+            
             .foregroundColor(darkTeal)
             .font(.title2)
             //Text(competitor.TeeBoxColour())

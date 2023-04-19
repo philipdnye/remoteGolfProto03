@@ -112,6 +112,39 @@ enum PlayFormat: Int, CaseIterable, Codable {
     }
 }
 
+enum TeamAssignment: Int, CaseIterable {
+    case indiv = 0
+    case teamA = 1
+    case teamB = 2
+    case teamC = 3
+    func stringValue() -> String {
+        switch(self){
+        case.indiv:
+            return "Individual"
+        case.teamA:
+            return "Team A"
+        case .teamB:
+            return "Team B"
+        case .teamC:
+            return "Team C"
+        }
+    }
+    
+    func stringValueInitial() -> String {
+        switch(self){
+        case.indiv:
+            return "I"
+        case.teamA:
+            return "A"
+        case .teamB:
+            return "B"
+        case .teamC:
+            return "C"
+        }
+    }
+}
+
+
 enum Assignment: String , Codable, Equatable {
     case Indiv = "Individual"
     case TeamsAB = "Teams A and B"
