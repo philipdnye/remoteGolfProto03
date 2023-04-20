@@ -48,7 +48,7 @@ class AddGameViewModel: ObservableObject {
     
     @Published var newTeeBox: TeeBox = TeeBox()
 
-    func AssignCompetitorTeams(game: Game) {
+    func AssignCompetitorTeams(game: Game, currentGF: CurrentGameFormat) {
         switch currentGF.assignTeamGrouping {
         case .Indiv:
             for i in 0..<(game.competitorArray.count) {
@@ -92,7 +92,7 @@ class AddGameViewModel: ObservableObject {
         }
     }
     
-    func AssignPlayingHandicaps (game: Game) {
+    func AssignPlayingHandicaps (game: Game, currentGF: CurrentGameFormat) {
         switch currentGF.competitorSort {
         case .TeamsAB:
             
@@ -142,14 +142,95 @@ class AddGameViewModel: ObservableObject {
                 sortedCompetitors[i].handicapAllowance = currentGF.playerHandAllowances[i]
             }
         }
-        // NOW ASSIGN THE PLAYING HANDICAP
+        // NOW ASSIGN THE PLAYING HANDICAP - need to round the course handicap as is an exact double
         for i in 0..<game.competitorArray.count {
-            game.competitorArray[i].playingHandicap = game.competitorArray[i].courseHandicap * game.competitorArray[i].handicapAllowance
+            game.competitorArray[i].playingHandicap = round(game.competitorArray[i].courseHandicap) * game.competitorArray[i].handicapAllowance
         }
     }
     
+    func AssignTeamPlayingHandicap(game: Game, currentGF: CurrentGameFormat) {
+        var totalPlayingHandicap: Double = 0
+        switch currentGF.assignShotsRecd {
+            
+        case .Indiv:
+            //        No change. Each individual gets their playing handicap
+            totalPlayingHandicap = 0
+            game.teamAPlayingHandicap = 0
+            game.teamBPlayingHandicap = 0
+            game.teamCPlayingHandicap = 0
+        case .TeamsAB:
+            for PH in game.competitorArray.filter({$0.team == 1}) {
+                totalPlayingHandicap += round(PH.playingHandicap*1000)/1000
+            }
+            game.teamAPlayingHandicap = totalPlayingHandicap
+            totalPlayingHandicap = 0
+            
+            for PH in game.competitorArray.filter({$0.team == 2}) {
+                totalPlayingHandicap += round(PH.playingHandicap*1000)/1000
+            }
+            game.teamBPlayingHandicap = totalPlayingHandicap
+            totalPlayingHandicap = 0
+            
+        case .TeamC:
+            for PH in game.competitorArray.filter({$0.team == 3}) {
+                totalPlayingHandicap += round(PH.playingHandicap*1000)/1000
+            }
+            game.teamCPlayingHandicap = totalPlayingHandicap
+            game.teamAPlayingHandicap = totalPlayingHandicap
+            game.teamBPlayingHandicap = totalPlayingHandicap
+            totalPlayingHandicap = 0
+        }
+    }
     
-    
+    func AssignShotsReceived (game: Game, currentGF: CurrentGameFormat) {
+        switch currentGF.assignShotsRecd {
+        case .Indiv:
+            var competitorsTotalPH: [Double] = Array(repeating: 0.0, count: game.competitorArray.count)
+            for i in 0..<game.competitorArray.count {
+                competitorsTotalPH[i] = game.competitorArray[i].playingHandicap
+            }
+            let lowPH = competitorsTotalPH.min() ?? 0
+            
+            for i in 0..<game.competitorArray.count {
+                game.competitorArray[i].shotsRecdMatch = game.competitorArray[i].playingHandicap - lowPH
+            }
+            
+            game.teamAShotsReceived = 0
+            game.teamBShotsReceived = 0
+            
+            
+        case .TeamsAB:
+            switch currentGF.playFormat {
+            case .matchplay:
+                //handicap totals for the teams must be rounded prior to working out difference in shots
+                let A = round(game.teamAPlayingHandicap)
+                let B = round(game.teamBPlayingHandicap)
+                let lowTeamHandicap = min(A,B)
+                let ASR = A - lowTeamHandicap
+                let BSR = B - lowTeamHandicap
+                
+                game.teamAShotsReceived = ASR
+                game.teamBShotsReceived = BSR
+                
+            case .strokeplay:
+                switch currentGF.noOfPlayersNeeded{
+                case 2:
+                    game.teamAShotsReceived = round(game.teamAPlayingHandicap+game.teamBPlayingHandicap)
+                
+                default:
+                    game.teamAShotsReceived = 0
+                    game.teamBShotsReceived = 0
+                }
+                
+                
+          
+            }
+            
+        case .TeamC:
+            game.teamAShotsReceived = 0
+            game.teamBShotsReceived = 0
+        }
+    }
     
 }
 

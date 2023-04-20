@@ -152,12 +152,13 @@ struct AddGameScreen: View {
        
        //code here to assign competitor teams
        
-       addGameVM.AssignCompetitorTeams(game: game)
-       addGameVM.AssignPlayingHandicaps (game: game)
-      
-       
+       addGameVM.AssignCompetitorTeams(game: game, currentGF: currentGF)
+       addGameVM.AssignPlayingHandicaps (game: game, currentGF: currentGF)
+       addGameVM.AssignTeamPlayingHandicap(game: game, currentGF: currentGF)
+       addGameVM.AssignShotsReceived(game: game, currentGF: currentGF)
        manager.save()
        presentationMode.wrappedValue.dismiss()
+       
     }
     
 

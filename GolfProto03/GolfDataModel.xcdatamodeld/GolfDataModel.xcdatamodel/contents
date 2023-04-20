@@ -17,6 +17,7 @@
         <attribute name="handicapAllowance" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="handicapIndex" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="playingHandicap" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="shotsRecdMatch" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="team" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="game" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Game" inverseName="competitors" inverseEntity="Game"/>
         <relationship name="player" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Player" inverseName="competitors" inverseEntity="Player"/>
@@ -40,6 +41,12 @@
         <attribute name="started" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="startingHole" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="startTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="teamAPlayingHandicap" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="teamAShotsReceived" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="teamBPlayingHandicap" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="teamBShotsReceived" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="teamCPlayingHandicap" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="teamCShotsReceived" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="competitors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Competitor" inverseName="game" inverseEntity="Competitor"/>
         <relationship name="defaultTeeBox" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TeeBox" inverseName="game" inverseEntity="TeeBox"/>
     </entity>

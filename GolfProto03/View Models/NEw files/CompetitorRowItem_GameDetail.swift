@@ -25,7 +25,12 @@ struct CompetitorRowItem_GameDetail: View {
                 Text(competitor.LastName())
                 Spacer()
                     .frame(width: 5)
-                Text(competitor.handicapAllowance.formatted())
+                Text("(\(competitor.handicapAllowance.formatted()))")
+                    .font(.caption2)
+                Text(String(format: "%.2f", competitor.playingHandicap))
+                    .font(.caption2)
+                    .frame(width:30)
+                
                 
             }
             

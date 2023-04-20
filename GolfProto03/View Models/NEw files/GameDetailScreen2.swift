@@ -16,27 +16,7 @@ struct GameDetailScreen2: View {
     @State private var isPresentedHcap: Bool = false
     @State private var needsRefresh: Bool = false
     
-//    var GameSummary: some View {
-//        VStack(alignment: .leading, spacing: 0){
-//            GameSummaryForDetailScreen(game: game)
-//            Group{
-//                Text(game.name)
-//                Text(game.defaultTeeBoxColour)
-//                Text(game.clubName)
-//                Text(game.courseName)
-//                Text(game.handicapFormatName)
-//                Text(game.scoreFormatName)
-//                Text(game.succinctDescription)
-//            }
-//            Group {
-//                Text(currentGF.description.description)
-//                Text(currentGF.playFormat.stringValue())
-//                Text(game.durationName)
-//                Text(game.startingHole.formatted())
-//                Text(game.startingHoleString)
-//            }
-//        }
-//    }
+
     func OnAppear() {
         gameListVM.getAllGames()
 
@@ -71,9 +51,25 @@ struct GameDetailScreen2: View {
         VStack(alignment: .leading, spacing: 0){
 //            Text(needsRefresh.description)
             GameSummaryForDetailScreen(game: game)
+            HStack{
+                VStack{
+                    Text("Team A: \(game.game.teamAPlayingHandicap.formatted())")
+                    Text("Team B: \(game.game.teamBPlayingHandicap.formatted())")
+                    Text("Team C: \(game.game.teamCPlayingHandicap.formatted())")
+                }
+                VStack{
+                    Text("Team A: \(game.game.teamAShotsReceived.formatted())")
+                    Text("Team B: \(game.game.teamBShotsReceived.formatted())")
+                    Text("Team C: \(game.game.teamCShotsReceived.formatted())")
+                }
+            }
             Form{
                 Section {
-                ForEach(Array(game.game.competitorArray), id: \.self){competitor in
+              
+                    ForEach(Array(game.game.competitorArray.sorted(by:
+                                                                    {$0.team < $1.team}
+                                                                   
+                                                                  )), id: \.self){competitor in
                     CompetitorRowItem_GameDetail(competitor: competitor, needsRefresh: $needsRefresh)
                         .swipeActions(edge: .trailing, allowsFullSwipe: false){
                             Button{
