@@ -14,6 +14,7 @@
     </entity>
     <entity name="Competitor" representedClassName="Competitor" syncable="YES" codeGenerationType="class">
         <attribute name="courseHandicap" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="handicapAllowance" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="handicapIndex" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="playingHandicap" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="team" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>

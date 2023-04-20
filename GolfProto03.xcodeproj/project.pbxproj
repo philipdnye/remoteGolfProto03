@@ -69,6 +69,7 @@
 		D4600C3C29EF0A5C007AABF4 /* GameSummaryForDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4600C3B29EF0A5C007AABF4 /* GameSummaryForDetailScreen.swift */; };
 		D4600C3E29EFD26E007AABF4 /* TeeBoxDistancesSubScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4600C3D29EFD26E007AABF4 /* TeeBoxDistancesSubScreen.swift */; };
 		D4600C4029EFD37B007AABF4 /* Extensions_String.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4600C3F29EFD37B007AABF4 /* Extensions_String.swift */; };
+		D4600C4229F12440007AABF4 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4600C4129F12440007AABF4 /* File.swift */; };
 		D46A73DB29EB213100327818 /* Player+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46A73D929EB213100327818 /* Player+CoreDataClass.swift */; };
 		D46A73DC29EB213100327818 /* Player+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46A73DA29EB213100327818 /* Player+CoreDataProperties.swift */; };
 		D46A73E029EB55AD00327818 /* AddGamePlayerRowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46A73DF29EB55AD00327818 /* AddGamePlayerRowItem.swift */; };
@@ -152,6 +153,7 @@
 		D4600C3B29EF0A5C007AABF4 /* GameSummaryForDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSummaryForDetailScreen.swift; sourceTree = "<group>"; };
 		D4600C3D29EFD26E007AABF4 /* TeeBoxDistancesSubScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeeBoxDistancesSubScreen.swift; sourceTree = "<group>"; };
 		D4600C3F29EFD37B007AABF4 /* Extensions_String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions_String.swift; sourceTree = "<group>"; };
+		D4600C4129F12440007AABF4 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = File.swift; path = GolfProto03/Extensions/File.swift; sourceTree = SOURCE_ROOT; };
 		D46A73D929EB213100327818 /* Player+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		D46A73DA29EB213100327818 /* Player+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		D46A73DF29EB55AD00327818 /* AddGamePlayerRowItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGamePlayerRowItem.swift; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 				D46A73DA29EB213100327818 /* Player+CoreDataProperties.swift */,
 				D4232EAE29E9BC8100E73190 /* Game+CoreDataClass.swift */,
 				D4232EAF29E9BC8100E73190 /* Game+CoreDataProperties.swift */,
+				D4600C4129F12440007AABF4 /* File.swift */,
 				D4232EA029E9A08500E73190 /* TeeBox+CoreDataClass.swift */,
 				D4232EA129E9A08500E73190 /* TeeBox+CoreDataProperties.swift */,
 				D49CC8A129E97CB700388CB1 /* Course+CoreDataClass.swift */,
@@ -521,6 +524,7 @@
 				D4600C3A29EEED31007AABF4 /* CourseHandicapCalcScreen.swift in Sources */,
 				D4600C3829EED043007AABF4 /* Extensions_TeeBox.swift in Sources */,
 				D41D4E5329CEF5AB001ACF68 /* CourseListScreen.swift in Sources */,
+				D4600C4229F12440007AABF4 /* File.swift in Sources */,
 				D41D4E5829CEF5AB001ACF68 /* TeeBoxListScreen.swift in Sources */,
 				D4232EB129E9BC8100E73190 /* Game+CoreDataProperties.swift in Sources */,
 				D4600C4029EFD37B007AABF4 /* Extensions_String.swift in Sources */,
