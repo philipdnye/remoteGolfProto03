@@ -110,7 +110,7 @@ struct GameDetailScreen2: View {
                                 
                                 print(game.game.competitorArray.filter{$0.team == 1}.count)
                             } label: {
-                                Label("Mute",systemImage: "a.circle")
+                                Label("Swap team",systemImage: "a.circle")
                             }
                             .tint(.gray)
                            
@@ -133,7 +133,7 @@ struct GameDetailScreen2: View {
                                 
                                     print(game.game.competitorArray.filter{$0.team == 2}.count)
                             } label: {
-                                Label("Mute",systemImage: "b.circle")
+                                Label("Swap team",systemImage: "b.circle")
                             }
                             .tint(.blue)
                            

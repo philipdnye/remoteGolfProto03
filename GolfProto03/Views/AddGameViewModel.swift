@@ -142,10 +142,27 @@ class AddGameViewModel: ObservableObject {
                 sortedCompetitors[i].handicapAllowance = currentGF.playerHandAllowances[i]
             }
         }
-        // NOW ASSIGN THE PLAYING HANDICAP - need to round the course handicap as is an exact double
-        for i in 0..<game.competitorArray.count {
-            game.competitorArray[i].playingHandicap = round(game.competitorArray[i].courseHandicap) * game.competitorArray[i].handicapAllowance
+        // NOW ASSIGN THE PLAYING HANDICAP - need to round the course handicap as is an exact double. ALSO NEED A switch statement, based on game format to determine if playing handicap is exact or rounded.
+        switch currentGF.assignShotsRecd {
+        case .Indiv:
+            for i in 0..<game.competitorArray.count {
+                game.competitorArray[i].playingHandicap = round(round(game.competitorArray[i].courseHandicap) * game.competitorArray[i].handicapAllowance)
+            }
+        case .TeamsAB:
+            for i in 0..<game.competitorArray.count {
+                game.competitorArray[i].playingHandicap = round(game.competitorArray[i].courseHandicap) * game.competitorArray[i].handicapAllowance
+            }
+        case .TeamC:
+            for i in 0..<game.competitorArray.count {
+                game.competitorArray[i].playingHandicap = round(game.competitorArray[i].courseHandicap) * game.competitorArray[i].handicapAllowance
+            }
         }
+        
+        
+        
+//        for i in 0..<game.competitorArray.count {
+//            game.competitorArray[i].playingHandicap = round(game.competitorArray[i].courseHandicap) * game.competitorArray[i].handicapAllowance
+//        }
     }
     
     func AssignTeamPlayingHandicap(game: Game, currentGF: CurrentGameFormat) {
@@ -181,6 +198,10 @@ class AddGameViewModel: ObservableObject {
             totalPlayingHandicap = 0
         }
     }
+    
+    
+    
+    
     
     func AssignShotsReceived (game: Game, currentGF: CurrentGameFormat) {
         switch currentGF.assignShotsRecd {

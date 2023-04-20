@@ -20,17 +20,22 @@ struct CompetitorRowItem_GameDetail: View {
             
             Group{
                 Text(competitor.FirstName())
+                    .frame(height: 70)
                 Spacer()
                     .frame(width: 5)
                 Text(competitor.LastName())
                 Spacer()
                     .frame(width: 5)
-                Text("(\(competitor.handicapAllowance.formatted()))")
-                    .font(.caption2)
-                Text(String(format: "%.2f", competitor.playingHandicap))
-                    .font(.caption2)
-                    .frame(width:30)
-                
+                VStack{
+                    Text("(\(competitor.handicapAllowance.formatted()))")
+                        .font(.caption2)
+                    Text(String(format: "%.2f", competitor.playingHandicap))
+                        .font(.caption2)
+                        .frame(width:35)
+                    Text(String(format: "%.2f", competitor.shotsRecdMatch))
+                        .font(.caption2)
+                        .frame(width:35)
+                }
                 
             }
             
