@@ -11,12 +11,18 @@ struct GameDetailScreen2: View {
     @StateObject private var addGameVM = AddGameViewModel()
     @StateObject private var gameListVM = GameListViewModel()
     @EnvironmentObject var currentGF: CurrentGameFormat
+    @Environment(\.presentationMode) var presentationMode
     
     @State private var isPresented: Bool = false
     @State private var isPresentedHcap: Bool = false
     @State private var needsRefresh: Bool = false
     
-
+    @State private var isShowingDialogueTrash:Bool = false
+    @State private var isShowingDialogueScoreEntry:Bool = false
+    @State private var showingSheetScorecard: Bool = false
+    @State private var gotoScoreEntry: Bool = false
+    @State private var showingSheetHandicapCalc: Bool = false
+   
     func OnAppear() {
         gameListVM.getAllGames()
 
@@ -43,6 +49,67 @@ struct GameDetailScreen2: View {
         gameListVM.getAllCompetitors()
     }
     
+    private var scoreEntryButton: some View {
+        AnyView(Button(action: showScoreEntry){
+//            let CGI = games.allGames.firstIndex(where: {$0 == game}) ?? 0
+            if game.gameStarted == true {
+                
+                switch game.gameFinished {
+                case false:
+                    Text("Resume game")
+                case true:
+                    Text("Scorecard")
+                }
+            } else {
+                
+                Text("Start game")
+               
+            }
+            
+            
+        })//{Image(systemName: "list.number")})
+    }
+    
+    private func showScoreEntry() {
+//        let CGI = games.allGames.firstIndex(where: {$0 == game}) ?? 0
+        if game.gameStarted == false {
+            isShowingDialogueScoreEntry.toggle()
+        } else {
+            
+            switch game.gameFinished {
+            case true:
+                //code here to launch the scorecard
+                print("game finished")
+                showingSheetScorecard.toggle()
+            case false:
+                gotoScoreEntry.toggle()
+            }
+        }
+    }
+    
+    private var handicapCalcButton: some View {
+        AnyView(Button(action: showHandicapCalc){
+            Image(systemName: "h.circle")
+                .foregroundColor(darkTeal)
+            
+        })
+    }
+    
+    private func showHandicapCalc() {
+        showingSheetHandicapCalc.toggle()
+    }
+    private var trashButton: some View {
+       
+        AnyView(Button(action: deleteGame){Image(systemName: "trash")})
+            
+    }
+    
+    private func deleteGame() {
+//        let CGI = games.allGames.firstIndex(where: {$0 == game}) ?? 0
+//        if games.allGames[CGI].gameStarted != true {
+            isShowingDialogueTrash = true
+//        }
+    }
     
     
     let game: GameViewModel
@@ -179,6 +246,59 @@ struct GameDetailScreen2: View {
         .onAppear(perform: {
            OnAppear()
         })
+        
+        .confirmationDialog(
+                    "If you start this game, you will not be able to amend any settings. Are you sure you want to continue?",
+                    isPresented: $isShowingDialogueScoreEntry
+                ) {
+                    Button("Start game", role: .destructive) {
+//                            scoreEntryVar.CGI = games.allGames.firstIndex(where: {$0 == game}) ?? 0
+                        //print("STart button \(scoreEntryVar.CGI)")
+                        
+//                            games.AssignTeamPlayingHandicap(game: &games.allGames[CGI])
+//                            games.AssignExtraShots(game: &games.allGames[CGI])
+//                            games.AssignTeamExtraShots(game: &games.allGames[CGI])
+//                            games.AssignShotsReceived(game: &games.allGames[CGI])
+//                            games.AssignTeamsTeeBox(game: &games.allGames[CGI])
+//                            games.saveGamesFM()
+                        
+                        
+//                            games.saveGamesFM()
+
+//                            self.presentationMode.wrappedValue.dismiss()
+                        gotoScoreEntry.toggle()
+                    }
+                } message: {
+                    Text("If you start this game, you will not be able to amend any settings. Are you sure you want to continue?")
+                }
+        
+                .confirmationDialog(
+                            "Permanently delete this game?",
+                            isPresented: $isShowingDialogueTrash
+                        ) {
+                            Button("Delete game", role: .destructive) {
+    //                            let index = games.allGames.firstIndex(where: {$0 == game}) ?? 0
+//                                games.allGames[scoreEntryVar.CGI].deleted = true
+//                                games.saveGamesFM()
+        
+                                self.presentationMode.wrappedValue.dismiss()
+                            }
+                        } message: {
+                            Text("You cannot undo this action.")
+                        }
+        
+        
+        
+                .navigationBarItems(
+                                    leading:trashButton,
+                                    trailing: HStack{
+                                        handicapCalcButton
+                                        scoreEntryButton
+                                        }
+                )
+        
+        
+        
     }
 }
 
