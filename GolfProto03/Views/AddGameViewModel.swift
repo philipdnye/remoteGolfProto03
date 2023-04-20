@@ -72,15 +72,30 @@ class AddGameViewModel: ObservableObject {
                     }
                 }
             case 2:
-                for i in 0..<(game.competitorArray.count)    {
-                    switch i {
-                    case 0:
-                        game.competitorArray[i].team = Int16(TeamAssignment.teamA.rawValue)
-                    case 1:
-                        game.competitorArray[i].team = Int16(TeamAssignment.teamB.rawValue)
-                    default:
-                        game.competitorArray[i].team = Int16(TeamAssignment.indiv.rawValue)
+                //need to switch over singles matchplay and then all the 2P versions of 4P games, as for these both competitors will be in TeamA
+                
+                switch currentGF.assignShotsRecd{
+                 //for singles matchplay
+                case .Indiv:
+                    for i in 0..<(game.competitorArray.count)    {
+                        switch i {
+                        case 0:
+                            game.competitorArray[i].team = Int16(TeamAssignment.teamA.rawValue)
+                        case 1:
+                            game.competitorArray[i].team = Int16(TeamAssignment.teamB.rawValue)
+                        default:
+                            game.competitorArray[i].team = Int16(TeamAssignment.indiv.rawValue)
+                        }
                     }
+                    //for 2P versions of 4P game formats
+                case.TeamsAB:
+                    for i in 0..<(game.competitorArray.count)    {
+                        game.competitorArray[i].team = Int16(TeamAssignment.teamA.rawValue)
+                    }
+                default:
+                    break
+                    
+                    
                 }
             default:
                 game.competitorArray[0].team = Int16(TeamAssignment.indiv.rawValue)
@@ -107,6 +122,17 @@ class AddGameViewModel: ObservableObject {
                 return (teamALow[0], teamAHigh[0], teamBLow[0], teamBHigh[0])
             }
             
+            func TeamABLowHigh2P (competitors: [Competitor]) -> (teamALow:Competitor, teamAHigh: Competitor){
+                let teamA = competitors.filter({$0.team == TeamAssignment.teamA.rawValue})
+                //let teamB = competitors.filter({$0.team == TeamAssignment.teamB.rawValue})
+                let teamAHigh = teamA.filter({$0.courseHandicap == teamA.map{$0.courseHandicap}.max()})
+               // let teamBHigh = teamB.filter({$0.courseHandicap == teamB.map{$0.courseHandicap}.max()})
+                let teamALow = teamA.filter({$0.courseHandicap == teamA.map{$0.courseHandicap}.min()})
+                //let teamBLow = teamB.filter({$0.courseHandicap == teamB.map{$0.courseHandicap}.min()})
+                
+                return (teamALow[0], teamAHigh[0])
+            }
+            
             
             switch currentGF.noOfPlayersNeeded{
             case 4:
@@ -122,9 +148,18 @@ class AddGameViewModel: ObservableObject {
                 
                 
             case 2:
-                for i in 0..<game.competitorArray.count {
-                    game.competitorArray[i].handicapAllowance = currentGF.playerHandAllowances[i]
-                }
+                // add code for 2 player versions of teamAB - this wont pick up singles matchplay
+                
+                let teamALowIndex = game.competitorArray.firstIndex(where: {$0.id == TeamABLowHigh2P(competitors: game.competitorArray).teamALow.id})
+                let teamAHighIndex = game.competitorArray.firstIndex(where: {$0.id == TeamABLowHigh2P(competitors: game.competitorArray).teamAHigh.id})
+
+                game.competitorArray[teamALowIndex ?? 0].handicapAllowance = currentGF.playerHandAllowances[0]
+                game.competitorArray[teamAHighIndex ?? 0].handicapAllowance = currentGF.playerHandAllowances[1]
+                
+                
+//                for i in 0..<game.competitorArray.count {
+//                    game.competitorArray[i].handicapAllowance = currentGF.playerHandAllowances[i]
+//                }
             default:
                 for i in 0..<game.competitorArray.count {
                     game.competitorArray[i].handicapAllowance = currentGF.playerHandAllowances[i]
