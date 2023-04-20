@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ChangeCompetitorTeeBoxSheet: View {
     @StateObject private var addGameVM = AddGameViewModel()
+    @EnvironmentObject var currentGF: CurrentGameFormat
     let competitor: Competitor
     let game: GameViewModel
     @Binding var isPresented: Bool
@@ -36,6 +37,13 @@ struct ChangeCompetitorTeeBoxSheet: View {
                         currentCompetitor?.teeBox = addGameVM.newTeeBox
                         //code here to update course handicap
                         currentCompetitor?.courseHandicap = competitor.CourseHandicap()
+                        manager.save()
+                        
+                        //now run code to recalc all playing handicaps THEN SAVE AGAIN
+                        addGameVM.AssignPlayingHandicaps (game: game.game, currentGF: currentGF)
+                        addGameVM.AssignTeamPlayingHandicap(game: game.game, currentGF: currentGF)
+                        addGameVM.AssignShotsReceived(game: game.game, currentGF: currentGF)
+                        
                         manager.save()
                         isPresented = false
                         neeedsRefresh.toggle()
@@ -67,5 +75,6 @@ struct ChangeCompetitorTeeBoxSheet_Previews: PreviewProvider {
         let game = GameViewModel(game: Game(context: CoreDataManager.shared.viewContext))
         
         ChangeCompetitorTeeBoxSheet(competitor: competitor, game: game, isPresented: .constant(true), neeedsRefresh: .constant(false))
+            .environmentObject(CurrentGameFormat())
     }
 }

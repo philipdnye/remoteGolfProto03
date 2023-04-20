@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GameDetailScreen2: View {
-    
+    @StateObject private var addGameVM = AddGameViewModel()
     @StateObject private var gameListVM = GameListViewModel()
     @EnvironmentObject var currentGF: CurrentGameFormat
     
@@ -95,7 +95,20 @@ struct GameDetailScreen2: View {
                         .swipeActions(edge: .leading,allowsFullSwipe: false) {
                             Button {
                                 UpdateCompetitorTeam(competitor: competitor, value: 1)
-                                    print(game.game.competitorArray.filter{$0.team == 1}.count)
+                                
+                                addGameVM.AssignPlayingHandicaps (game: game.game, currentGF: currentGF)
+                                addGameVM.AssignTeamPlayingHandicap(game: game.game, currentGF: currentGF)
+                                addGameVM.AssignShotsReceived(game: game.game, currentGF: currentGF)
+                                
+                                let manager = CoreDataManager.shared
+                                manager.save()
+                                needsRefresh.toggle()
+                                gameListVM.getAllGames()
+                                gameListVM.getAllCompetitors()
+                                
+                                
+                                
+                                print(game.game.competitorArray.filter{$0.team == 1}.count)
                             } label: {
                                 Label("Mute",systemImage: "a.circle")
                             }
@@ -107,6 +120,17 @@ struct GameDetailScreen2: View {
                         .swipeActions(edge: .leading,allowsFullSwipe: false) {
                             Button {
                                 UpdateCompetitorTeam(competitor: competitor, value: 2)
+                                addGameVM.AssignPlayingHandicaps (game: game.game, currentGF: currentGF)
+                                addGameVM.AssignTeamPlayingHandicap(game: game.game, currentGF: currentGF)
+                                addGameVM.AssignShotsReceived(game: game.game, currentGF: currentGF)
+                               
+                                let manager = CoreDataManager.shared
+                                manager.save()
+                                needsRefresh.toggle()
+                                gameListVM.getAllGames()
+                                gameListVM.getAllCompetitors()
+                                
+                                
                                     print(game.game.competitorArray.filter{$0.team == 2}.count)
                             } label: {
                                 Label("Mute",systemImage: "b.circle")
