@@ -157,12 +157,7 @@ class AddGameViewModel: ObservableObject {
                 game.competitorArray[i].playingHandicap = round(game.competitorArray[i].courseHandicap) * game.competitorArray[i].handicapAllowance
             }
         }
-        
-        
-        
-//        for i in 0..<game.competitorArray.count {
-//            game.competitorArray[i].playingHandicap = round(game.competitorArray[i].courseHandicap) * game.competitorArray[i].handicapAllowance
-//        }
+
     }
     
     func AssignTeamPlayingHandicap(game: Game, currentGF: CurrentGameFormat) {
@@ -193,8 +188,8 @@ class AddGameViewModel: ObservableObject {
                 totalPlayingHandicap += round(PH.playingHandicap*1000)/1000
             }
             game.teamCPlayingHandicap = totalPlayingHandicap
-            game.teamAPlayingHandicap = totalPlayingHandicap
-            game.teamBPlayingHandicap = totalPlayingHandicap
+            game.teamAPlayingHandicap = 0
+            game.teamBPlayingHandicap = 0
             totalPlayingHandicap = 0
         }
     }
@@ -223,15 +218,26 @@ class AddGameViewModel: ObservableObject {
         case .TeamsAB:
             switch currentGF.playFormat {
             case .matchplay:
-                //handicap totals for the teams must be rounded prior to working out difference in shots
-                let A = round(game.teamAPlayingHandicap)
-                let B = round(game.teamBPlayingHandicap)
+                //handicap totals for the teams must be rounded prior to working out difference in shots *** NOT ALWAYS
+                //in grrensomes fourssome chapman pinehurst, you add the EXACT handicaps together, then work out the difference and THEN ROUND
+                
+                
+                
+                
+                
+                
+                
+                
+                let A = game.teamAPlayingHandicap
+                let B = game.teamBPlayingHandicap
+                
                 let lowTeamHandicap = min(A,B)
+               
                 let ASR = A - lowTeamHandicap
                 let BSR = B - lowTeamHandicap
                 
-                game.teamAShotsReceived = ASR
-                game.teamBShotsReceived = BSR
+                game.teamAShotsReceived = round(ASR)
+                game.teamBShotsReceived = round(BSR)
                 
             case .strokeplay:
                 switch currentGF.noOfPlayersNeeded{
