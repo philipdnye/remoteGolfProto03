@@ -29,11 +29,14 @@ extension Game {
     @NSManaged public var startingHole: Int16
     @NSManaged public var startTime: Date?
     @NSManaged public var teamAPlayingHandicap: Double
-    @NSManaged public var teamBPlayingHandicap: Double
-    @NSManaged public var teamCPlayingHandicap: Double
     @NSManaged public var teamAShotsReceived: Double
+    @NSManaged public var teamBPlayingHandicap: Double
     @NSManaged public var teamBShotsReceived: Double
+    @NSManaged public var teamCPlayingHandicap: Double
     @NSManaged public var teamCShotsReceived: Double
+    @NSManaged public var teamADiffTeesXShots: Double
+    @NSManaged public var teamBDiffTeesXShots: Double
+    @NSManaged public var teamCDiffTeesXShots: Double
     @NSManaged public var competitors: NSSet?
     @NSManaged public var defaultTeeBox: TeeBox?
     

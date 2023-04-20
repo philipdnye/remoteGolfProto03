@@ -294,5 +294,37 @@ class AddGameViewModel: ObservableObject {
         }
     }
     
+    func AssignExtraShots (game: Game, currentGF: CurrentGameFormat){
+        switch game.TeeBoxesAllSame(){
+        case true:
+            for i in 0..<game.competitorArray.count {
+                game.competitorArray[i].diffTeesXShots = 0.0
+            }
+        case false:
+            switch game.scoreFormat {
+            case 0: //medal - NOTE will need a special version for Texas Scramble where extra shots are divided by number of players
+                
+                var courseRatings: [Double] = []
+                
+                for i in 0..<game.competitorArray.count {
+                    courseRatings.append(game.competitorArray[i].CourseRating())
+                }
+                let lowCR = round(courseRatings.min()!*1000)/1000
+                var courseRatingsAdj: [Double] = []
+                for i in 0..<game.competitorArray.count {
+                    courseRatingsAdj.append(round(game.competitorArray[i].CourseRating() * 1000)/1000 - lowCR)
+                    game.competitorArray[i].diffTeesXShots = courseRatingsAdj[i]
+                }
+                
+                
+            case 1: //stableford
+                break
+            default: //bogey
+                break
+            }
+        }
+    }
+    
+    
 }
 

@@ -129,6 +129,7 @@ struct GameDetailScreen2: View {
                     Text("Team B: \(game.game.teamBShotsReceived.formatted())")
                     Text("Team C: \(game.game.teamCShotsReceived.formatted())")
                 }
+                Text(game.game.TeeBoxesAllSame().description)
             }
             Form{
                 Section {
@@ -166,6 +167,7 @@ struct GameDetailScreen2: View {
                                 addGameVM.AssignPlayingHandicaps (game: game.game, currentGF: currentGF)
                                 addGameVM.AssignTeamPlayingHandicap(game: game.game, currentGF: currentGF)
                                 addGameVM.AssignShotsReceived(game: game.game, currentGF: currentGF)
+                                addGameVM.AssignExtraShots(game: game.game, currentGF: currentGF)
                                 
                                 let manager = CoreDataManager.shared
                                 manager.save()
@@ -190,6 +192,7 @@ struct GameDetailScreen2: View {
                                 addGameVM.AssignPlayingHandicaps (game: game.game, currentGF: currentGF)
                                 addGameVM.AssignTeamPlayingHandicap(game: game.game, currentGF: currentGF)
                                 addGameVM.AssignShotsReceived(game: game.game, currentGF: currentGF)
+                                addGameVM.AssignExtraShots(game: game.game, currentGF: currentGF)
                                
                                 let manager = CoreDataManager.shared
                                 manager.save()

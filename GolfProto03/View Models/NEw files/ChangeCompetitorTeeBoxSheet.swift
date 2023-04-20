@@ -43,6 +43,7 @@ struct ChangeCompetitorTeeBoxSheet: View {
                         addGameVM.AssignPlayingHandicaps (game: game.game, currentGF: currentGF)
                         addGameVM.AssignTeamPlayingHandicap(game: game.game, currentGF: currentGF)
                         addGameVM.AssignShotsReceived(game: game.game, currentGF: currentGF)
+                        addGameVM.AssignExtraShots(game: game.game, currentGF: currentGF)
                         
                         manager.save()
                         isPresented = false

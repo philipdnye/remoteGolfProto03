@@ -58,6 +58,7 @@ struct AddGameScreen: View {
        addGameVM.AssignPlayingHandicaps (game: game, currentGF: currentGF)
        addGameVM.AssignTeamPlayingHandicap(game: game, currentGF: currentGF)
        addGameVM.AssignShotsReceived(game: game, currentGF: currentGF)
+       addGameVM.AssignExtraShots(game: game, currentGF: currentGF)
        manager.save()
        presentationMode.wrappedValue.dismiss()
        

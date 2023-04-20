@@ -55,3 +55,23 @@ extension Competitor {
         }
     }
 }
+
+extension Competitor {
+    func TotalPlayingHandicap () -> Double {
+       let totalPH = Double(round(self.playingHandicap) + round(self.diffTeesXShots))
+        return totalPH
+    }
+}
+extension Competitor {
+    func TotalPlayingHandicapUnrounded () -> Double {
+       let totalPH = Double(self.playingHandicap + self.diffTeesXShots)
+        return totalPH
+    }
+}
+
+extension Competitor {
+    func TotalShotsRecdMatch () -> Double {
+        let totalSR = Double(self.shotsRecdMatch + self.diffTeesXShots)
+        return totalSR
+    }
+}

@@ -35,8 +35,16 @@ struct CompetitorRowItem_GameDetail: View {
                     Text(String(format: "%.2f", competitor.shotsRecdMatch))
                         .font(.caption2)
                         .frame(width:35)
+                    Text(String(format: "%.2f", competitor.diffTeesXShots))
+                        .font(.caption2)
+                        .frame(width:35)
                 }
-                
+                VStack{
+                    Text(competitor.CourseRating().formatted())
+                    Text(competitor.TotalPlayingHandicap().formatted())
+                    Text(competitor.TotalShotsRecdMatch().formatted())
+                }
+                .font(.caption2)
             }
             
             

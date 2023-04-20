@@ -57,3 +57,15 @@ extension Game {
     }
 }
 
+extension Game {
+    func TeeBoxesAllSame() -> Bool {
+        var teeBoxes: [TeeBox] = []
+        for i in 0..<self.competitorArray.count {
+            teeBoxes.append(self.competitorArray[i].teeBox ?? TeeBox())
+        }
+        let hasAllItemsEqual = teeBoxes.dropFirst().reduce(true) { (partialResult, element) in
+            return partialResult && element == teeBoxes.first
+        }
+        return hasAllItemsEqual
+    }
+}
